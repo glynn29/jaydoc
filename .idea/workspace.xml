@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa0d9f9a-f944-4d4d-9fec-e968e2dae6ae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Layout/Layout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Layout/Layout.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/actions/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/actions/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/reducers/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/utility.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Logo/Logo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Logo/Logo.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItem/NavigationItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItem/NavigationItem.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/DrawerToggle/DrawerToggle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/DrawerToggle/DrawerToggle.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/SideDrawer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/SideDrawer.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/ToolBar/Toolbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/ToolBar/Toolbar.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Login/Login.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +42,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/store" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -51,9 +54,11 @@
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Layout" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Navigation\NavigationItems" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Navigation" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Auth\Login" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\store" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Layout" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -81,7 +86,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1597786106421</updated>
-      <workItem from="1597786109216" duration="4554000" />
+      <workItem from="1597786109216" duration="5447000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1597786439528</created>
@@ -104,7 +109,21 @@
       <option name="project" value="LOCAL" />
       <updated>1597790237768</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added Layout.js component">
+      <created>1597795039142</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1597795039142</updated>
+    </task>
+    <task id="LOCAL-00005" summary="set up redux actions and reducers, and added authorization action and reducer. also updated index.js to support redux">
+      <created>1597795109178</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1597795109178</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,13 +133,15 @@
     <MESSAGE value="initial" />
     <MESSAGE value="added Backdrop.js and Spinner.js" />
     <MESSAGE value="added Button.js component" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Button.js component" />
+    <MESSAGE value="added Layout.js component" />
+    <MESSAGE value="set up redux actions and reducers, and added authorization action and reducer. also updated index.js to support redux" />
+    <option name="LAST_COMMIT_MESSAGE" value="set up redux actions and reducers, and added authorization action and reducer. also updated index.js to support redux" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="468" y="17" key="CommitChangelistDialog2" timestamp="1597795038476">
+    <state x="468" y="17" key="CommitChangelistDialog2" timestamp="1597795108656">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="468" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1597795038476" />
+    <state x="468" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1597795108656" />
     <state x="4425" y="652" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786439037" />
     <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1597790458806">
       <screen x="0" y="0" width="1536" height="824" />
@@ -138,9 +159,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1597790458806" />
-    <state x="4392" y="791" key="Vcs.Push.Dialog.v2" timestamp="1597786448629">
-      <screen x="3840" y="537" width="1920" height="1040" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1597795115388">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1597795115388" />
     <state x="4392" y="791" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786448629" />
   </component>
 </project>
