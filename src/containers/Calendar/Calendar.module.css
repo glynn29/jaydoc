@@ -1,0 +1,16 @@
+.Box {
+    width: 80%;
+    margin: auto;
+    background-color: rgba(218,243,255,0.58);
+}
+
+.Tile{
+    border: 5px solid lightblue;
+    background-image: linear-gradient(to top, rgba(255,255,255,.1), rgba(0,0,1,.2));
+    box-shadow: lightblue 2px 2px;
+    height: 90px;
+    width: 120px;
+    display: flex;
+    /*align-items: center;*/
+}
+
