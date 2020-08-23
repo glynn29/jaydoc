@@ -43,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "red",
         color: "white"
     },
+    editButton:{
+        backgroundColor: "green",
+        color: "white"
+    },
+    detailsButton:{
+        backgroundColor: "blue",
+        color: "white"
+    },
     table: {
         minWidth: 700,
     },
