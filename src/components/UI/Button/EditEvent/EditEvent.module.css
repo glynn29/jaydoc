@@ -1,0 +1,9 @@
+.Box{
+    margin: auto;
+    width: 60%;
+    height: 60%;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.3rem;
+    background-color: white;
+}

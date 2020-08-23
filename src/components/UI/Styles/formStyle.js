@@ -20,13 +20,37 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 4500,
+        minWidth: 200,
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
     textarea: {
         resize: "both"
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalPaper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+    deleteButton:{
+        backgroundColor: "red",
+        color: "white"
+    },
+    table: {
+        minWidth: 700,
+    },
+    visuallyHidden: {
+        display: "none"
+    },
+    active: {
+        color: "yellow"
     }
 }));
 
