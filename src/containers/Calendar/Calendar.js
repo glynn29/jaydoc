@@ -12,7 +12,7 @@ const CalendarBox = () => {
     };
 
     return (
-        <div>
+        <div className={classes.Box}>
 
             <p>calendar page</p>
 

@@ -21,6 +21,10 @@ import Layout from "./containers/hoc/Layout/Layout";
 const App = (props) =>{
         let routes = (
             <Switch>
+                 <Route path="/email" component={Email}/>
+                 <Route path="/report" component={Report}/>
+                 <Route path="/eventList" component={EventList}/>
+                 <Route path="/volunteerList" component={Users}/>
                 <Route path="/account" component={Account}/>
                 <Route path="/calendar" component={Calendar}/>
                 <Route path="/contactUs" component={ContactUs}/>
