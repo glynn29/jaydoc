@@ -2,43 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa0d9f9a-f944-4d4d-9fec-e968e2dae6ae" name="Default Changelist" comment="added logo component">
-      <change afterPath="$PROJECT_DIR$/src/assests/images/jaydoc2.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/axios.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/components/Pages/AccountPage/GeneralAnnouncements/GeneralAnnouncements.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Footer/Footer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Footer/Footer.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Styles/formStyle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/Dashboard/Dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/RegisteredVolunteer/RegisteredVolunteer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/Report/Reports.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/VolunteerList/VolunteerList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Login/Login.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Logout/Logout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Register/Register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Register/Register.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Client/Account/Account.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Client/Comments/Comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Client/Comments/Comment.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Client/ContactUs/ContactUs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Client/ContactUs/ContactUs.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Client/Home/Home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Client/Home/Home.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/hoc/Auxillary/Auxillary.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/withErrorHandler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/AddEvent/AddEvent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/EditEvent/EditEvent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/EditEvent/EditEvent.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/EditVolunteer/EditVolunteer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Layout/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/hoc/Layout/Layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Layout/Layout.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/hoc/Layout/Layout.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Styles/formStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Styles/formStyle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Calendar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +55,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Button\EditVolunteer" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\assests\images" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Pages" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Auth" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers" />
@@ -115,7 +96,8 @@
       <updated>1597786106421</updated>
       <workItem from="1597786109216" duration="11770000" />
       <workItem from="1597951718179" duration="25052000" />
-      <workItem from="1598112062050" duration="5891000" />
+      <workItem from="1598112062050" duration="23846000" />
+      <workItem from="1598199993437" duration="225000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1597786439528</created>
@@ -166,7 +148,70 @@
       <option name="project" value="LOCAL" />
       <updated>1598118432964</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Footer component and styles file for Material UI">
+      <created>1598118475860</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118475860</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Initial files for the admin side">
+      <created>1598118506062</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118506062</updated>
+    </task>
+    <task id="LOCAL-00010" summary="initial Authorization files outline">
+      <created>1598118544994</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118544994</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Initial client side pages">
+      <created>1598118586505</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118586505</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added front end look to Comment.js, ContactUs.js, and Home.js">
+      <created>1598118628391</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118628391</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Aux file to take place of div">
+      <created>1598118651693</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118651693</updated>
+    </task>
+    <task id="LOCAL-00014" summary="transformed into functional components">
+      <created>1598118708413</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118708413</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added redux store and axios file">
+      <created>1598118740480</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1598118740480</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added logo">
+      <created>1598200219979</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1598200219979</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,38 +225,48 @@
     <MESSAGE value="set up redux actions and reducers, and added authorization action and reducer. also updated index.js to support redux" />
     <MESSAGE value="added logo component" />
     <MESSAGE value="initial Navigations Files with styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial Navigations Files with styling" />
+    <MESSAGE value="Footer component and styles file for Material UI" />
+    <MESSAGE value="Initial files for the admin side" />
+    <MESSAGE value="initial Authorization files outline" />
+    <MESSAGE value="Initial client side pages" />
+    <MESSAGE value="Added front end look to Comment.js, ContactUs.js, and Home.js" />
+    <MESSAGE value="Aux file to take place of div" />
+    <MESSAGE value="initial set up" />
+    <MESSAGE value="transformed into functional components" />
+    <MESSAGE value="added redux store and axios file" />
+    <MESSAGE value="added logo" />
+    <option name="LAST_COMMIT_MESSAGE" value="added logo" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1598118585698">
+    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1598200276217">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598118585698" />
+    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598200276217" />
     <state x="4425" y="652" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786439037" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1598112966151">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1598132323568">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598112966151" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1598112966151">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323568" />
+    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1598132323567">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598112966151" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1598112966150">
+    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323567" />
+    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1598132323567">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598112966150" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1598112966151">
+    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323567" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1598132323568">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598112966151" />
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1597951763053">
+    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323568" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1598118744869">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1597951763053" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598118744869" />
     <state x="4392" y="791" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786448629" />
-    <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1597951752813">
+    <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1598200189647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="467" y="239" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1597951752813" />
+    <state x="467" y="239" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598200189647" />
   </component>
 </project>
