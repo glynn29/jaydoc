@@ -1,7 +1,5 @@
-import React, {useState} from "react";
-import TransitionModal from "../../Modal/Modal";
+import React, {useState,useEffect} from "react";
 
-import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
@@ -20,26 +18,21 @@ const list = [
     {name:"M4"},
 ];
 
-const EditVolunteer = props => {
+const AddVolunteer = props => {
     const formClasses = formStyles();
-    const [open, setOpen] = React.useState(false);
     const [first, setFirst] = useState("");
     const [last, setLast] = useState("");
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [active, setActive] = useState(true);
-    const [status, setStatus] = useState(null);
+    const [status, setStatus] = useState("");
     const [spanish, setSpanish] = useState(false);
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    //useEffect to mount data from id from props
 
     const submitFormHandler = () =>{
-        alert(first + " " + last + " " + email + " " + status + " active:" + active + " spanish:" + spanish);
+        props.onAdd();
+        alert("Added User: " + first + " " + last + " " + email + " " + status + " active:" + active + " spanish:" + spanish);
     };
 
     const form = (
@@ -54,7 +47,7 @@ const EditVolunteer = props => {
                             name="firstName"
                             variant="outlined"
                             required
-                            fullWidth
+
                             id="firstName"
                             label="First Name"
                             autoFocus
@@ -65,7 +58,7 @@ const EditVolunteer = props => {
                             onChange={event => setLast(event.target.value)}
                             variant="outlined"
                             required
-                            fullWidth
+
                             id="lastName"
                             label="Last Name"
                             name="lastName"
@@ -76,15 +69,27 @@ const EditVolunteer = props => {
                             onChange={event => setEmail(event.target.value)}
                             variant="outlined"
                             required
-                            fullWidth
+
                             id="email"
                             label="Email Address"
                             name="email"
                         />
                     </Grid>
                     <Grid item>
+                        <TextField
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                            variant="outlined"
+                            required
+
+                            id="password"
+                            label="Password"
+                            name="password"
+                        />
+                    </Grid>
+                    <Grid item>
                         <FormControl variant="outlined" className={formClasses.formControl} >
-                            <InputLabel htmlFor="outlined-age-native-simple" required fullWidth>Status</InputLabel>
+                            <InputLabel htmlFor="outlined-age-native-simple" required >Status</InputLabel>
                             <Select
                                 native
                                 value={status}
@@ -125,25 +130,18 @@ const EditVolunteer = props => {
                 </Grid>
                 <Button
                     type="submit"
-                    fullWidth
+
                     variant="contained"
                     color="primary"
                     className={formStyles.submit}
                 >
-                    Edit User
+                    Add Volunteer
                 </Button>
             </form>
         </div>
     );
 
-    return(
-        <div>
-            <Button variant="contained" color="secondary" type="button" onClick={handleOpen}>
-                Edit
-            </Button>
-            <TransitionModal open={open} handleOpen={handleOpen} handleClose={handleClose} form={form} title={"Edit Volunteer"}/>
-        </div>
-    );
+    return form;
 };
 
-export default EditVolunteer;
+export default AddVolunteer;

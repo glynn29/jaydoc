@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -133,16 +133,23 @@ EnhancedTableHead.propTypes = {
 function EnhancedTable(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('calories');
+    const [orderBy, setOrderBy] = React.useState('first');
     const [page, setPage] = React.useState(0);
-    const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [dense, setDense] = React.useState(false);
     const [rows, setRows] = useState(props.data);
 
-    function deleteEventHandler(eventId) {
-        const newList = rows.filter(event => event.id !== eventId);
-        setRows(newList);
-        props.delete(eventId);
+    const {data} = props;
+    useEffect(() => {
+        setRows(data);
+    },[data]);
+
+    function deleteHandler(id) {
+        props.delete(id);
+    }
+
+    function addHandler() {
+        props.add();
     }
 
     const handleRequestSort = (event, property) => {
@@ -169,7 +176,7 @@ function EnhancedTable(props) {
     return (
         <div className={classes.root}>
             <Container>
-                <Button variant="contained" color="primary" onClick={() => props.add()}>Add</Button>
+                <Button variant="contained" color="primary" onClick={() => addHandler()}>Add</Button>
                 <TableContainer component={Paper}>
                     <Table
                         className={classes.table}
@@ -195,14 +202,13 @@ function EnhancedTable(props) {
                                             key={row.id}
                                         >
                                             {props.rowLables.map((label)=>{
-                                                console.log("Row : " + row.id);
                                                 return(
                                                     <StyledTableCell component="th" key={row[label.id]} scope="row" align="left">{row[label.id]}</StyledTableCell>
                                                 );
                                             })}
                                             {props.details && <StyledTableCell align="left"><Button onClick={() => {props.details(row.id)}} variant="contained" className={classes.detailsButton}>Details</Button></StyledTableCell>}
                                             <StyledTableCell align="left"><Button onClick={() => {props.edit(row.id)}} variant="contained" className={classes.editButton}>Edit</Button></StyledTableCell>
-                                            <StyledTableCell align="left"><Button onClick={() => {deleteEventHandler(row.id)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>
+                                            <StyledTableCell align="left"><Button onClick={() => {deleteHandler(row.id)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>
 
                                         </StyledTableRow>
                                     );
