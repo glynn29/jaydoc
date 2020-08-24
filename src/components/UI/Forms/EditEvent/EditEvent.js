@@ -49,7 +49,7 @@ const EditEvent= props => {
                     />
                 </Grid>
                 <Grid item>
-                    <FormControl variant="outlined" className={formStyles.formControl}>
+                    <FormControl variant="outlined" className={formClasses.formControl}>
                         <TextField
                             value={details}
                             onChange={event => setDetails(event.target.value)}
@@ -70,7 +70,7 @@ const EditEvent= props => {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={formStyles.submit}
+                className={formClasses.submit}
             >
                 Edit Event
             </Button>

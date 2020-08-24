@@ -120,7 +120,7 @@ const EditVolunteer = props => {
                     fullwidth
                     variant="contained"
                     color="primary"
-                    className={formStyles.submit}
+                    className={formClasses.submit}
                 >
                     Edit User
                 </Button>

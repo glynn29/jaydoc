@@ -3,23 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="aa0d9f9a-f944-4d4d-9fec-e968e2dae6ae" name="Default Changelist" comment="added logo component">
       <change afterPath="$PROJECT_DIR$/src/components/Pages/AccountPage/GeneralAnnouncements/GeneralAnnouncements.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/AddEvent/AddEvent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/EditEvent/EditEvent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/EditEvent/EditEvent.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/EditVolunteer/EditVolunteer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/AddEvent/AddEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Forms/AddEvent/AddEvent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/EditEvent/EditEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Forms/EditEvent/EditEvent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/UI/Styles/formStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Styles/formStyle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Calendar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,19 +46,19 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Button\EditVolunteer" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\assests\images" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Pages" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Navigation\NavigationItems" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Navigation" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Auth\Login" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Forms" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Footer" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Button\EditVolunteer" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\assests\images" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -97,7 +89,7 @@
       <workItem from="1597786109216" duration="11770000" />
       <workItem from="1597951718179" duration="25052000" />
       <workItem from="1598112062050" duration="23846000" />
-      <workItem from="1598199993437" duration="225000" />
+      <workItem from="1598199993437" duration="33149000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1597786439528</created>
@@ -211,7 +203,63 @@
       <option name="project" value="LOCAL" />
       <updated>1598200219979</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added edit button modals">
+      <created>1598200277805</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1598200277805</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added default modal component">
+      <created>1598200311087</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1598200311087</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Custom table component with filtering functions">
+      <created>1598223062603</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1598223062603</updated>
+    </task>
+    <task id="LOCAL-00020" summary="small changes">
+      <created>1598223094576</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1598223094576</updated>
+    </task>
+    <task id="LOCAL-00021" summary="event tables for data and form for filling out data">
+      <created>1598223330770</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1598223330770</updated>
+    </task>
+    <task id="LOCAL-00022" summary="updated styles">
+      <created>1598223357260</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1598223357260</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Added Forms for the add and edit modals">
+      <created>1598230597622</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1598230597622</updated>
+    </task>
+    <task id="LOCAL-00024" summary="formatting changes">
+      <created>1598236250228</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1598236250228</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,34 +283,46 @@
     <MESSAGE value="transformed into functional components" />
     <MESSAGE value="added redux store and axios file" />
     <MESSAGE value="added logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="added logo" />
+    <MESSAGE value="added edit button modals" />
+    <MESSAGE value="added default modal component" />
+    <MESSAGE value="Custom table component with filtering functions" />
+    <MESSAGE value="small changes" />
+    <MESSAGE value="event tables for data and form for filling out data" />
+    <MESSAGE value="updated styles" />
+    <MESSAGE value="Added Forms for the add and edit modals" />
+    <MESSAGE value="formatting changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="formatting changes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1598200276217">
+    <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598236201772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598200276217" />
+    <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598236201772" />
+    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1598236249274">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598236249274" />
     <state x="4425" y="652" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786439037" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1598132323568">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1598223109619">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323568" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1598132323567">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
+    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1598223109619">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323567" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1598132323567">
+    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
+    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1598223109619">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323567" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1598132323568">
+    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1598223109619">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598132323568" />
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1598118744869">
+    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1598223360963">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598118744869" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223360963" />
     <state x="4392" y="791" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786448629" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1598200189647">
       <screen x="0" y="0" width="1536" height="824" />
