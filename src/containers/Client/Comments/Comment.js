@@ -3,8 +3,6 @@ import React, {useState} from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
-
-import * as classes from './Comment.module.css';
 import formStyles from "../../../components/UI/Styles/formStyle";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
@@ -16,10 +14,10 @@ const Comment = () => {
     const [message, setMessage] = useState("");
 
     const form = (
-        <div className={classes.Box}>
+        <div style={{textAlign:"center", width: "70%", margin:"auto"}}>
             <h1><Typography variant="h3">Comments</Typography></h1>
             <p><Typography variant="body1">We appreciate everything our volunteers do to make the clinic function. If there's something that you'd like to pass along to us in private, please do it below. We appreciate the feedback - constructive, of course. If you're having technical difficulty with the site or with your account please use the 'Contact' tab to report it.</Typography></p>
-            {/*<Container component="main" maxWidth="xs">*/}
+            <Container maxWidth="md">
 
                 <CssBaseline />
 
@@ -56,7 +54,7 @@ const Comment = () => {
                         /></FormControl></Grid>
                     </form>
 
-            {/*</Container>*/}
+            </Container>
         </div>
     );
 

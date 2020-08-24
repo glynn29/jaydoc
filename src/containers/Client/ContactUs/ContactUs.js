@@ -3,8 +3,7 @@ import React, {useState} from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-
-import * as classes from './ContactUs.module.css';
+import Container from "@material-ui/core/Container";
 import formStyles from "../../../components/UI/Styles/formStyle";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
@@ -26,10 +25,10 @@ const ContactUs = () => {
     ];
 
     const form = (
-        <div className={classes.Box}>
+       <div style={{textAlign:"center", width: "70%", margin:"auto"}}>
             <Typography variant="h3">Contact Us</Typography>
             <p><Typography>If you are having technical difficulty with the website, or if you have a general question about JayDoc Free Clinic, please use the following form to submit your query:</Typography></p>
-            {/*<Container component="main" maxWidth="xs">*/}
+            <Container component="main" maxWidth="md">
             <CssBaseline />
             <form className={formClasses.root} noValidate autoComplete="off">
                 <Grid container spacing={2} direction={"column"} alignItems={"stretch"}>
@@ -103,7 +102,7 @@ const ContactUs = () => {
                     />
                 </Grid>
             </form>
-            {/*</Container>*/}
+            </Container>
         </div>
     );
 
