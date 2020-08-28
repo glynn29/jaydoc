@@ -17,11 +17,12 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+        minWidth: 200
     },
     formControl: {
-        //margin: theme.spacing(1),
         minWidth: 200,
-        width: '99%',
+        width: '100%',
+        marginTop: theme.spacing(3),
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
         color: "white"
     },
     table: {
-        minWidth: 700,
+        //minWidth: 700,
     },
     visuallyHidden: {
         display: "none"
