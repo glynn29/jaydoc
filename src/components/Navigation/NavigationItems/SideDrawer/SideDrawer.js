@@ -18,7 +18,7 @@ const sideDrawer = (props) => {
         <div>
             <Backdrop show={props.open} clicked={props.closed}/>
             <div className={attachedClasses.join(' ')}>
-                <Typography variant="h5">JayDoc Free Clinic <Typography variant="h6">Official Volunteer Website</Typography></Typography>
+                <label><Typography variant="h5">JayDoc Free Clinic </Typography><Typography variant="h6">Official Volunteer Website</Typography></label>
                 <div className={classes.Logo}>
                     <Logo/>
                 </div>

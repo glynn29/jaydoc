@@ -2,16 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa0d9f9a-f944-4d4d-9fec-e968e2dae6ae" name="Default Changelist" comment="added logo component">
-      <change afterPath="$PROJECT_DIR$/src/components/Pages/AccountPage/GeneralAnnouncements/GeneralAnnouncements.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/axiosHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/SideDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/SideDrawer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/AddEvent/AddEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Forms/AddEvent/AddEvent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/EditEvent/EditEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Forms/EditEvent/EditEvent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Styles/formStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Styles/formStyle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/EditVolunteer/EditVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Forms/EditVolunteer/EditVolunteer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Table/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Table/Table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Logout/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Logout/Logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Register/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Register/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Client/Comments/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Client/Comments/Comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Client/ContactUs/ContactUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Client/ContactUs/ContactUs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +46,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/containers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -47,11 +55,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Navigation\NavigationItems" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Navigation" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Auth\Login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Forms" />
@@ -89,7 +97,9 @@
       <workItem from="1597786109216" duration="11770000" />
       <workItem from="1597951718179" duration="25052000" />
       <workItem from="1598112062050" duration="23846000" />
-      <workItem from="1598199993437" duration="33149000" />
+      <workItem from="1598199993437" duration="50663000" />
+      <workItem from="1598544495832" duration="8646000" />
+      <workItem from="1598900487270" duration="29565000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1597786439528</created>
@@ -259,22 +269,76 @@
       <option name="project" value="LOCAL" />
       <updated>1598236250228</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fixed formatting error">
+      <created>1598242696024</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1598242696024</updated>
+    </task>
+    <task id="LOCAL-00026" summary="initial Reminder.js file">
+      <created>1598636670890</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1598636670890</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added new styles">
+      <created>1598636701658</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1598636701658</updated>
+    </task>
+    <task id="LOCAL-00028" summary="initial gereralannouncements file">
+      <created>1598636738266</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1598636738266</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added auth component for firestore and context components">
+      <created>1598636771847</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1598636771847</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Minor changes">
+      <created>1598998909895</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1598998909895</updated>
+    </task>
+    <task id="LOCAL-00031" summary="cloud function to add admin user">
+      <created>1598998939343</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1598998939343</updated>
+    </task>
+    <task id="LOCAL-00032" summary="added firebase and firebase helper function">
+      <created>1598998992041</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1598998992041</updated>
+    </task>
+    <task id="LOCAL-00033" summary="updated auth reducer and actions to work with context api">
+      <created>1598999046550</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1598999046550</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="initial" />
-    <MESSAGE value="added Backdrop.js and Spinner.js" />
-    <MESSAGE value="added Button.js component" />
-    <MESSAGE value="added Layout.js component" />
-    <MESSAGE value="set up redux actions and reducers, and added authorization action and reducer. also updated index.js to support redux" />
-    <MESSAGE value="added logo component" />
-    <MESSAGE value="initial Navigations Files with styling" />
-    <MESSAGE value="Footer component and styles file for Material UI" />
-    <MESSAGE value="Initial files for the admin side" />
     <MESSAGE value="initial Authorization files outline" />
     <MESSAGE value="Initial client side pages" />
     <MESSAGE value="Added front end look to Comment.js, ContactUs.js, and Home.js" />
@@ -291,42 +355,59 @@
     <MESSAGE value="updated styles" />
     <MESSAGE value="Added Forms for the add and edit modals" />
     <MESSAGE value="formatting changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="formatting changes" />
+    <MESSAGE value="fixed formatting error" />
+    <MESSAGE value="initial Reminder.js file" />
+    <MESSAGE value="added new styles" />
+    <MESSAGE value="initial gereralannouncements file" />
+    <MESSAGE value="added auth component for firestore and context components" />
+    <MESSAGE value="Minor changes" />
+    <MESSAGE value="cloud function to add admin user" />
+    <MESSAGE value="added firebase and firebase helper function" />
+    <MESSAGE value="updated auth reducer and actions to work with context api" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated auth reducer and actions to work with context api" />
   </component>
   <component name="WindowStateProjectService">
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598236201772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598236201772" />
-    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1598236249274">
+    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1598999140971">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598236249274" />
-    <state x="4425" y="652" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786439037" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1598223109619">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598999140971" />
+    <state x="4425" y="652" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598636771189" />
+    <state width="1877" height="372" key="GridCell.Tab.0.bottom" timestamp="1598921676493">
+      <screen x="3840" y="537" width="1920" height="1040" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1598223109619">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598568329510" />
+    <state width="1877" height="372" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598921676493" />
+    <state width="1877" height="372" key="GridCell.Tab.0.center" timestamp="1598921676493">
+      <screen x="3840" y="537" width="1920" height="1040" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1598223109619">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="281" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598568329510" />
+    <state width="1877" height="372" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598921676493" />
+    <state width="1877" height="372" key="GridCell.Tab.0.left" timestamp="1598921676493">
+      <screen x="3840" y="537" width="1920" height="1040" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1598223109619">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="281" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598568329509" />
+    <state width="1877" height="372" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598921676493" />
+    <state width="1877" height="372" key="GridCell.Tab.0.right" timestamp="1598921676493">
+      <screen x="3840" y="537" width="1920" height="1040" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223109619" />
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1598223360963">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="281" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598568329510" />
+    <state width="1877" height="372" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598921676493" />
+    <state x="4392" y="791" key="Vcs.Push.Dialog.v2" timestamp="1598636775418">
+      <screen x="3840" y="537" width="1920" height="1040" />
     </state>
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598223360963" />
-    <state x="4392" y="791" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1597786448629" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598326676629" />
+    <state x="4392" y="791" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598636775418" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1598200189647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598200189647" />
+    <state x="203" y="139" key="new project wizard" timestamp="1598294505628">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="203" y="139" key="new project wizard/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598294505628" />
   </component>
 </project>
