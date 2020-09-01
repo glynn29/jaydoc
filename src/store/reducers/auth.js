@@ -6,7 +6,8 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
-    authRedirectPath: '/'
+    registered: false,
+    isAdmin: false
 };
 
 const authStart = (state, action) => {
@@ -15,8 +16,14 @@ const authStart = (state, action) => {
 
 const authSuccess = (state, action) => {
     return updateObject(state, {
-        token: action.token,
-        userId: action.userId,
+        error: null,
+        loading: false
+    });
+};
+
+const registerSuccess = (state, action) => {
+    return updateObject(state, {
+        registered: true,
         error: null,
         loading: false
     });
@@ -42,6 +49,8 @@ const reducer = (state = initialState, action) => {
             return authStart(state, action);
         case actionTypes.AUTH_SUCCESS:
             return authSuccess(state, action);
+        case actionTypes.REGISTER_SUCCESS:
+            return registerSuccess(state, action);
         case actionTypes.AUTH_FAIL:
             return authFail(state, action);
         case actionTypes.AUTH_LOGOUT:
