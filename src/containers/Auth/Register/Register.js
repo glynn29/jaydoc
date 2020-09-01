@@ -17,6 +17,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 //import * as classes from './Register.module.css';
 import formStyles from "../../../components/UI/Styles/formStyle";
+import * as actions from "../../../store/actions";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 const list2 = [
     "M1",
@@ -32,13 +35,13 @@ const list = [
     {name:"M4"},
 ];
 
-const Register = () => {
+const Register = (props) => {
     const [first, setFirst] = useState("");
     const [last, setLast] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState(null);
-    const [passwordConfirm, setPasswordConfirm] = useState(null);
-    const [status, setStatus] = useState(null);
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [status, setStatus] = useState("");
     const [spanish, setSpanish] = useState(false);
 
     const classes = formStyles();
@@ -47,8 +50,29 @@ const Register = () => {
     //
     // }, [list])
 
+    const submitHandler = (event) =>{
+        event.preventDefault();
+        const formData = {
+            first: first,
+            last: last,
+            email: email,
+            password: password,
+            passwordConfirm: passwordConfirm,
+            status: status,
+            spanish: spanish
+        };
+        props.onRegister(formData);
+    };
+
+    let authRedirect = null;
+    if(props.isRegistered){
+        console.log("redirected to login",);
+        authRedirect = <Redirect to={"/login"}/>
+    }
+
     const form = (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="sm">
+            {authRedirect}
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -57,7 +81,7 @@ const Register = () => {
                 <Typography component="h1" variant="h5">
                     Register
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={submitHandler}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -127,7 +151,7 @@ const Register = () => {
                                 autoComplete="current-password"
                             />
                         </Grid>
-                        <Grid >
+                        <Grid item xs={12}>
                             <FormControl variant="outlined" className={classes.formControl}>
                                 <InputLabel htmlFor="outlined-age-native-simple">Status</InputLabel>
                                 <Select
@@ -149,8 +173,10 @@ const Register = () => {
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} align="center" >
                             <FormControlLabel
+                                style={{alignItems: 'center',}}
+                                className={classes.formControl}
                                 checked={spanish}
                                 value={spanish}
                                 onChange={event => setSpanish(event.target.value)}
@@ -178,11 +204,23 @@ const Register = () => {
                 </form>
             </div>
         </Container>
-
-
     );
 
     return form;
-}
+};
 
-export default Register;
+const mapStateToProps = state => {
+    return{
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isRegistered: state.auth.registered,
+    };
+};
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        onRegister: (registerData) => dispatch(actions.register(registerData)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

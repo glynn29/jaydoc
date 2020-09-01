@@ -1,4 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,14 +15,29 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import formStyles from "../../../components/UI/Styles/formStyle";
+import Spinner from "../../../components/UI/Spinner/Spinner";
+import * as actions from '../../../store/actions/index'
+import {AuthContext} from "../../../containers/Auth/Auth";
 
-const Login = () => {
+
+
+const Login = (props) => {
+    const {currentUser} = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const classes = formStyles();
 
+    const submitHandler = (event) =>{
+        event.preventDefault();
+        props.onLogin(email, password);
+    };
+
+    if (currentUser){
+        return <Redirect to={"/"}/>;
+    }
+
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="sm">
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -28,7 +46,7 @@ const Login = () => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={submitHandler}>
                     <TextField
                         value={email}
                         onChange={event => setEmail(event.target.value)}
@@ -84,6 +102,20 @@ const Login = () => {
             </div>
         </Container>
     );
-}
+};
 
-export default Login;
+const mapStateToProps = state => {
+    return{
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+    };
+};
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        onLogin: (email, password) => dispatch(actions.login(email, password)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

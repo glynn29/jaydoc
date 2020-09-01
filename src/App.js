@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -10,23 +10,20 @@ import Calendar from "./containers/Calendar/Calendar";
 import Account from "./containers/Client/Account/Account";
 import Home from "./containers/Client/Home/Home";
 import Logout from "./containers/Auth/Logout/Logout";
-
+import firebase from "./firebase";
 import Dashboard from "./containers/Admin/Dashboard/Dashboard";
 import Email from "./containers/Admin/Email/Email";
 import EventList from "./containers/Admin/EventList/EventList";
 import Report from "./containers/Admin/Report/Reports";
 import Users from "./containers/Admin/Users/Users";
 import Layout from "./containers/hoc/Layout/Layout";
+import {AuthContext} from "./containers/Auth/Auth";
 
 const App = (props) =>{
+    const {currentUser, isAdmin} = useContext(AuthContext);
+
         let routes = (
             <Switch>
-                 <Route path="/email" component={Email}/>
-                 <Route path="/report" component={Report}/>
-                 <Route path="/eventList" component={EventList}/>
-                 <Route path="/volunteerList" component={Users}/>
-                <Route path="/account" component={Account}/>
-                <Route path="/calendar" component={Calendar}/>
                 <Route path="/contactUs" component={ContactUs}/>
                 <Route path="/comments" component={Comment}/>
                 <Route path="/register" component={Register}/>
@@ -35,7 +32,7 @@ const App = (props) =>{
             </Switch>
         );
 
-        if(props.isAuthenticated){
+        if(currentUser){
             routes = (
                 <Switch>
                     <Route path="/account" component={Account}/>
@@ -43,22 +40,28 @@ const App = (props) =>{
                     <Route path="/contactUs" component={ContactUs}/>
                     <Route path="/comments" component={Comment}/>
                     <Route path="/logout" component={Logout}/>
+                    <Route path="/login" component={Login}/>
                     <Route path="/" exact component={Home}/>
                 </Switch>
             );
         }
 
-    // <Switch>
-    //     <Route path="/email" component={Email}/>
-    //     <Route path="/report" component={Report}/>
-    //     <Route path="/eventList" component={EventList}/>
-    //     <Route path="/volunteerList" component={Users}/>
-    //     <Route path="/" exact component={Dashboard}/>
-    // </Switch>
-
+        if(currentUser && isAdmin) {
+            routes = (
+                <Switch>
+                    <Route path="/email" component={Email}/>
+                    <Route path="/report" component={Report}/>
+                    <Route path="/eventList" component={EventList}/>
+                    <Route path="/volunteerList" component={Users}/>
+                    <Route path="/logout" component={Logout}/>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/" exact component={Dashboard}/>
+                </Switch>
+            );
+        }
         return (
             <div>
-                <Layout>
+                <Layout currentUser={currentUser}>
                     {routes}
                 </Layout>
             </div>
