@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
     },
     active: {
         color: "yellow"
+    },
+    menuPaper: {
+        maxHeight: 300
     }
 }));
 
