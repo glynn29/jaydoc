@@ -3,3 +3,7 @@ export {
     logout,
     register
 } from './auth'
+
+export {
+    fetchRoleList,
+} from './lists'

@@ -29,7 +29,7 @@ export const fetchRoleList = () => {
             .then((roles) => {
                 roles.forEach((doc) => {
                     doc.data().roles.map((role) => {
-                        list.push(role);
+                        return list.push(role);
                     })
                 });
                 //console.log(list);

@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import {auth} from "../../firebase";
+import {auth, firestore} from "../../firebase";
 
 export const authStart = () => {
     return{
@@ -46,14 +46,38 @@ export const login = (email, password) => {
   }
 };
 
+async function createUser({first, last, email, role, spanish}) {
+    const user = await auth.currentUser;
+    console.log(user);
+    firestore.collection('users').add({
+        first: first,
+        last: last,
+        email: email,
+        role: role,
+        spanish: spanish,
+        id: user.uid,
+        approved: false,
+        events: [
+            {position: 'Director', eventId: 'LPnLIhcQpvnafAZey5lb'},
+            {position: 'Student', eventId:'PYI8ymMLtYD8qTAHNmOD'}
+        ]
+    })
+}
+
 export const register = (registerData) => {
     return dispatch => {
         dispatch(authStart());
         auth.createUserWithEmailAndPassword(registerData.email, registerData.password)
             .then(()=>{
+                const name = registerData.first + " " + registerData.last;
+                console.log(name);
                 dispatch(registerSuccess());
-            }).catch(error => dispatch(authFail(error.message)))
-
+            })
+            .then(()=>{
+                createUser(registerData).catch(error => console.log(error));
+            })
+            .catch(error => dispatch(authFail(error.message)))
     }
 };
+
 
