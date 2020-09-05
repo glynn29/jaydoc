@@ -15,7 +15,6 @@
 
 .Toolbar nav{
     height: 100%;
-
 }
 
 .Logo{
@@ -31,7 +30,7 @@
     align-items: center;
 }
 
-@media (max-width: 499px) {
+@media (max-width: 549px) {
     .Header{
         display: none;
     }

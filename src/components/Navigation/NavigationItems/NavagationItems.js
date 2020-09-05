@@ -1,7 +1,6 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 
 import Typography from "@material-ui/core/Typography";
-
 import classes from "./NavigationItems.module.css"
 import NavigationItem from "./NavagationItem/NavigationItem";
 import {AuthContext} from "../../../containers/Auth/Auth";
@@ -9,17 +8,10 @@ import {AuthContext} from "../../../containers/Auth/Auth";
 const NavigationItems = (props) => {
     const {currentUser, isAdmin} = useContext(AuthContext);
 
-    //useEffect(()=> {},[isAdmin]);
-
-    const nav = (<div>
-        {/*{!props.isAuthenticated*/}
-        {currentUser
-            ?
+    const nav = currentUser ?
                 <NavigationItem link="/logout" clicked={props.clicked}><Typography>Logout</Typography></NavigationItem>
             :
-                <NavigationItem link="/login" clicked={props.clicked}><Typography>Login</Typography></NavigationItem>
-        }
-    </div>);
+                <NavigationItem link="/login" clicked={props.clicked}><Typography>Login</Typography></NavigationItem>;
 
     const adminLinks = (<ul className={classes.NavigationItems}>
         <NavigationItem link="/" exact clicked={props.clicked}><Typography>DashBoard</Typography></NavigationItem>
@@ -34,11 +26,8 @@ const NavigationItems = (props) => {
         <NavigationItem link="/" exact clicked={props.clicked}><Typography>Home</Typography></NavigationItem>
         <NavigationItem link="/comments" clicked={props.clicked}><Typography>Comments</Typography></NavigationItem>
         <NavigationItem link="/contactUs" clicked={props.clicked}><Typography>Contact</Typography></NavigationItem>
-        {currentUser &&
-                <NavigationItem link="/account" clicked={props.clicked}><Typography>Account</Typography></NavigationItem>}
-        {currentUser &&
-                <NavigationItem link="/calendar" clicked={props.clicked}><Typography>Calendar</Typography></NavigationItem>
-        }
+        {currentUser && <NavigationItem link="/account" clicked={props.clicked}><Typography>Account</Typography></NavigationItem>}
+        {currentUser && <NavigationItem link="/calendar" clicked={props.clicked}><Typography>Calendar</Typography></NavigationItem>}
         {nav}
     </ul>);
 

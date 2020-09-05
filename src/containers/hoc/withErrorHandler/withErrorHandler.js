@@ -1,12 +1,11 @@
 import React from "react";
 
-import Modal from "../../components/UI/Modal/Modal";
+import Modal from "../../../components/UI/Modal/Modal";
 import Aux from "../Auxillary/Auxillary";
-import useHttpClient from "../../containers/hooks/http-error-handler";
 
-const withErrorHandler = (WrappedComponent, axios) => {
+const withErrorHandler = (WrappedComponent) => {
     return props =>{
-        const [error, clearError] = useHttpClient(axios);
+        const {error, clearError} = props;
 
             return (
                 <Aux>

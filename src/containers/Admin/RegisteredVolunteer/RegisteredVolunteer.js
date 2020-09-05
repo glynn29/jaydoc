@@ -2,7 +2,7 @@ import React from "react";
 
 const RegisteredVolunteer = () => {
     return (<div>
-        <p>Home page</p>
+        <p>Registered page</p>
     </div>);
 };
 

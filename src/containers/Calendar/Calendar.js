@@ -7,9 +7,9 @@ import * as classes from './Calendar.module.css';
 const CalendarBox = () => {
     const [date, setDate] = useState(new Date());
 
-    const links = {
-        link1: <a href="www.google.com">Google</a>
-    };
+    // const links = {
+    //     link1: <a href="www.google.com">Google</a>
+    // };
 
     return (
         <div className={classes.Box}>

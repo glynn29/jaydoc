@@ -1,19 +1,24 @@
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
 
 import EnhancedTable from "../../../components/UI/Table/Table";
-import EditVolunteerForm from "../../../components/UI/Forms/EditVolunteer/EditVolunteer";
-import AddVolunteer from "../../../components/UI/Forms/AddVolunteer/AddVolunteer";
+import EditVolunteerForm from "./Forms/EditVolunteer/EditVolunteer";
+import AddVolunteer from "./Forms/AddVolunteer/AddVolunteer";
 import TransitionModal from "../../../components/UI/Modal/Modal";
+import Container from "@material-ui/core/Container";
 
 function createData(first, last, role, active, login, id) {
     return { first, last, role, active, login, id };
 }
 
 let rows = [
-    createData("john", "hugecock", "M1", "true", 54, 1 ),
-    createData("john2", "hugecock2", "M3", "true", 542, 2 ),
-    createData("john2", "hugeeeecock", "M2", "false", 514, 3 ),
-    createData("john2", "Vhugecock", "M4", "true", 534, 4 ),
+    createData("john1", "cena1", "M1", "true", 54, 1 ),
+    createData("john2", "cena2", "M3", "true", 542, 2 ),
+    createData("john3", "cena3", "M2", "false", 514, 3 ),
+    createData("john4", "cena4", "M4", "true", 534, 4 ),
+    createData("john1", "cena1", "M1", "true", 54, 5 ),
+    createData("john2", "cena2", "M3", "true", 542, 6 ),
+    createData("john3", "cena3", "M2", "false", 514, 7 ),
+    createData("john4", "cena4", "M4", "true", 534, 8 ),
 ];
 
 const headCells = [
@@ -32,7 +37,7 @@ const rowLabels = [
     { id: 'id'},
 ];
 
-const formInfo = {first: "John", last: "dick", role: 'Rapist', active: 'true',id: 12 };
+const formInfo = {first: "John", last: "cena", role: 'M1', active: 'true', id: 12 };
 
 const ApprovedVolunteer = () => {
     const [editOpen, setEditOpen] = useState(false);
@@ -42,7 +47,7 @@ const ApprovedVolunteer = () => {
 
     function addVolunteer() {//added to AddVolunteer component below
         alert("Person added");
-        const newVolunteer = createData("john", "hugecock", "M1", "true", 54, (Math.random().toFixed()) );
+        const newVolunteer = createData("john", "cena", "M1", "true", 54, (Math.random().toFixed()) );
         const newTableData = [...tableData];
         newTableData.push(newVolunteer);
         setTableData(newTableData);
@@ -79,7 +84,7 @@ const ApprovedVolunteer = () => {
         setAddOpen(!addOpen);
     };
 
-    return (<div>
+    return (<Container component="main" maxWidth="md">
         <p>Approved Volunteers page</p>
         <EnhancedTable
             data={tableData}
@@ -102,7 +107,7 @@ const ApprovedVolunteer = () => {
             handleClose={handleEditClose}
             form={<EditVolunteerForm formData={formData}/>}
             title={"Edit Approved Volunteer"}/>
-    </div>);
+    </Container>);
 };
 
 export default ApprovedVolunteer;

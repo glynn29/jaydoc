@@ -1,12 +1,10 @@
 import React from "react";
 
-import Typography from "@material-ui/core/Typography";
-
 import classes from "./Toolbar.module.css";
 import Logo from "../../Logo/Logo";
 import NavigationItems from "../NavigationItems/NavagationItems";
 import DrawerToggle from "../NavigationItems/SideDrawer/DrawerToggle/DrawerToggle";
-import jaydoc from '../../../assests/images/jaydoc2.PNG'
+//import jaydoc from '../../../assests/images/jaydoc2.PNG'
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
