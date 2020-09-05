@@ -4,73 +4,81 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
-import formStyles from "../../../components/UI/Styles/formStyle";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import Checkbox from "@material-ui/core/Checkbox";
-import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
+import AutoComplete from "@material-ui/lab/AutoComplete";
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
+import formStyles from "../../../components/UI/Styles/formStyle";
 import ReminderForm from "../../../components/UI/Forms/Reminder/Reminder";
+import {connect} from "react-redux";
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const list2 = [
-    {name:"M1"},
-    {name:"M2"},
-    {name:"M3"},
-    {name:"M4"},
+    "Mass Email",
+    "Custom Email",
+    "Reminder",
 ];
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//     PaperProps: {
+//         style: {
+//             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//             width: 250,
+//         },
+//     },
+// };
 
-const Email = () => {
+const Email = (props) => {
     const formClasses = formStyles();
-    const [emailType, setEmailType] = useState("");
-    const [category, setCategory] = useState([]);
+    const [emailType, setEmailType] = useState("Mass Email");
+    const [role, setRole] = useState([]);
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
-
-    const list = [
-        "Mass Email",
-        "Custom Email",
-        "Reminder"
-    ];
+    const list = props.roleList;
 
     const emailForm = (
         <Grid container spacing={1} direction={"column"} alignItems={"stretch"} >
             {emailType === "Custom Email" &&
             <Grid item>
                 <FormControl variant="outlined" className={formClasses.formControl}>
-                    <InputLabel required >Category</InputLabel>
-                    <Select
-                        multiple
-                        value={category}
-                        onChange={event => setCategory(event.target.value) }
-                        renderValue={(selected) => selected.join(', ')}
-                        MenuProps={MenuProps}
-                        label="Category"
-                    >
-                        {list2.map( listItem => {
-                            return (
-                                <MenuItem key={listItem.name} value={listItem.name}>
-                                    <Checkbox checked={category.indexOf(listItem.name) > -1}/>
-                                    <ListItemText primary={listItem.name}/>
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
+                <AutoComplete
+                    //value={role}
+                    //inputValue={role}
+                    onChange={(event,value) => {setRole(value); console.log(role)}}
+                    multiple
+                    options={list}
+                    limitTags={2}
+                    disableCloseOnSelect
+                    getOptionLabel={(option) => option}
+                    renderOption={(option, { selected }) => (
+                        <React.Fragment>
+                            <Checkbox
+                                icon={icon}
+                                checkedIcon={checkedIcon}
+                                style={{ marginRight: 8 }}
+                                checked={selected}
+                            />
+                            {option}
+                        </React.Fragment>
+                    )}
+                    //style={{ width: 500 }}
+                    renderInput={(params) => (
+                        <TextField {...params} key={params} variant="outlined" label="Roles" placeholder="Roles" />
+                    )}
+                />
                 </FormControl>
+
             </Grid>}
             <Grid item>
                 <TextField
@@ -116,7 +124,6 @@ const Email = () => {
                             <FormControl variant="outlined" className={formClasses.formControl} >
                                 <InputLabel htmlFor="outlined-age-native-simple" required >Email Type</InputLabel>
                                 <Select
-                                    native
                                     value={emailType}
                                     onChange={event => setEmailType(event.target.value) }
                                     label="Email Type"
@@ -125,17 +132,18 @@ const Email = () => {
                                         id: 'outlined-age-native-simple',
                                     }}
                                 >
-                                    <option aria-label="Select an Email Type" value="" />
-                                    {list.map( listItem => {
+                                    <MenuItem aria-label="Select an Email Type" value="" />
+                                    {list2.map( listItem => {
                                         return (
-                                            <option key={listItem} value={listItem}>{listItem}</option>
+                                            <MenuItem key={listItem} value={listItem}>{listItem}</MenuItem>
                                         );
                                     })}
                                 </Select>
                             </FormControl>
-                        </Grid>
+
                         {emailType !== "Reminder" && emailForm}
                         {emailType === "Reminder" && <ReminderForm/>}
+                        </Grid>
                     </Grid>
                     <Button
                         type="submit"
@@ -154,6 +162,12 @@ const Email = () => {
     return form;
 };
 
-export default Email;
+const mapStateToProps = state =>{
+    return {
+        roleList: state.lists.roleList
+    }
+};
+
+export default connect(mapStateToProps)(Email);
 
 

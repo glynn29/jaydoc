@@ -1,5 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
+import Spinner from "../../../components/UI/Spinner/Spinner";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,32 +11,26 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-//import * as classes from './Register.module.css';
+import MenuItem from "@material-ui/core/MenuItem";
 import formStyles from "../../../components/UI/Styles/formStyle";
 import * as actions from "../../../store/actions";
-import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
 
-const list2 = [
-    "M1",
-    "M2",
-    "M3",
-    "M4"
-];
-
-const list = [
-    {name:"M1"},
-    {name:"M2"},
-    {name:"M3"},
-    {name:"M4"},
-];
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
 
 const Register = (props) => {
     const [first, setFirst] = useState("");
@@ -41,14 +38,10 @@ const Register = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [status, setStatus] = useState("");
+    const [role, setRole] = useState("");
     const [spanish, setSpanish] = useState(false);
-
+    const list = props.roleList;
     const classes = formStyles();
-
-    // useEffect(() => {
-    //
-    // }, [list])
 
     const submitHandler = (event) =>{
         event.preventDefault();
@@ -58,21 +51,18 @@ const Register = (props) => {
             email: email,
             password: password,
             passwordConfirm: passwordConfirm,
-            status: status,
+            role: role,
             spanish: spanish
         };
         props.onRegister(formData);
     };
 
-    let authRedirect = null;
     if(props.isRegistered){
-        console.log("redirected to login",);
-        authRedirect = <Redirect to={"/login"}/>
+         return <Redirect to={"/login"}/>
     }
 
     const form = (
         <Container component="main" maxWidth="sm">
-            {authRedirect}
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -81,7 +71,8 @@ const Register = (props) => {
                 <Typography component="h1" variant="h5">
                     Register
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={submitHandler}>
+                <form className={classes.form} onSubmit={submitHandler}>
+                    {props.error}
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -153,21 +144,21 @@ const Register = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl variant="outlined" className={classes.formControl}>
-                                <InputLabel htmlFor="outlined-age-native-simple">Status</InputLabel>
+                                <InputLabel>Role</InputLabel>
                                 <Select
-                                    native
-                                    value={status}
-                                    onChange={event => setStatus(event.target.value) }
-                                    label="Status"
+                                    MenuProps={MenuProps}
+                                    value={role}
+                                    onChange={event => setRole(event.target.value) }
+                                    label="Role"
                                     inputProps={{
-                                        name: 'status',
+                                        name: 'role',
                                         id: 'outlined-age-native-simple',
                                     }}
                                 >
-                                    <option aria-label="None" value="" />
+                                    <MenuItem aria-label="None" value="" />
                                     {list.map( listItem => {
                                         return (
-                                            <option key={listItem.name} value={listItem.name}>{listItem.name}</option>
+                                            <MenuItem key={listItem} value={listItem}>{listItem}</MenuItem>
                                         );
                                     })}
                                 </Select>
@@ -179,7 +170,7 @@ const Register = (props) => {
                                 className={classes.formControl}
                                 checked={spanish}
                                 value={spanish}
-                                onChange={event => setSpanish(event.target.value)}
+                                onChange={event => setSpanish(!spanish)}
                                 control={<Checkbox value="spanish" color="primary" />}
                                 label="Speak Spanish"
                             />
@@ -206,7 +197,7 @@ const Register = (props) => {
         </Container>
     );
 
-    return form;
+    return props.loading ? <Spinner/> : form;
 };
 
 const mapStateToProps = state => {
@@ -214,6 +205,7 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isRegistered: state.auth.registered,
+        roleList: state.lists.roleList
     };
 };
 
