@@ -9,6 +9,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 const ContactUs = () => {
     const formClasses = formStyles();
@@ -27,7 +28,7 @@ const ContactUs = () => {
     const form = (
        <div style={{textAlign:"center", width: "70%", margin:"auto"}}>
             <Typography variant="h3">Contact Us</Typography>
-            <p><Typography>If you are having technical difficulty with the website, or if you have a general question about JayDoc Free Clinic, please use the following form to submit your query:</Typography></p>
+            <Typography>If you are having technical difficulty with the website, or if you have a general question about JayDoc Free Clinic, please use the following form to submit your query:</Typography>
             <Container component="main" maxWidth="md">
             <CssBaseline />
             <form className={formClasses.root} noValidate autoComplete="off">
@@ -57,7 +58,7 @@ const ContactUs = () => {
                         autoComplete="email"
                     />
                     <FormControl variant="outlined" className={formStyles.formControl}>
-                        <InputLabel htmlFor="outlined-age-native-simple" required fullWidth>Category</InputLabel>
+                        <InputLabel htmlFor="outlined-age-native-simple" required>Category</InputLabel>
                         <Select
                             native
                             value={category}
@@ -100,6 +101,13 @@ const ContactUs = () => {
                         rows={15}
                         inputProps={{ className: formClasses.textarea }}
                     />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={formClasses.submit}>
+                        SEND
+                    </Button>
                 </Grid>
             </form>
             </Container>
