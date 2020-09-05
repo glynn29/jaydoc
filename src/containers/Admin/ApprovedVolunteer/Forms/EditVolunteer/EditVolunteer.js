@@ -1,9 +1,10 @@
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
+import {connect} from "react-redux";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
-import formStyles from "../../Styles/formStyle";
+import formStyles from "../../../../../components/UI/Styles/formStyle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,26 +12,29 @@ import Select from "@material-ui/core/Select";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-const list = [
-    {name:"M1"},
-    {name:"M2"},
-    {name:"M3"},
-    {name:"M4"},
-];
+import {firestore} from "../../../../../firebase";
+
 
 const EditVolunteer = props => {
     const formClasses = formStyles();
     const [first, setFirst] = useState(props.formData.first);
     const [last, setLast] = useState(props.formData.last);
-    const [email, setEmail] = useState(props.formData.email);
-    const [active, setActive] = useState(true);
-    const [status, setStatus] = useState(props.formData.role);
+    const [approved, setApproved] = useState(true);
+    const [role, setRole] = useState(props.formData.role);
     const [spanish, setSpanish] = useState(false);
+    const list = props.roleList;
 
-    //useEffect to mount data from id from props
-
-    const submitFormHandler = () =>{
-        alert(first + " " + last + " " + email + " " + status + " active:" + active + " spanish:" + spanish);
+    const submitFormHandler = (event) =>{
+        event.preventDefault();
+        firestore.collection('users').doc(props.formData.id).set({
+            first: first,
+            last: last,
+            approved: approved,
+            spanish: spanish,
+        }, {merge: true})
+            .then(()=>{props.onEdit();})
+            .catch(error => {console.log(error)});
+        console.log("event Edited");
     };
 
     const form = (
@@ -46,51 +50,41 @@ const EditVolunteer = props => {
                             name="firstName"
                             variant="outlined"
                             required
-                            fullwidth
+                            fullWidth
                             id="firstName"
                             label="First Name"
                             autoFocus
-                        /></Grid>
+                        />
+                    </Grid>
                     <Grid item>
                         <TextField
                             value={last}
                             onChange={event => setLast(event.target.value)}
                             variant="outlined"
                             required
-                            fullwidth
+                            fullWidth
                             id="lastName"
                             label="Last Name"
                             name="lastName"
-                        /></Grid>
-                    <Grid item>
-                        <TextField
-                            value={email}
-                            onChange={event => setEmail(event.target.value)}
-                            variant="outlined"
-                            required
-                            fullwidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
                         />
                     </Grid>
                     <Grid item>
                         <FormControl variant="outlined" className={formClasses.formControl} >
-                            <InputLabel htmlFor="outlined-age-native-simple" required fullwidth>Status</InputLabel>
+                            <InputLabel htmlFor="outlined-age-native-simple" required>Role</InputLabel>
                             <Select
                                 native
-                                value={status}
-                                onChange={event => setStatus(event.target.value) }
-                                label="Status"
+                                value={role}
+                                onChange={event => setRole(event.target.value) }
+                                label="Role"
                                 inputProps={{
-                                    name: 'status',
+                                    name: 'role',
                                     id: 'outlined-age-native-simple',
                                 }}
                             >
                                 <option aria-label="None" value="" />
                                 {list.map( listItem => {
                                     return (
-                                        <option key={listItem.name} value={listItem.name}>{listItem.name}</option>
+                                        <option key={listItem} value={listItem}>{listItem}</option>
                                     );
                                 })}
                             </Select>
@@ -100,26 +94,26 @@ const EditVolunteer = props => {
                         <FormControlLabel
                             checked={spanish}
                             value={spanish}
-                            onChange={event => setSpanish(event.target.value)}
+                            onChange={event => setSpanish(!spanish)}
                             control={<Checkbox value={spanish} color="primary" />}
                             label="Speak Spanish"
                         />
                     </Grid>
                     <Grid item>
                         <FormControlLabel
-                            checked={active}
-                            value={active}
-                            onChange={event => setActive(event.target.value)}
-                            control={<Checkbox value={active} color="primary" />}
-                            label="Active"
+                            checked={approved}
+                            value={approved}
+                            onChange={event => setApproved(!approved)}
+                            control={<Checkbox value={approved} color="primary" />}
+                            label="Approved"
                         />
                     </Grid>
                 </Grid>
                 <Button
                     type="submit"
-                    fullwidth
                     variant="contained"
                     color="primary"
+                    fullWidth
                     className={formClasses.submit}
                 >
                     Edit User
@@ -131,4 +125,10 @@ const EditVolunteer = props => {
     return form;
 };
 
-export default EditVolunteer;
+const mapStateToProps = state => {
+    return{
+        roleList: state.lists.roleList
+    };
+};
+
+export default connect(mapStateToProps)(EditVolunteer);
