@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -116,8 +116,8 @@ function EnhancedTableHead(props) {
                     </StyledTableCell>
                 ))}
                 {props.details && <StyledTableCell align="left">Details</StyledTableCell>}
-                <StyledTableCell align="left">Edit</StyledTableCell>
-                <StyledTableCell align="left">Delete</StyledTableCell>
+                {props.edit &&<StyledTableCell align="left">Edit</StyledTableCell>}
+                {props.delete && <StyledTableCell align="left">Delete</StyledTableCell>}
             </TableRow>
         </TableHead>
     );
@@ -144,14 +144,6 @@ function EnhancedTable(props) {
         setRows(data);
     },[data]);
 
-    function deleteHandler(id) {
-        props.delete(id);
-    }
-
-    function addHandler() {
-        props.add();
-    }
-
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -176,7 +168,7 @@ function EnhancedTable(props) {
     return (
         <div className={classes.root}>
             <Container>
-                <Button variant="contained" color="primary" onClick={() => addHandler()}>Add</Button>
+                {props.add && <Button variant="contained" color="primary" onClick={() => props.add()}>Add</Button>}
                 <TableContainer component={Paper}>
                     <Table
                         className={classes.table}
@@ -199,16 +191,16 @@ function EnhancedTable(props) {
                                     return (
                                         <StyledTableRow
                                             hover
-                                            key={row.id}
+                                            key={index}
                                         >
-                                            {props.rowLables.map((label)=>{
+                                            {props.rowLables.map((cell, index)=>{
                                                 return(
-                                                    <StyledTableCell component="th" key={row[label.id]} scope="row" align="left">{row[label.id]}</StyledTableCell>
+                                                    <StyledTableCell component="th" key={index} scope="row" align="left">{row[cell.id]}</StyledTableCell>
                                                 );
                                             })}
-                                            {props.details && <StyledTableCell align="left"><Button onClick={() => {props.details(row.id)}} variant="contained" className={classes.detailsButton}>Details</Button></StyledTableCell>}
-                                            <StyledTableCell align="left"><Button onClick={() => {props.edit(row.id)}} variant="contained" className={classes.editButton}>Edit</Button></StyledTableCell>
-                                            <StyledTableCell align="left"><Button onClick={() => {deleteHandler(row.id)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>
+                                            {props.details && <StyledTableCell align="left"><Button onClick={() => {props.details(row)}} variant="contained" className={classes.detailsButton}>Details</Button></StyledTableCell>}
+                                            {props.edit && <StyledTableCell align="left"><Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button></StyledTableCell>}
+                                            {props.delete && <StyledTableCell align="left"><Button onClick={() => {props.delete(row.id)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>}
 
                                         </StyledTableRow>
                                     );
