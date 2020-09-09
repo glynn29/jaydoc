@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        width: 200,
+        width: '100%',
     },
 }));
 
@@ -18,16 +18,18 @@ export default function DateAndTimePickers(props) {
     const classes = useStyles();
 
     return (
-        <TextField
-            value={props.value}
-            onChange={(event) => props.onChange(event.target.value)}
-            id="datetime-local"
-            label="Next appointment"
-            type="datetime-local"
-            className={classes.textField}
-            InputLabelProps={{
-                shrink: true,
-            }}
-        />
+        <div className={classes.container}>
+            <TextField
+                value={props.value}
+                onChange={(event) => props.onChange(event.target.value)}
+                id={props.label}
+                label={props.label}
+                type="datetime-local"
+                className={classes.textField}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+            />
+        </div>
     );
 };
