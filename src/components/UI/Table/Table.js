@@ -118,6 +118,7 @@ function EnhancedTableHead(props) {
                 {props.details && <StyledTableCell align="left">Details</StyledTableCell>}
                 {props.edit &&<StyledTableCell align="left">Edit</StyledTableCell>}
                 {props.delete && <StyledTableCell align="left">Delete</StyledTableCell>}
+                {props.signUp && <StyledTableCell align="left">Sign Up</StyledTableCell>}
             </TableRow>
         </TableHead>
     );
@@ -193,7 +194,7 @@ function EnhancedTable(props) {
                                             hover
                                             key={index}
                                         >
-                                            {props.rowLables.map((cell, index)=>{
+                                            {props.headCells.map((cell, index)=>{
                                                 return(
                                                     <StyledTableCell component="th" key={index} scope="row" align="left">{row[cell.id]}</StyledTableCell>
                                                 );
@@ -201,7 +202,7 @@ function EnhancedTable(props) {
                                             {props.details && <StyledTableCell align="left"><Button onClick={() => {props.details(row)}} variant="contained" className={classes.detailsButton}>Details</Button></StyledTableCell>}
                                             {props.edit && <StyledTableCell align="left"><Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button></StyledTableCell>}
                                             {props.delete && <StyledTableCell align="left"><Button onClick={() => {props.delete(row.id)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>}
-
+                                            {props.signUp && <StyledTableCell align="left"><Button onClick={()=> {props.signUp(row)}} variant="contained" className={classes.detailsButton}>Sign Up</Button> </StyledTableCell> }
                                         </StyledTableRow>
                                     );
                                 })}
