@@ -10,33 +10,31 @@ import Grid from "@material-ui/core/Grid";
 const TransitionModal = (props) => {
     const formStyles = useStyles();
 
-
     return (
         <div >
-            <Container>
-            <Modal
-                //className={classes.Box}
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={formStyles.modal}
-                open={props.open}
-                onClose={props.handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={props.open}>
-                    <div className={formStyles.modalPaper}>
-                        <Grid container spacing={2} direction={"column"} alignItems={"center"}>
-                        <h2>{props.title}</h2>
-                        <p>blah blah blah</p>
-                        {props.form}
-                        </Grid>
-                    </div>
-                </Fade>
-            </Modal>
+            <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+                <Modal
+                    //className={classes.Box}
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={formStyles.modal}
+                    open={props.open}
+                    onClose={props.handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={props.open}>
+                        <div className={formStyles.modalPaper}>
+                            <Grid container spacing={2} direction={"column"} alignItems={"center"}>
+                            <h2>{props.title}</h2>
+                            {props.form}
+                            </Grid>
+                        </div>
+                    </Fade>
+                </Modal>
             </Container>
         </div>
     );
