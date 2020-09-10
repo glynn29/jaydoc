@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -13,6 +14,50 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
 }));
+
+export const CustomDatePicker = (props) => {
+    const classes = useStyles();
+
+    return (
+        <div className={classes.container}>
+            <TextField
+                variant="outlined"
+                value={props.value}
+                onChange={(event) => props.onChange(event.target.value)}
+                id={props.label}
+                label={props.label}
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+            />
+        </div>
+    );
+};
+
+
+export const CustomTimePicker = (props) => {
+    const classes = useStyles();
+
+    return (
+        <div className={classes.container}>
+            <TextField
+                variant="outlined"
+                value={props.value}
+                onChange={(event) => props.onChange(event.target.value)}
+                id={props.label}
+                label={props.label}
+                type="time"
+                className={classes.textField}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+            />
+        </div>
+    );
+};
+
 
 export default function DateAndTimePickers(props) {
     const classes = useStyles();
