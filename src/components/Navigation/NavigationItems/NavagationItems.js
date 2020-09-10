@@ -16,6 +16,7 @@ const NavigationItems = (props) => {
     const adminLinks = (<ul className={classes.NavigationItems}>
         <NavigationItem link="/" exact clicked={props.clicked}><Typography>DashBoard</Typography></NavigationItem>
         <NavigationItem link="/eventList" clicked={props.clicked}><Typography>Events</Typography></NavigationItem>
+        <NavigationItem link="/scheduledEventList" clicked={props.clicked}><Typography>Schedule Events</Typography></NavigationItem>
         <NavigationItem link="/volunteerList" clicked={props.clicked}><Typography>Volunteers</Typography></NavigationItem>
         <NavigationItem link="/email" clicked={props.clicked}><Typography>Email</Typography></NavigationItem>
         <NavigationItem link="/report" clicked={props.clicked}><Typography>Report</Typography></NavigationItem>
