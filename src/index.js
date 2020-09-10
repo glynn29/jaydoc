@@ -9,14 +9,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import authReducer from './store/reducers/auth';
-import listReducer from './store/reducers/list'
-import {AuthProvider} from './containers/Auth/Auth'
+import listReducer from './store/reducers/list';
+import confirmationReducer from './store/reducers/singUp';
+import {AuthProvider} from './containers/Auth/Auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    lists: listReducer
+    lists: listReducer,
+    signUp: confirmationReducer,
 });
 
 const store = createStore(rootReducer,composeEnhancers(

@@ -3,43 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="aa0d9f9a-f944-4d4d-9fec-e968e2dae6ae" name="Default Changelist" comment="added logo component">
       <change afterPath="$PROJECT_DIR$/src/axiosHelper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/Calendar/Forms/SignUp/SignUp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/Modal/Modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/Modal/Modal.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/hooks/http-error-handler.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/firebase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/actions/signUp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/reducers/singUp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItem/NavigationItem.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItem/NavigationItem.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavagationItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavigationItems.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/NavigationItems.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/DrawerToggle/DrawerToggle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/DrawerToggle/DrawerToggle.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/SideDrawer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/NavigationItems/SideDrawer/SideDrawer.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/ToolBar/Toolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/ToolBar/Toolbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/ToolBar/Toolbar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/ToolBar/Toolbar.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/AddEvent/AddEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/AddEvent/AddEvent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/AddVolunteer/AddVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/Forms/AddVolunteer/AddVolunteer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/EditEvent/EditEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/EditEvent/EditEvent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/EditVolunteer/EditVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/Forms/EditVolunteer/EditVolunteer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Forms/Reminder/Reminder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Forms/Reminder/Reminder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Table/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Table/Table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Admin/RegisteredVolunteer/RegisteredVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/RegisteredVolunteer/RegisteredVolunteer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Users/Users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Register/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Register/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/AddEvent/AddEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/AddEvent/AddEvent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/Forms/AddScheduledEvent/AddScheduledEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/Forms/AddScheduledEvent/AddScheduledEvent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/Forms/EditScheduledEvent/EditScheduledEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/Forms/EditScheduledEvent/EditScheduledEvent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/ScheduledEventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/ScheduledEventList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Client/Comments/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Client/Comments/Comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Client/ContactUs/ContactUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Client/ContactUs/ContactUs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/hoc/Layout/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/hoc/Layout/Layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Confirmation/Confirmation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Confirmation/Confirmation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Forms/AreYouSure/AreYouSure.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Forms/AreYouSure/AreYouSure.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Forms/Signup.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/withErrorHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/withErrorHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions/lists.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/lists.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +56,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../burgerbuilder" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/containers/hoc/withErrorHandler" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -78,18 +65,18 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Calendar\Forms\SignUp" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin\ApprovedVolunteer\Forms" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin\EventList\Forms" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Forms" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Footer" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI\Button\EditVolunteer" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\hoc\withErrorHandler" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\Navigation\NavigationItems" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -123,56 +110,7 @@
       <workItem from="1598199993437" duration="50663000" />
       <workItem from="1598544495832" duration="8646000" />
       <workItem from="1598900487270" duration="50198000" />
-      <workItem from="1599171593267" duration="17032000" />
-    </task>
-    <task id="LOCAL-00001" summary="initial">
-      <created>1597786439528</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1597786439528</updated>
-    </task>
-    <task id="LOCAL-00002" summary="added Backdrop.js and Spinner.js">
-      <created>1597790190678</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1597790190678</updated>
-    </task>
-    <task id="LOCAL-00003" summary="added Button.js component">
-      <created>1597790237768</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1597790237768</updated>
-    </task>
-    <task id="LOCAL-00004" summary="added Layout.js component">
-      <created>1597795039142</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1597795039142</updated>
-    </task>
-    <task id="LOCAL-00005" summary="set up redux actions and reducers, and added authorization action and reducer. also updated index.js to support redux">
-      <created>1597795109178</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1597795109178</updated>
-    </task>
-    <task id="LOCAL-00006" summary="added logo component">
-      <created>1597796135580</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1597796135580</updated>
-    </task>
-    <task id="LOCAL-00007" summary="initial Navigations Files with styling">
-      <created>1598118432964</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1598118432964</updated>
+      <workItem from="1599171593267" duration="77494000" />
     </task>
     <task id="LOCAL-00008" summary="Footer component and styles file for Material UI">
       <created>1598118475860</created>
@@ -384,31 +322,146 @@
       <option name="project" value="LOCAL" />
       <updated>1599253743824</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="minor formatting and added user signup to firestore">
+      <created>1599268558744</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1599268558744</updated>
+    </task>
+    <task id="LOCAL-00039" summary="minor formatting changes">
+      <created>1599268604767</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1599268604767</updated>
+    </task>
+    <task id="LOCAL-00040" summary="formatting">
+      <created>1599268633410</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1599268633410</updated>
+    </task>
+    <task id="LOCAL-00041" summary="added send button">
+      <created>1599268695040</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1599268695040</updated>
+    </task>
+    <task id="LOCAL-00042" summary="added add, edit, and delete logic for volunteers in firestore">
+      <created>1599324828080</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1599324828080</updated>
+    </task>
+    <task id="LOCAL-00043" summary="added add, edit, delete logic for events in the firestore">
+      <created>1599324857155</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1599324857155</updated>
+    </task>
+    <task id="LOCAL-00044" summary="minor changes">
+      <created>1599324885641</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1599324885641</updated>
+    </task>
+    <task id="LOCAL-00045" summary="changed to work with new roleList">
+      <created>1599324928102</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1599324928102</updated>
+    </task>
+    <task id="LOCAL-00046" summary="added DateTimePicker.js component">
+      <created>1599602323089</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1599602323089</updated>
+    </task>
+    <task id="LOCAL-00047" summary="added ScheduledEventList.js component along with add and edit components">
+      <created>1599679283706</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1599679283707</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Made small changes to DateTimePicker.js">
+      <created>1599679309970</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1599679309970</updated>
+    </task>
+    <task id="LOCAL-00049" summary="New Signup.js form component and updated Calendar.js to support showing events">
+      <created>1599708002890</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1599708002890</updated>
+    </task>
+    <task id="LOCAL-00050" summary="made two new DateTimePickers">
+      <created>1599708035372</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1599708035373</updated>
+    </task>
+    <task id="LOCAL-00051" summary="added ScheduleEvent to navbar">
+      <created>1599708090122</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1599708090122</updated>
+    </task>
+    <task id="LOCAL-00052" summary="added Singup functionality">
+      <created>1599776884682</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1599776884682</updated>
+    </task>
+    <task id="LOCAL-00053" summary="minor changes">
+      <created>1599776910223</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1599776910224</updated>
+    </task>
+    <task id="LOCAL-00054" summary="initial Confirmation.js component">
+      <created>1599776935545</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1599776935545</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Modal.js to ask if the user is sure they want to sign up">
+      <created>1599776966507</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1599776966507</updated>
+    </task>
+    <task id="LOCAL-00056" summary="added confirmation page route">
+      <created>1599777001924</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1599777001924</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="initial set up" />
-    <MESSAGE value="transformed into functional components" />
-    <MESSAGE value="added redux store and axios file" />
-    <MESSAGE value="added logo" />
-    <MESSAGE value="added edit button modals" />
-    <MESSAGE value="added default modal component" />
-    <MESSAGE value="Custom table component with filtering functions" />
-    <MESSAGE value="small changes" />
-    <MESSAGE value="event tables for data and form for filling out data" />
-    <MESSAGE value="updated styles" />
-    <MESSAGE value="Added Forms for the add and edit modals" />
-    <MESSAGE value="formatting changes" />
-    <MESSAGE value="fixed formatting error" />
-    <MESSAGE value="initial Reminder.js file" />
-    <MESSAGE value="added new styles" />
-    <MESSAGE value="initial gereralannouncements file" />
-    <MESSAGE value="added auth component for firestore and context components" />
-    <MESSAGE value="Minor changes" />
     <MESSAGE value="cloud function to add admin user" />
     <MESSAGE value="added firebase and firebase helper function" />
     <MESSAGE value="updated auth reducer and actions to work with context api" />
@@ -416,51 +469,71 @@
     <MESSAGE value="added auth context for updating ui on login and logout, and for checking if the user is an admin" />
     <MESSAGE value="added new style" />
     <MESSAGE value="created list action and reducer to get the rolesList" />
-    <option name="LAST_COMMIT_MESSAGE" value="created list action and reducer to get the rolesList" />
+    <MESSAGE value="minor formatting and added user signup to firestore" />
+    <MESSAGE value="minor formatting changes" />
+    <MESSAGE value="formatting" />
+    <MESSAGE value="added send button" />
+    <MESSAGE value="added add, edit, and delete logic for volunteers in firestore" />
+    <MESSAGE value="added add, edit, delete logic for events in the firestore" />
+    <MESSAGE value="changed to work with new roleList" />
+    <MESSAGE value="added DateTimePicker.js component" />
+    <MESSAGE value="added ScheduledEventList.js component along with add and edit components" />
+    <MESSAGE value="Made small changes to DateTimePicker.js" />
+    <MESSAGE value="New Signup.js form component and updated Calendar.js to support showing events" />
+    <MESSAGE value="made two new DateTimePickers" />
+    <MESSAGE value="added ScheduleEvent to navbar" />
+    <MESSAGE value="added Singup functionality" />
+    <MESSAGE value="minor changes" />
+    <MESSAGE value="initial Confirmation.js component" />
+    <MESSAGE value="Modal.js to ask if the user is sure they want to sign up" />
+    <MESSAGE value="added confirmation page route" />
+    <option name="LAST_COMMIT_MESSAGE" value="added confirmation page route" />
   </component>
   <component name="WindowStateProjectService">
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598236201772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598236201772" />
-    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1599268603866">
+    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1599777001069">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599268603866" />
+    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599777001069" />
     <state x="4425" y="652" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598636771189" />
+    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1599708117030" />
     <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1599265023283">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599265023283" />
-    <state width="746" height="217" key="GridCell.Tab.0.bottom" timestamp="1599248395357">
+    <state width="1493" height="152" key="GridCell.Tab.0.bottom" timestamp="1599779286958">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599248395357" />
+    <state width="1493" height="152" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599779286958" />
     <state width="1877" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961417" />
-    <state width="746" height="217" key="GridCell.Tab.0.center" timestamp="1599248395357">
+    <state width="1493" height="152" key="GridCell.Tab.0.center" timestamp="1599779286958">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="217" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599248395357" />
+    <state width="1493" height="152" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599779286958" />
     <state width="1877" height="217" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961416" />
-    <state width="746" height="217" key="GridCell.Tab.0.left" timestamp="1599248395357">
+    <state width="1493" height="152" key="GridCell.Tab.0.left" timestamp="1599779286958">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="217" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599248395357" />
+    <state width="1493" height="152" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599779286958" />
     <state width="1877" height="217" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961416" />
-    <state width="746" height="217" key="GridCell.Tab.0.right" timestamp="1599248395357">
+    <state width="1493" height="152" key="GridCell.Tab.0.right" timestamp="1599779286958">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="217" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599248395357" />
+    <state width="1493" height="152" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599779286958" />
     <state width="1877" height="217" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961416" />
     <state x="483" y="130" key="MultipleFileMergeDialog" timestamp="1599013793839">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599013793839" />
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1599253747521">
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1599766555512">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599253747521" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1599766555512" />
     <state x="4392" y="791" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598636775418" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1599708038490" />
     <state x="4424" y="839" key="com.intellij.ide.util.TipDialog" timestamp="1599171616765">
       <screen x="3840" y="537" width="1920" height="1040" />
     </state>

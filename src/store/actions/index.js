@@ -5,5 +5,9 @@ export {
 } from './auth'
 
 export {
-    fetchRoleList,
+    fetchRoleList
 } from './lists'
+
+export {
+    updateConfirmation
+} from './signUp'
