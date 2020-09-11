@@ -111,7 +111,7 @@ const AddVolunteer = props => {
                                 <option aria-label="None" value="" />
                                 {list.map( listItem => {
                                     return (
-                                        <option key={listItem} value={listItem}>{listItem}</option>
+                                        <option key={listItem.name} value={listItem.name}>{listItem.name}</option>
                                     );
                                 })}
                             </Select>

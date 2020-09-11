@@ -135,7 +135,7 @@ const Email = (props) => {
                                     <MenuItem aria-label="Select an Email Type" value="" />
                                     {list2.map( listItem => {
                                         return (
-                                            <MenuItem key={listItem} value={listItem}>{listItem}</MenuItem>
+                                            <MenuItem key={listItem.name} value={listItem.name}>{listItem.name}</MenuItem>
                                         );
                                     })}
                                 </Select>

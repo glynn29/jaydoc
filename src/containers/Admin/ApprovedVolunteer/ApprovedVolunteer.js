@@ -16,14 +16,6 @@ const headCells = [
     { id: 'spanish', label: 'Spanish'},
 ];
 
-const rowLabels = [
-    { id: 'first'},
-    { id: 'last'},
-    { id: 'role'},
-    { id: 'approved'},
-    { id: 'spanish'},
-];
-
 const ApprovedVolunteer = () => {
     const [editOpen, setEditOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
@@ -56,7 +48,7 @@ const ApprovedVolunteer = () => {
     function deleteVolunteer(userId) {
         firestore.collection('users').doc(userId).delete()
             .then(() => {
-                const newList = tableData.filter(user => user.id !== userId)
+                const newList = tableData.filter(user => user.id !== userId);
                 setTableData(newList);
             })
             .catch(error => console.log(error));
@@ -94,7 +86,6 @@ const ApprovedVolunteer = () => {
             <EnhancedTable
                 data={tableData}
                 headCells={headCells}
-                rowLables={rowLabels}
                 delete={deleteVolunteer}
                 add={toggleAdd}
                 edit={(row) => toggleEdit(row)}
