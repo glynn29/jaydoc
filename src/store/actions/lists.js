@@ -7,10 +7,17 @@ export const fetchListStart = () => {
     };
 };
 
-export const fetchListSuccess = (list) => {
+export const fetchRoleSuccess = (list) => {
     return{
-        type: actionTypes.FETCH_LIST_SUCCESS,
+        type: actionTypes.FETCH_ROLE_SUCCESS,
         roleList: list
+    };
+};
+
+export const fetchPositionSuccess = (list) => {
+    return{
+        type: actionTypes.FETCH_POSITION_SUCCESS,
+        positionList: list
     };
 };
 
@@ -36,7 +43,26 @@ export const fetchRoleList = () => {
             })
             .then(()=>{
                 console.log("dispatch success");
-                dispatch(fetchListSuccess(list))}
+                dispatch(fetchRoleSuccess(list))}
+            )
+            .catch( error => dispatch(fetchListFail(error)));
+
+    }
+};
+
+export const fetchPositionList = () => {
+    return dispatch =>{
+        dispatch(fetchListStart());
+        let list = [];
+        firestore.collection('positions').get()
+            .then((positions) => {
+                positions.forEach((position) => {
+                    list.push(position.data())
+                });
+            })
+            .then(()=>{
+                console.log("dispatch success");
+                dispatch(fetchPositionSuccess(list))}
             )
             .catch( error => dispatch(fetchListFail(error)));
 

@@ -83,6 +83,7 @@ const App = (props) =>{
 const mapDispatchToProps = dispatch => {
     return{
         onFetchRoleList: () => dispatch(actions.fetchRoleList()),
+        onFetchPositionList: () => dispatch(actions.fetchPositionList())
     }
 };
 

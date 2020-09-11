@@ -46,7 +46,7 @@ export const login = (email, password) => {
   }
 };
 
-async function createUser({first, last, email, role, spanish}) {
+async function createUser({first, last, email, role, spanish, positions}) {
     const user = await auth.currentUser;
     firestore.collection('users').add({
         first: first,
@@ -56,6 +56,7 @@ async function createUser({first, last, email, role, spanish}) {
         spanish: spanish,
         id: user.uid,
         approved: 'false',
+        positions,
         events: [
             {position: 'Director', eventId: 'LPnLIhcQpvnafAZey5lb'},
             {position: 'Student', eventId:'PYI8ymMLtYD8qTAHNmOD'}

@@ -3,6 +3,7 @@ import {updateObject} from '../utility';
 
 const initialState = {
     roleList: [],
+    positionList: [],
     error: null,
     loading: false,
 };
@@ -14,11 +15,19 @@ const fetchListStart = (state, action) => {
     });
 };
 
-const fetchListSuccess = (state, action) => {
+const fetchRoleSuccess = (state, action) => {
     return updateObject(state, {
         error: null,
         loading: false,
         roleList: action.roleList
+    });
+};
+
+const fetchPositionSuccess = (state, action) => {
+    return updateObject(state, {
+        error: null,
+        loading: false,
+        positionList: action.positionList
     });
 };
 
@@ -33,8 +42,10 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_LIST_START:
             return fetchListStart(state, action);
-        case actionTypes.FETCH_LIST_SUCCESS:
-            return fetchListSuccess(state, action);
+        case actionTypes.FETCH_ROLE_SUCCESS:
+            return fetchRoleSuccess(state, action);
+        case actionTypes.FETCH_POSITION_SUCCESS:
+            return fetchPositionSuccess(state, action);
         case actionTypes.FETCH_LIST_FAIL:
             return fetchListFail(state, action);
         default:

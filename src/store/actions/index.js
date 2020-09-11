@@ -5,7 +5,8 @@ export {
 } from './auth'
 
 export {
-    fetchRoleList
+    fetchRoleList,
+    fetchPositionList
 } from './lists'
 
 export {
