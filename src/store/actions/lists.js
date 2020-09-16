@@ -56,8 +56,10 @@ export const fetchPositionList = () => {
         let list = [];
         firestore.collection('positions').get()
             .then((positions) => {
-                positions.forEach((position) => {
-                    list.push(position.data())
+                positions.forEach((doc) => {
+                    doc.data().positions.map((position) => {
+                        return list.push(position);
+                    })
                 });
             })
             .then(()=>{

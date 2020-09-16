@@ -7,11 +7,15 @@ const initialState = {
     error: null,
     loading: false,
     registered: false,
-    isAdmin: false
+    isAdmin: false,
+    positions: null
 };
 
 const authStart = (state, action) => {
-    return updateObject(state, {error: null, loading: true});
+    return updateObject(state, {
+        error: null,
+        loading: true
+    });
 };
 
 const authSuccess = (state, action) => {
@@ -43,6 +47,12 @@ const authLogout = (state, action) => {
     });
 };
 
+const getCurrentUser = (state, action) => {
+    return updateObject(state, {
+        positions: action.positions
+    })
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START:
@@ -55,6 +65,8 @@ const reducer = (state = initialState, action) => {
             return authFail(state, action);
         case actionTypes.AUTH_LOGOUT:
             return authLogout(state, action);
+        case actionTypes.FETCH_CURRENT_USER:
+            return getCurrentUser(state, action);
         default:
             return state;
     }

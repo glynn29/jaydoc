@@ -1,7 +1,8 @@
 export {
     login,
     logout,
-    register
+    register,
+    getUser
 } from './auth'
 
 export {

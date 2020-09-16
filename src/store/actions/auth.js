@@ -27,6 +27,14 @@ export const authFail = (error) => {
     };
 };
 
+export const getCurrentUser = (user) => {
+    console.log(user.positions);
+    return{
+        type: actionTypes.FETCH_CURRENT_USER,
+        positions: user.positions
+    }
+};
+
 export const logout = () => {
     auth.signOut().then(() => console.log("user signed out"));
     return{
@@ -56,7 +64,7 @@ async function createUser({first, last, email, role, spanish, positions}) {
         spanish: spanish,
         id: user.uid,
         approved: 'false',
-        positions,
+        positions: positions,
         events: [
             {position: 'Director', eventId: 'LPnLIhcQpvnafAZey5lb'},
             {position: 'Student', eventId:'PYI8ymMLtYD8qTAHNmOD'}
@@ -79,5 +87,37 @@ export const register = (registerData) => {
             .catch(error => dispatch(authFail(error.message)))
     }
 };
+export const getUser = () => {
+    // console.log("get Users");
+    // let user;
+    // getUserRef(userRef => {
+    //     user = userRef;
+    // }).catch();
+    // console.log(user);
+    // return dispatch => {
+    //     dispatch(getCurrentUser(user))
+    // }
+    return dispatch => {
+    const {uid} = auth.currentUser;
+    const userRes = firestore.collection('users').where('id', '==', uid).get()
+        .then((res) => {
+            console.log(res);
+            res.forEach(user => {
+                console.log(user.data());
+                dispatch(getCurrentUser(user.data()))
+            });
+        });
+    }
+};
 
+export async function getUserRef(){
+    const {uid} = await auth.currentUser;
+    console.log("uid: ",uid);
+    const user = await firestore.collection('users').where('id', '==', uid).get();
+    user.forEach(user => {
+        //console.log(user.data());
+        return user.data();
+    });
+
+}
 
