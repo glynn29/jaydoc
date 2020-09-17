@@ -2,13 +2,16 @@ import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../utility';
 
 const initialState = {
-    token: null,
+    email: null,
     userId: null,
+    userDocId: null,
+    name: null,
+    events: [],
     error: null,
     loading: false,
     registered: false,
     isAdmin: false,
-    positions: null
+    positions: []
 };
 
 const authStart = (state, action) => {
@@ -49,7 +52,12 @@ const authLogout = (state, action) => {
 
 const getCurrentUser = (state, action) => {
     return updateObject(state, {
-        positions: action.positions
+        positions: action.positions,
+        email: action.email,
+        userId: action.userId,
+        name: action.name,
+        events: action.events,
+        userDocId: action.userDocId,
     })
 };
 

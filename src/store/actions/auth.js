@@ -31,7 +31,12 @@ export const getCurrentUser = (user) => {
     console.log(user.positions);
     return{
         type: actionTypes.FETCH_CURRENT_USER,
-        positions: user.positions
+        positions: user.positions,
+        email: user.email,
+        userId: user.id,
+        userDocId: user.userDocId,
+        name: user.first + " " + user.last,
+        events: user.events,
     }
 };
 
@@ -88,15 +93,6 @@ export const register = (registerData) => {
     }
 };
 export const getUser = () => {
-    // console.log("get Users");
-    // let user;
-    // getUserRef(userRef => {
-    //     user = userRef;
-    // }).catch();
-    // console.log(user);
-    // return dispatch => {
-    //     dispatch(getCurrentUser(user))
-    // }
     return dispatch => {
     const {uid} = auth.currentUser;
     const userRes = firestore.collection('users').where('id', '==', uid).get()
@@ -104,20 +100,10 @@ export const getUser = () => {
             console.log(res);
             res.forEach(user => {
                 console.log(user.data());
-                dispatch(getCurrentUser(user.data()))
+                dispatch(getCurrentUser({...user.data(), userDocId: user.id}))
             });
         });
     }
 };
 
-export async function getUserRef(){
-    const {uid} = await auth.currentUser;
-    console.log("uid: ",uid);
-    const user = await firestore.collection('users').where('id', '==', uid).get();
-    user.forEach(user => {
-        //console.log(user.data());
-        return user.data();
-    });
-
-}
 
