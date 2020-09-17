@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import Typography from "@material-ui/core/Typography";
 
 import * as classes from './Home.module.css';
+import * as actions from "../../../store/actions";
+import {connect} from "react-redux";
 
-const Home = () => {
+const Home = (props) => {
+    // useEffect(() => {
+    //
+    //     props.getCurrentUser();
+    //     }
+    // );
     return (
         <div className={classes.Box}>
             <Typography variant="h2" className={classes.Line}><b>Welcome</b></Typography>
@@ -61,4 +68,11 @@ const Home = () => {
     );
 };
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+    return{
+        getCurrentUser: () => dispatch(actions.getUser()),
+    }
+};
+
+export default connect(null, mapDispatchToProps)(Home);
+
