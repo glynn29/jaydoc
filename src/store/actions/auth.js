@@ -53,56 +53,56 @@ export const login = (email, password) => {
       auth.signInWithEmailAndPassword(email,password)
           .then(()=>{
               console.log("logged in");
+              dispatch(getUser());
               dispatch(authSuccess());
           })
           .catch(error => dispatch(authFail(error.message)))
   }
 };
 
-async function createUser({first, last, email, role, spanish, positions}) {
+async function createUser({first, last, email, role, language, positions}) {
+    console.log("adding user",first,last,email,role,language,positions);
     const user = await auth.currentUser;
-    firestore.collection('users').add({
+    await firestore.collection('users').add({
         first: first,
         last: last,
         email: email,
         role: role,
-        spanish: spanish,
+        language: language,
         id: user.uid,
         approved: 'false',
         positions: positions,
-        events: [
-            {position: 'Director', eventId: 'LPnLIhcQpvnafAZey5lb'},
-            {position: 'Student', eventId:'PYI8ymMLtYD8qTAHNmOD'}
-        ]
-    })
+        events: []
+    });
+    logout();
 }
 
 export const register = (registerData) => {
     return dispatch => {
         dispatch(authStart());
+        console.table(registerData);
         auth.createUserWithEmailAndPassword(registerData.email, registerData.password)
             .then(()=>{
-                const name = registerData.first + " " + registerData.last;
-                console.log(name);
                 dispatch(registerSuccess());
             })
             .then(()=>{
-                createUser(registerData).catch(error => console.log(error));
+                createUser(registerData).catch(error => console.log(error.message));
             })
             .catch(error => dispatch(authFail(error.message)))
     }
 };
+
 export const getUser = () => {
     return dispatch => {
-    const {uid} = auth.currentUser;
-    const userRes = firestore.collection('users').where('id', '==', uid).get()
-        .then((res) => {
-            console.log(res);
-            res.forEach(user => {
-                console.log(user.data());
-                dispatch(getCurrentUser({...user.data(), userDocId: user.id}))
+        const {uid} = auth.currentUser;
+        firestore.collection('users').where('id', '==', uid).get()
+            .then((res) => {
+                console.log(res);
+                res.forEach(user => {
+                    console.log(user.data());
+                    dispatch(getCurrentUser({...user.data(), userDocId: user.id}))
+                });
             });
-        });
     }
 };
 

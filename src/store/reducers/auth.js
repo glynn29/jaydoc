@@ -45,8 +45,16 @@ const authFail = (state, action) => {
 
 const authLogout = (state, action) => {
     return updateObject(state, {
-        token: null,
-        userId: null
+        email: null,
+        userId: null,
+        userDocId: null,
+        name: null,
+        events: [],
+        error: null,
+        loading: false,
+        //registered: false,
+        isAdmin: false,
+        positions: []
     });
 };
 
