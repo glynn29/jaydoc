@@ -1,17 +1,31 @@
 .Box {
-    width: 80%;
+    width: 90%;
     margin: auto;
     /*background-color: rgba(218,243,255,0.58);*/
     text-align: center;
 }
 
-.Tile{
+.Tile {
     border: 5px solid lightblue;
     background-image: linear-gradient(to top, rgba(255,255,255,.1), rgba(0,0,1,.2));
     box-shadow: lightblue 2px 2px;
-    height: 90px;
-    width: 120px;
+    /*height: 90px;*/
+    /*width: 120px;*/
+    /*min-width: 100px;*/
+    /*min-height: 90px;*/
+    min-height: 7rem;
     display: flex;
-    /*align-items: center;*/
 }
 
+.CalenderItemBlock {
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    /*box-sizing: border-box;*/
+    /*justify-content: space-around;*/
+}
+
+.CalenderItem:hover{
+    color: yellow;
+}

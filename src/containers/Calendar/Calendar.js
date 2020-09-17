@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
 import 'react-calendar/dist/Calendar.css'
 
 //import {Calender} from '@material-ui/pickers/views/Calendar/Calendar';
 import Calendar from 'react-calendar';
 import * as classes from './Calendar.module.css';
 import {firestore} from "../../firebase";
-import SignUp from "./Forms/Signup";
+import SignUp from "./Forms/SignUp/SignUp";
 import TransitionModal from "../../components/UI/Modal/Modal";
+import * as actions from "../../store/actions";
 
-const CalendarBox = () => {
+const CalendarBox = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [date, setDate] = useState(new Date());
     const [formData, setFormData] = useState({});
@@ -25,6 +27,7 @@ const CalendarBox = () => {
 
     useEffect(() => {
         getEvents().catch(error => {console.log(error)});
+        props.getCurrentUser();
     }, []);
 
     function editModal() {
@@ -40,8 +43,8 @@ const CalendarBox = () => {
         setModalOpen(false);
     };
 
-    const toggleModal = ({name, date, start, end, positions, eventId}) => {
-        setFormData({name, date, start, end, positions, eventId});
+    const toggleModal = ({name, date, start, end, positions, eventId, id}) => {
+        setFormData({name, date, start, end, positions, eventId, id});
         setModalOpen(!modalOpen);
     };
 
@@ -64,15 +67,16 @@ const CalendarBox = () => {
                     tileContent={
                         ({ date, view }) => {
                             const table = tableData.map((row)=>{
+                                //console.log(row);
                                 const tempDate = new Date(row.date);
                                 const day = tempDate.getDate();
                                 const month = tempDate.getMonth();
                                 //console.log("Day of week", date.getDate(), "date",day);
                                 return(
-                                    view === 'month' && date.getDate() === day && date.getMonth() === month ? <p key={row.id} onClick={()=>toggleModal(row)}>{row.name}</p>: null
+                                    view === 'month' && date.getDate() === day && date.getMonth() === month ? <p key={row.id} onClick={()=>toggleModal(row)} className={classes.CalenderItem}>{row.name}</p>: null
                                 );
                             });
-                            return(table);
+                            return(<div className={classes.CalenderItemBlock}>{table}</div>);
                         }
                     }
                 />
@@ -88,4 +92,16 @@ const CalendarBox = () => {
     );
 };
 
-export default CalendarBox;
+const mapStateToProps = state => {
+    return{
+        positions: state.auth.positions
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+        getCurrentUser: () => dispatch(actions.getUser()),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarBox);
