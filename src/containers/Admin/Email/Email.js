@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -16,14 +16,14 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 import formStyles from "../../../components/UI/Styles/formStyle";
-import ReminderForm from "../../../components/UI/Forms/Reminder/Reminder";
+import ReminderForm from "./Forms/Reminder/Reminder";
 import {connect} from "react-redux";
+import {firestore} from "../../../firebase";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const list2 = [
-    "Mass Email",
     "Custom Email",
     "Reminder",
 ];
@@ -40,74 +40,84 @@ const list2 = [
 // };
 
 const Email = (props) => {
-    const formClasses = formStyles();
-    const [emailType, setEmailType] = useState("Mass Email");
+    const classes = formStyles();
+    const [emailType, setEmailType] = useState("Custom Email");
     const [role, setRole] = useState([]);
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
     const list = props.roleList;
 
+    useEffect(() => {
+        firestore.collection("email").doc("emailTemplate").get()
+            .then((email) => {
+               console.log(email.data());
+                setMessage(email.data().email);
+            })
+    },[]);
+
     const emailForm = (
         <Grid container spacing={1} direction={"column"} alignItems={"stretch"} >
-            {emailType === "Custom Email" &&
             <Grid item>
-                <FormControl variant="outlined" className={formClasses.formControl}>
-                <AutoComplete
-                    //value={role}
-                    //inputValue={role}
-                    onChange={(event,value) => {setRole(value); console.log(role)}}
-                    multiple
-                    options={list}
-                    limitTags={2}
-                    disableCloseOnSelect
-                    getOptionLabel={(option) => option}
-                    renderOption={(option, { selected }) => (
-                        <React.Fragment>
-                            <Checkbox
-                                icon={icon}
-                                checkedIcon={checkedIcon}
-                                style={{ marginRight: 8 }}
-                                checked={selected}
-                            />
-                            {option}
-                        </React.Fragment>
-                    )}
-                    //style={{ width: 500 }}
-                    renderInput={(params) => (
-                        <TextField {...params} key={params} variant="outlined" label="Roles" placeholder="Roles" />
-                    )}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <AutoComplete
+                        //value={role}
+                        //inputValue={role}
+                        onChange={(event,value) => {setRole(value); console.log(role)}}
+                        multiple
+                        options={list}
+                        limitTags={2}
+                        disableCloseOnSelect
+                        getOptionLabel={(option) => option.name}
+                        renderOption={(option, { selected }) => (
+                            <React.Fragment>
+                                <Checkbox
+                                    icon={icon}
+                                    checkedIcon={checkedIcon}
+                                    style={{ marginRight: 8 }}
+                                    checked={selected}
+                                />
+                                {option.name}
+                            </React.Fragment>
+                        )}
+                        //style={{ width: 500 }}
+                        renderInput={(params) => (
+                            <TextField {...params} key={params} variant="outlined" label="Roles" placeholder="Roles" />
+                        )}
+                    />
                 </FormControl>
-
-            </Grid>}
+            </Grid>
             <Grid item>
-                <TextField
-                    value={subject}
-                    onChange={event => setSubject(event.target.value)}
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="subject"
-                    label="Subject"
-                    name="subject"
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <TextField
+                        value={subject}
+                        onChange={event => setSubject(event.target.value)}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="subject"
+                        label="Subject"
+                        name="subject"
+                    />
+                </FormControl>
             </Grid>
 
             <Grid item>
-                <TextField
-                    value={message}
-                    onChange={event => setMessage(event.target.value)}
-                    id="outlined-textarea"
-                    label="Message"
-                    placeholder="Keep up the good work"
-                    multiline
-                    variant="outlined"
-                    fullWidth
-                    required
-                    rows={15}
-                    inputProps={{ className: formClasses.textarea }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <TextField
+                        value={message}
+                        onChange={event => setMessage(event.target.value)}
+                        id="outlined-textarea"
+                        label="Message"
+                        placeholder="Keep up the good work"
+                        multiline
+                        variant="outlined"
+                        fullWidth
+                        required
+                        rows={15}
+                        inputProps={{ className: classes.textarea }}
+                    />
+                </FormControl>
             </Grid>
         </Grid>
 );
@@ -118,10 +128,10 @@ const Email = (props) => {
             <Typography>Use this page to send email reminders</Typography>
             <Container component="main" maxWidth="md">
                 <CssBaseline />
-                <form className={formClasses.root} noValidate autoComplete="off">
+                <form className={classes.root} noValidate autoComplete="off">
                     <Grid container spacing={1} direction={"column"} alignItems={"stretch"} >
                         <Grid item>
-                            <FormControl variant="outlined" className={formClasses.formControl} >
+                            <FormControl variant="outlined" className={classes.formControl} >
                                 <InputLabel htmlFor="outlined-age-native-simple" required >Email Type</InputLabel>
                                 <Select
                                     value={emailType}
@@ -132,27 +142,86 @@ const Email = (props) => {
                                         id: 'outlined-age-native-simple',
                                     }}
                                 >
-                                    <MenuItem aria-label="Select an Email Type" value="" />
                                     {list2.map( listItem => {
                                         return (
-                                            <MenuItem key={listItem.name} value={listItem.name}>{listItem.name}</MenuItem>
+                                            <MenuItem key={listItem} value={listItem}>{listItem}</MenuItem>
                                         );
                                     })}
                                 </Select>
                             </FormControl>
+                        </Grid>
+                        <Grid item>
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <AutoComplete
+                                    //value={role}
+                                    //inputValue={role}
+                                    onChange={(event,value) => {setRole(value); console.log(role)}}
+                                    multiple
+                                    options={list}
+                                    limitTags={2}
+                                    disableCloseOnSelect
+                                    getOptionLabel={(option) => option.name}
+                                    renderOption={(option, { selected }) => (
+                                        <React.Fragment>
+                                            <Checkbox
+                                                icon={icon}
+                                                checkedIcon={checkedIcon}
+                                                style={{ marginRight: 8 }}
+                                                checked={selected}
+                                            />
+                                            {option.name}
+                                        </React.Fragment>
+                                    )}
+                                    //style={{ width: 500 }}
+                                    renderInput={(params) => (
+                                        <TextField {...params} key={params} variant="outlined" label="Roles" placeholder="Roles" />
+                                    )}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item>
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <TextField
+                                    value={subject}
+                                    onChange={event => setSubject(event.target.value)}
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="subject"
+                                    label="Subject"
+                                    name="subject"
+                                />
+                            </FormControl>
+                        </Grid>
 
-                        {emailType !== "Reminder" && emailForm}
-                        {emailType === "Reminder" && <ReminderForm/>}
+                        <Grid item>
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <TextField
+                                    value={message}
+                                    onChange={event => setMessage(event.target.value)}
+                                    id="outlined-textarea"
+                                    label="Message"
+                                    placeholder="Keep up the good work"
+                                    multiline
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    rows={15}
+                                    inputProps={{ className: classes.textarea }}
+                                />
+                            </FormControl>
                         </Grid>
                     </Grid>
+                    {emailType === "Reminder" && <ReminderForm/>}
                     <Button
                         type="submit"
                         variant="contained"
                         color="primary"
                         //fullWidth
-                        className={formClasses.submit}
+                        className={classes.submit}
                     >
-                        {emailType === "Reminder" ? "Send Reminders" : "Send Mail" }
+                        Send Reminders
                     </Button>
                 </form>
             </Container>

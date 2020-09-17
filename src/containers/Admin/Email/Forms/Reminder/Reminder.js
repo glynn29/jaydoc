@@ -1,6 +1,6 @@
 import React from "react";
 
-import EnhancedTable from "../../Table/Table";
+import EnhancedTable from "../../../../../components/UI/Table/Table";
 //import TransitionModal from "../../Modal/Modal";
 
 const headCells = [
