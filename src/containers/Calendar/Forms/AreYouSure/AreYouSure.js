@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import useStyles from "../../../../components/UI/Styles/formStyle";
 import Grid from "@material-ui/core/Grid";
+
 const AreYouSure = props => {
     const classes = useStyles();
     const [formData, setFormData] = useState(props.formData);
@@ -18,7 +19,7 @@ const AreYouSure = props => {
                     <Button variant="contained" className={classes.deleteButton} onClick={props.cancel}>Cancel</Button>
                 </Grid>
                 <Grid item>
-                    <Button variant="contained"  className={classes.detailsButton} onClick={props.submit}>Confirm</Button>
+                    <Button variant="contained"  className={classes.detailsButton} onClick={() => props.submit({index: formData.index, position: formData.position, date: formData.date})}>Confirm</Button>
                 </Grid>
             </Grid>
         </Container>
