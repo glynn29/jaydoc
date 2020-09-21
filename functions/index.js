@@ -13,3 +13,9 @@ exports.addAdminRole = functions.https.onCall((data, context)=> {
         }
     }).catch(error => {return error})
 });
+
+exports.removeUserById = functions.https.onCall((data, context) => {
+    return admin.auth().deleteUser(data.uid)
+        .then(() => console.log("Successfully deleted user: ", data.uid))
+        .catch(error => console.log("Error deleting user: ",error.message))
+});
