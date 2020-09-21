@@ -201,8 +201,8 @@ function EnhancedTable(props) {
                                             })}
                                             {props.details && <StyledTableCell align="left"><Button onClick={() => {props.details(row)}} variant="contained" className={classes.detailsButton}>Details</Button></StyledTableCell>}
                                             {props.edit && <StyledTableCell align="left"><Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button></StyledTableCell>}
-                                            {props.delete && <StyledTableCell align="left"><Button onClick={() => {props.delete(row.id)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>}
-                                            {props.signUp && <StyledTableCell align="left">{row.volunteer === 'none' && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button> }</StyledTableCell> }
+                                            {props.delete && <StyledTableCell align="left"><Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>}
+                                            {props.signUp && <StyledTableCell align="left">{row.volunteer === 'none' && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}</StyledTableCell> }
                                         </StyledTableRow>
                                     );
                                 })}

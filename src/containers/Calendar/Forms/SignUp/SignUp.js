@@ -26,13 +26,19 @@ const SignUp = (props) => {
     const [date, setDate] = useState(props.formData.date);
     const [modalOpen, setModalOpen] = useState(false);
     const [confirm, setConfirm] = useState(null);
+    const [alreadyInEvent, setAlreadyInEvent] = useState(false);
+    const [position, setPosition] = useState();
 
     useEffect(()=> {
         let filteredTableData = [];
         props.formData.positions.map((row, index) => {
             for(let i = 0; i < positions.length; i++){
                 if(positions[i] === row.position){
-                    filteredTableData.push({...row, index});
+                    filteredTableData.push({...row, index, name});
+                    if (row.volunteer === name){
+                        setAlreadyInEvent(true);
+                        setPosition(row.position);
+                    }
                 }
             }
         });
@@ -70,10 +76,15 @@ const SignUp = (props) => {
             positions: newTableData
         }, {merge: true})
             .then(() => {
-                let newEvents = props.events;
+                let newEvents = [];
+                if(props.events)
+                    newEvents = props.events;
                 newEvents.push({
                     eventId: props.formData.id,
+                    eventName,
                     position: position,
+                    startTime,
+                    endTime,
                     date: date
                 });
 
@@ -97,11 +108,7 @@ const SignUp = (props) => {
     return(
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
             <p>{eventName} From {formattedStart} to {formattedEnd} on {formattedDate}</p>
-            <EnhancedTable
-                data={filteredTableData}
-                headCells={headCells}
-                signUp={toggleModal}
-            />
+            { !alreadyInEvent ? <EnhancedTable data={filteredTableData} headCells={headCells} signUp={toggleModal}/> : <p>Already signed up for this event as {position}</p>}
             <TransitionModal
                 open={modalOpen}
                 handleOpen={handleModalOpen}
