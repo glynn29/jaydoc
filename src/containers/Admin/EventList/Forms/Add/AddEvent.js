@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
@@ -8,8 +8,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 import {firestore} from "../../../../../firebase";
-import AddPositions from "./AddPositions";
+import Positions from "../Positions/Positions";
 import TransitionModal from "../../../../../components/UI/Modal/Modal";
+import Container from "@material-ui/core/Container";
+import {connect} from "react-redux";
 
 const AddEvent = props => {
     const classes = formStyles();
@@ -17,7 +19,15 @@ const AddEvent = props => {
     const [sponsor, setSponsor] = useState("");
     const [details, setDetails] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
-    const [positions, setPositions] = useState([]);
+    const [positionList, setPositionList] = useState([]);
+
+    useEffect(() => {
+        const updatedPositionList = [];
+        props.positionList.map(position => {
+            updatedPositionList.push({name: position, count: 0});
+        });
+        setPositionList(updatedPositionList);
+    },[]);
 
     const submitFormHandler = (event) =>{
         event.preventDefault();
@@ -25,7 +35,7 @@ const AddEvent = props => {
             name,
             sponsor,
             details,
-            positions
+            positions: positionList
         }).then(()=>{props.onAdd();})
             .catch(error => {console.log(error)});
         console.log("event ADDED");
@@ -39,26 +49,17 @@ const AddEvent = props => {
         setModalOpen(false);
     };
 
-    const toggleModal = () => {
-        setModalOpen(!modalOpen);
-    };
-
     function submitHandler(positionsForm) {
         handleModalClose();
-        setPositions(positionsForm);
-        console.table(positionsForm);
-    }
-
-    function cancelHandler() {
-        handleModalClose();
+        setPositionList(positionsForm);
     }
 
     const form = (
-        <div>
+        <Container component="main" maxWidth="sm" className={classes.Container}>
             <CssBaseline />
             <form className={classes.root} autoComplete="off" onSubmit={submitFormHandler}>
-                <Grid container spacing={2} direction={"column"} alignItems={"stretch"}>
-                    <Grid item>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
                         <FormControl className={classes.formControl}>
                             <TextField
                                 value={name}
@@ -73,7 +74,7 @@ const AddEvent = props => {
                             />
                         </FormControl>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <FormControl className={classes.formControl}>
                         <TextField
                             value={sponsor}
@@ -87,7 +88,7 @@ const AddEvent = props => {
                             />
                         </FormControl>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 value={details}
@@ -104,9 +105,9 @@ const AddEvent = props => {
                             />
                         </FormControl>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <Button
-                            onClick={toggleModal}
+                            onClick={handleModalOpen}
                             fullWidth
                             variant="contained"
                             color="primary"
@@ -114,7 +115,7 @@ const AddEvent = props => {
                             Add Positions
                         </Button>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <Button
                             type="submit"
                             fullWidth
@@ -131,14 +132,21 @@ const AddEvent = props => {
                 open={modalOpen}
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
-                form={<AddPositions submit={submitHandler} cancel={cancelHandler} />}
+                form={<Positions submit={submitHandler} cancel={handleModalClose} positionList={positionList} button={"Add Positions"}/>}
                 title={"Add Positions"}
             />
-        </div>
+        </Container>
     );
 
     return form;
 };
 
-export default AddEvent;
+const mapStateToProps = state => {
+    return{
+        positionList: state.lists.positionList
+    };
+};
+
+export default connect(mapStateToProps)(AddEvent);
+
 

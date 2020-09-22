@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 
 import Container from "@material-ui/core/Container";
@@ -10,66 +10,58 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-const AddPositions = props => {
+const Positions = props => {
     const classes = formStyles();
-    const [positions, setPositions] = useState([]);
+    const [positionList, setPositionList] = useState(props.positionList);
 
     const submitHandler = (event) => {
         event.preventDefault();
-        props.submit(positions);
+        props.submit(positionList);
     };
 
-    const onChangeHandler = (event, position) => {
+    const onChangeHandler = (event, position ,index) => {
         const count = event.target.value;
-        const newPos = {name: position, count};
-        let newPositions = positions.filter(pos => {
-            return pos.name !== position
-        });
 
-        if(count > 0)
-            newPositions.push(newPos);
+        let newPositions = [...positionList];
 
-        setPositions(newPositions);
+        if(count >= 0)
+            newPositions[index] = {name: position.name, count: count};
+
+        setPositionList(newPositions);
     };
 
     return(
-        <Container component="main" maxWidth="sm" style={{textAlign: 'center', margin: 'auto'}}>
+        <Container component="main" maxWidth="sm" className={classes.Container}>
             <CssBaseline />
             <form className={classes.root} autoComplete="off" onSubmit={submitHandler}>
-                <Grid container spacing={1} direction={"row"} alignItems={"stretch"}>
-                {props.positionList.map(position => {
+                <Grid container spacing={1} >
+                {positionList.map((position, index) => {
                     return(
-                        <Grid key={position} item sm={6}>
+                        <Grid key={index} item sm={6}>
                             <FormControl className={classes.formControl}>
                                 <TextField
-                                    onChange={(event) => onChangeHandler(event, position)}
+                                    onChange={(event) => onChangeHandler(event, position,index)}
+                                    value={positionList[index].count}
                                     type="number"
-                                    key={position}
-                                    label={position}
+                                    label={position.name}
                                     variant="outlined"
                                     fullWidth
+                                    InputProps={{ inputProps: { min: 0 } }}
                                 />
                             </FormControl>
                         </Grid>
                     );
                 })}
                     <Grid item sm={6}>
-                        <Button type="submit" fullWidth className={classes.detailsButton}>Add Positions</Button>
+                        <Button type="submit" fullWidth className={classes.detailsButton}>{props.button}</Button>
                     </Grid>
                     <Grid item sm={6}>
                         <Button onClick={props.cancel} fullWidth className={classes.deleteButton}>Cancel</Button>
                     </Grid>
                 </Grid>
-
             </form>
         </Container>
     );
 };
 
-const mapStateToProps = state => {
-    return{
-        positionList: state.lists.positionList
-    };
-};
-
-export default connect(mapStateToProps)(AddPositions);
+export default Positions;

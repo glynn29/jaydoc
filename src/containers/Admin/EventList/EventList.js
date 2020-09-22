@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 
 import EnhancedTable from "../../../components/UI/Table/Table";
 import EditEventForm from "./Forms/EditEvent/EditEvent";
-import AddEventForm from "./Forms/AddEvent/AddEvent";
+import AddEventForm from "./Forms/Add/AddEvent";
 import TransitionModal from "../../../components/UI/Modal/Modal";
 import {firestore} from "../../../firebase";
 
@@ -12,12 +12,6 @@ const headCells = [
     { id: 'name', label: 'Event Name' },
     { id: 'sponsor', label: 'Sponsor' },
     { id: 'id',  label: 'ID' },
-];
-
-const rowLabels = [
-    { id: 'name' },
-    { id: 'sponsor' },
-    { id: 'id',   }
 ];
 
 const EventList = () => {
@@ -39,43 +33,11 @@ const EventList = () => {
         getEvents().catch(error => {console.log(error)});
     },[]);
 
+    //add modal functions
     function addEvent() {
         handleAddClose();
         getEvents().catch(error => {console.log(error)});
     }
-
-    function editEvent() {
-        handleEditClose();
-        getEvents().catch(error => {console.log(error)});
-    }
-
-    function detailsEvent(event) {
-        console.log(event);
-        alert(event.name + " " + event.details + " " +event.positions.map(position => position.name +  " "+ position.count ))
-    }
-
-    function deleteEvent(eventId) {
-        firestore.collection('events').doc(eventId).delete()
-            .then(()=>{
-                const newList = tableData.filter(event => event.id !== eventId);
-                setTableData(newList);
-            })
-            .catch(error => {console.log(error)});
-        console.log("event removed");
-    }
-
-    const handleEditOpen = () => {
-        setEditOpen(true);
-    };
-
-    const handleEditClose = () => {
-        setEditOpen(false);
-    };
-
-    const toggleEdit = ({name, sponsor, id, details, positions}) => {
-        setFormData({name, sponsor, id, details, positions});
-        setEditOpen(!editOpen);
-    };
 
     const handleAddOpen = () => {
         setAddOpen(true);
@@ -85,9 +47,37 @@ const EventList = () => {
         setAddOpen(false);
     };
 
-    const toggleAdd = () => {
-        setAddOpen(!addOpen);
+    //edit modal functions
+    function editEvent() {
+        handleEditClose();
+        getEvents().catch(error => {console.log(error)});
+    }
+
+    const handleEditOpen = ({name, sponsor, id, details, positions}) => {
+        setFormData({name, sponsor, id, details, positions});
+        setEditOpen(true);
     };
+
+    const handleEditClose = () => {
+        setEditOpen(false);
+    };
+
+    //delete modal functions
+    function deleteEvent({id}) {
+        firestore.collection('events').doc(id).delete()
+            .then(()=>{
+                const newList = tableData.filter(event => event.id !== id);
+                setTableData(newList);
+            })
+            .catch(error => {console.log(error)});
+        console.log("event removed");
+    }
+
+    //details modal functions
+    function detailsEvent(event) {
+        console.log(event);
+        alert(event.name + " " + event.details + " " +event.positions.map(position => position.name +  " "+ position.count ))
+    }
 
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
@@ -95,10 +85,9 @@ const EventList = () => {
             <EnhancedTable
                 data={tableData}
                 headCells={headCells}
-                rowLables={rowLabels}
                 delete={deleteEvent}
-                add={toggleAdd}
-                edit={(row) => toggleEdit(row)}
+                add={handleAddOpen}
+                edit={(row) => handleEditOpen(row)}
                 details={detailsEvent}
             />
             <TransitionModal
