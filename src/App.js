@@ -16,7 +16,7 @@ import Email from "./containers/Admin/Email/Email";
 import EventList from "./containers/Admin/EventList/EventList";
 import ScheduledEventList from "./containers/Admin/ScheduledEventList/ScheduledEventList";
 import Report from "./containers/Admin/Report/Reports";
-import Users from "./containers/Admin/Users/Users";
+import Users from "./containers/Admin/Volunteers/Volunteers";
 import Layout from "./containers/hoc/Layout/Layout";
 import Error from "./containers/Client/Error/Error";
 import {AuthContext} from "./containers/Auth/Auth";
