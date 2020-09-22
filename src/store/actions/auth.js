@@ -28,7 +28,6 @@ export const authFail = (error) => {
 };
 
 export const getCurrentUser = (user) => {
-    console.log(user.positions);
     return{
         type: actionTypes.FETCH_CURRENT_USER,
         positions: user.positions,
@@ -37,6 +36,7 @@ export const getCurrentUser = (user) => {
         userDocId: user.userDocId,
         name: user.first + " " + user.last,
         events: user.events,
+        approved: user.approved
     }
 };
 
@@ -74,7 +74,6 @@ async function createUser({first, last, email, role, language, positions}) {
         positions: positions,
         events: []
     });
-    logout();
 }
 
 export const register = (registerData) => {
@@ -97,9 +96,8 @@ export const getUser = () => {
         const {uid} = auth.currentUser;
         firestore.collection('users').where('id', '==', uid).get()
             .then((res) => {
-                console.log(res);
                 res.forEach(user => {
-                    console.log(user.data());
+                    console.log("get User");
                     dispatch(getCurrentUser({...user.data(), userDocId: user.id}))
                 });
             });
