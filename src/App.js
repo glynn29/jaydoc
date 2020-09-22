@@ -18,19 +18,22 @@ import ScheduledEventList from "./containers/Admin/ScheduledEventList/ScheduledE
 import Report from "./containers/Admin/Report/Reports";
 import Users from "./containers/Admin/Users/Users";
 import Layout from "./containers/hoc/Layout/Layout";
+import Error from "./containers/Client/Error/Error";
 import {AuthContext} from "./containers/Auth/Auth";
 import * as actions from './store/actions/index';
-//import firebase from "./firebase";
 //import withErrorHandler from "./containers/hoc/withErrorHandler/withErrorHandler";
 
 const App = (props) =>{
     const {currentUser, isAdmin} = useContext(AuthContext);
 
-    const {onFetchRoleList} = props;
+    const {onFetchRoleList, onFetchPositionList, getCurrentUser} = props;
     useEffect(() => {
-        console.log("fetching roles from app.js");
+        if(!isAdmin && currentUser){
+            getCurrentUser();
+        }
         onFetchRoleList();
-    },[onFetchRoleList]);
+        onFetchPositionList();
+    },[onFetchRoleList, onFetchPositionList, getCurrentUser, currentUser]);
 
     let routes = (
         <Switch>
@@ -55,22 +58,50 @@ const App = (props) =>{
                 <Route path="/" exact component={Home}/>
             </Switch>
         );
+
+        if (props.approved === "false"){
+            routes = (
+                <Switch>
+                    <Route path="/contactUs" component={ContactUs}/>
+                    <Route path="/comments" component={Comment}/>
+                    <Route path="/logout" component={Logout}/>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/" exact component={Error}/>
+                </Switch>
+            );
+        }
+
+        if(isAdmin){
+            routes = (
+                <Switch>
+                    <Route path="/email" component={Email}/>
+                    <Route path="/report" component={Report}/>
+                    <Route path="/eventList" component={EventList}/>
+                    <Route path="/volunteerList" component={Users}/>
+                    <Route path="/scheduledEventList" component={ScheduledEventList}/>
+                    <Route path="/logout" component={Logout}/>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/" exact component={Dashboard}/>
+                </Switch>
+            );
+        }
     }
 
-    if(currentUser && isAdmin) {
-        routes = (
-            <Switch>
-                <Route path="/email" component={Email}/>
-                <Route path="/report" component={Report}/>
-                <Route path="/eventList" component={EventList}/>
-                <Route path="/volunteerList" component={Users}/>
-                <Route path="/scheduledEventList" component={ScheduledEventList}/>
-                <Route path="/logout" component={Logout}/>
-                <Route path="/login" component={Login}/>
-                <Route path="/" exact component={Dashboard}/>
-            </Switch>
-        );
-    }
+    // if(currentUser && isAdmin) {
+    //     routes = (
+    //         <Switch>
+    //             <Route path="/email" component={Email}/>
+    //             <Route path="/report" component={Report}/>
+    //             <Route path="/eventList" component={EventList}/>
+    //             <Route path="/volunteerList" component={Users}/>
+    //             <Route path="/scheduledEventList" component={ScheduledEventList}/>
+    //             <Route path="/logout" component={Logout}/>
+    //             <Route path="/login" component={Login}/>
+    //             <Route path="/" exact component={Dashboard}/>
+    //         </Switch>
+    //     );
+    // }
+
     return (
         <div>
             <Layout currentUser={currentUser}>
@@ -80,11 +111,18 @@ const App = (props) =>{
     );
 };
 
+const mapStateToProps = state => {
+    return{
+        approved: state.auth.approved
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return{
         onFetchRoleList: () => dispatch(actions.fetchRoleList()),
-        onFetchPositionList: () => dispatch(actions.fetchPositionList())
+        onFetchPositionList: () => dispatch(actions.fetchPositionList()),
+        getCurrentUser: () => dispatch(actions.getUser()),
     }
 };
 
-export default withRouter(connect(null,mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));

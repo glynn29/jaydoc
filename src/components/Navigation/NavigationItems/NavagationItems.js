@@ -1,12 +1,15 @@
 import React, {useContext} from "react";
+import {connect} from "react-redux";
 
 import Typography from "@material-ui/core/Typography";
+
 import classes from "./NavigationItems.module.css"
 import NavigationItem from "./NavagationItem/NavigationItem";
 import {AuthContext} from "../../../containers/Auth/Auth";
 
 const NavigationItems = (props) => {
     const {currentUser, isAdmin} = useContext(AuthContext);
+    const {approved} = props;
 
     const nav = currentUser ?
                 <NavigationItem link="/logout" clicked={props.clicked}><Typography>Logout</Typography></NavigationItem>
@@ -27,12 +30,18 @@ const NavigationItems = (props) => {
         <NavigationItem link="/" exact clicked={props.clicked}><Typography>Home</Typography></NavigationItem>
         <NavigationItem link="/comments" clicked={props.clicked}><Typography>Comments</Typography></NavigationItem>
         <NavigationItem link="/contactUs" clicked={props.clicked}><Typography>Contact</Typography></NavigationItem>
-        {currentUser && <NavigationItem link="/account" clicked={props.clicked}><Typography>Account</Typography></NavigationItem>}
-        {currentUser && <NavigationItem link="/calendar" clicked={props.clicked}><Typography>Calendar</Typography></NavigationItem>}
+        {(currentUser && approved === "true") && <NavigationItem link="/account" clicked={props.clicked}><Typography>Account</Typography></NavigationItem>}
+        {(currentUser && approved === "true") && <NavigationItem link="/calendar" clicked={props.clicked}><Typography>Calendar</Typography></NavigationItem>}
         {nav}
     </ul>);
 
     return isAdmin ? adminLinks : userLinks;
 };
 
-export default NavigationItems
+const mapStateToProps = state => {
+    return{
+        approved: state.auth.approved
+    };
+};
+
+export default connect(mapStateToProps)(NavigationItems);
