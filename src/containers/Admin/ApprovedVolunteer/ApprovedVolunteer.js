@@ -7,66 +7,45 @@ import EditVolunteerForm from "./Forms/EditVolunteer/EditVolunteer";
 import AddVolunteer from "./Forms/AddVolunteer/AddVolunteer";
 import TransitionModal from "../../../components/UI/Modal/Modal";
 import {firestore} from "../../../firebase";
+import {DeleteUser} from "../../../CloudFunctions/deleteUser"
+import DeleteVolunteer from "./Forms/DeleteVolunteer/DeleteVolunteer";
 
-const headCells = [
-    { id: 'first' , label: 'First Name' },
-    { id: 'last' , label: 'Last Name' },
-    { id: 'role' , label: 'Role' },
-    { id: 'approved', label: 'Approved'},
-    { id: 'spanish', label: 'Spanish'},
-];
-
-const ApprovedVolunteer = () => {
+const ApprovedVolunteer = (props) => {
+    const {headCells} = props;
     const [editOpen, setEditOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
     const [formData, setFormData] = useState({});
-    const [tableData, setTableData] = useState([]);
-
-    async function getVolunteers(){
-        let volunteers = [];
-        const volunteerRef = await firestore.collection('users').get();
-        volunteerRef.forEach((user) => {
-            volunteers.push(user.data());
-        });
-        setTableData(volunteers)
-    }
+    const [tableData, setTableData] = useState(props.tableData);
 
     useEffect(() => {
-        getVolunteers().catch(error => console.log(error));
-    },[]);
+        setTableData(props.tableData);
+    }, [props.tableData]);
 
-    function addVolunteer() {
-        handleAddClose();
-        getVolunteers().catch(error => console.log(error));
-    }
-
+    //edit modal functions
     function editVolunteer() {
         handleEditClose();
-        getVolunteers().catch(error => console.log(error));
+        props.getVolunteers().catch(error => console.log(error));
     }
 
-    function deleteVolunteer(userId) {
-        firestore.collection('users').doc(userId).delete()
-            .then(() => {
-                const newList = tableData.filter(user => user.id !== userId);
-                setTableData(newList);
-            })
-            .catch(error => console.log(error));
-        console.log("user removed");
-    }
-
-    const handleEditOpen = () => {
-        setEditOpen(true);
+    const handleEditOpen = ({first, last, role, approved, language, userDocId}) => {
+        let approvedBool = false;
+        if(approved === 'true'){
+            approvedBool = true
+        }
+        setFormData({first, last, role, approved: approvedBool, language, userDocId});
+        setEditOpen(!editOpen);
     };
 
     const handleEditClose = () => {
         setEditOpen(false);
     };
 
-    const toggleEdit = ({first, last, role, approved, spanish, id}) => {
-        setFormData({first, last, role, approved, spanish, id});
-        setEditOpen(!editOpen);
-    };
+    //add modal functions
+    function addVolunteer() {
+        handleAddClose();
+        props.getVolunteers().catch(error => console.log(error));
+    }
 
     const handleAddOpen = () => {
         setAddOpen(true);
@@ -76,19 +55,41 @@ const ApprovedVolunteer = () => {
         setAddOpen(false);
     };
 
-    const toggleAdd = () => {
-        setAddOpen(!addOpen);
+    //delete modal functions
+    function deleteVolunteer({userDocId, id}) {
+        console.log(userDocId, id);
+        firestore.collection('users').doc(userDocId).delete()
+            // .then(() => {
+            //     const newList = tableData.filter(user => user.id !== id);
+            //     setTableData(newList);
+            // })
+            .then(() => DeleteUser(id)).then(() => {
+                props.getVolunteers().catch(error => console.log(error));
+        })
+            .catch(error => console.log(error));
+        handleDeleteClose();
+        console.log("user removed");
+    }
+
+    const handleDeleteOpen = (props) => {
+        console.log(props);
+        setFormData({...props});
+        setDeleteOpen(true);
+    };
+
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
     };
 
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <p>Approved Volunteers page</p>
+            <p>Approved Volunteers</p>
             <EnhancedTable
                 data={tableData}
                 headCells={headCells}
-                delete={deleteVolunteer}
-                add={toggleAdd}
-                edit={(row) => toggleEdit(row)}
+                delete={handleDeleteOpen}
+                add={handleAddOpen}
+                edit={(row) => handleEditOpen(row)}
             />
             <TransitionModal
                 open={editOpen}
@@ -103,6 +104,13 @@ const ApprovedVolunteer = () => {
                 handleClose={handleAddClose}
                 form={<AddVolunteer onAdd={addVolunteer}/>}
                 title={"Add Approved Volunteer"}
+            />
+            <TransitionModal
+                open={deleteOpen}
+                handleOpen={handleDeleteOpen}
+                handleClose={handleDeleteClose}
+                form={<DeleteVolunteer formData={formData} submit={deleteVolunteer} cancel={handleDeleteClose} />}
+                title={"Are You Sure?"}
             />
         </Container>
     );

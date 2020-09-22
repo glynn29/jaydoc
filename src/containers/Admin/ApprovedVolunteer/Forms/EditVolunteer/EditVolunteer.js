@@ -13,24 +13,25 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import {firestore} from "../../../../../firebase";
+import Container from "@material-ui/core/Container";
 
 
 const EditVolunteer = props => {
-    const formClasses = formStyles();
+    const classes = formStyles();
     const [first, setFirst] = useState(props.formData.first);
     const [last, setLast] = useState(props.formData.last);
-    const [approved, setApproved] = useState(true);
+    const [approved, setApproved] = useState(props.formData.approved);
     const [role, setRole] = useState(props.formData.role);
-    const [spanish, setSpanish] = useState(false);
+    const [language, setLanguage] = useState(props.formData.language);
     const list = props.roleList;
 
     const submitFormHandler = (event) =>{
         event.preventDefault();
-        firestore.collection('users').doc(props.formData.id).set({
+        firestore.collection('users').doc(props.formData.userDocId).set({
             first: first,
             last: last,
-            approved: approved,
-            spanish: spanish,
+            approved: `${approved}`,
+            language,
         }, {merge: true})
             .then(()=>{props.onEdit();})
             .catch(error => {console.log(error)});
@@ -38,69 +39,76 @@ const EditVolunteer = props => {
     };
 
     const form = (
-        <div>
+        <Container component="main" maxWidth="sm" className={classes.Container}>
             <CssBaseline />
-            <h1>{"Id is: " + props.formData.id}</h1>
-            <form className={formClasses.root} noValidate autoComplete="off" onSubmit={submitFormHandler}>
-                <Grid container spacing={2} direction={"column"} alignItems={"stretch"}>
-                    <Grid item>
-                        <TextField
-                            value={first}
-                            onChange={event => setFirst(event.target.value)}
-                            name="firstName"
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="firstName"
-                            label="First Name"
-                            autoFocus
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            value={last}
-                            onChange={event => setLast(event.target.value)}
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="lastName"
-                            label="Last Name"
-                            name="lastName"
-                        />
-                    </Grid>
-                    <Grid item>
-                        <FormControl variant="outlined" className={formClasses.formControl} >
-                            <InputLabel htmlFor="outlined-age-native-simple" required>Role</InputLabel>
-                            <Select
-                                native
-                                value={role}
-                                onChange={event => setRole(event.target.value) }
-                                label="Role"
-                                inputProps={{
-                                    name: 'role',
-                                    id: 'outlined-age-native-simple',
-                                }}
-                            >
-                                <option aria-label="None" value="" />
-                                {list.map( listItem => {
-                                    return (
-                                        <option key={listItem.name} value={listItem.name}>{listItem.name}</option>
-                                    );
-                                })}
-                            </Select>
+            <form className={classes.root} noValidate autoComplete="off" onSubmit={submitFormHandler}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="outlined" className={classes.formControl} >
+                            <TextField
+                                value={first}
+                                onChange={event => setFirst(event.target.value)}
+                                name="firstName"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="firstName"
+                                label="First Name"
+                                autoFocus
+                            />
                         </FormControl>
                     </Grid>
-                    <Grid item>
-                        <FormControlLabel
-                            checked={spanish}
-                            value={spanish}
-                            onChange={event => setSpanish(!spanish)}
-                            control={<Checkbox value={spanish} color="primary" />}
-                            label="Speak Spanish"
-                        />
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="outlined" className={classes.formControl} >
+                            <TextField
+                                value={last}
+                                onChange={event => setLast(event.target.value)}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="lastName"
+                                label="Last Name"
+                                name="lastName"
+                            />
+                        </FormControl>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl} >
+                            <InputLabel htmlFor="outlined-age-native-simple" required>Role</InputLabel>
+                                <Select
+                                    native
+                                    value={role}
+                                    onChange={event => setRole(event.target.value) }
+                                    label="Role"
+                                    inputProps={{
+                                        name: 'role',
+                                        id: 'outlined-age-native-simple',
+                                    }}
+                                >
+                                    <option aria-label="None" value="" />
+                                    {list.map( listItem => {
+                                        return (
+                                            <option key={listItem.name} value={listItem.name}>{listItem.name}</option>
+                                        );
+                                    })}
+                                </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl} >
+                            <TextField
+                                color="primary"
+                                variant="outlined"
+                                label="Second Language"
+                                fullWidth
+                                value={language}
+                                onChange={event => setLanguage(event.target.value)}
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
                         <FormControlLabel
+                            className={classes.formControl}
                             checked={approved}
                             value={approved}
                             onChange={event => setApproved(!approved)}
@@ -114,12 +122,12 @@ const EditVolunteer = props => {
                     variant="contained"
                     color="primary"
                     fullWidth
-                    className={formClasses.submit}
+                    className={classes.submit}
                 >
                     Edit User
                 </Button>
             </form>
-        </div>
+        </Container>
     );
 
     return form;
