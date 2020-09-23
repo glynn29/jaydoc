@@ -1,11 +1,15 @@
 import React from "react";
-import {AddAdmin} from '../../../components/addAdmin';
+import {AddAdmin} from '../../../CloudFunctions/addAdmin';
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 
 const Report = () => {
-    return (<div>
-        <p>Reports page</p>
-        <AddAdmin/>
-    </div>);
+    return (
+        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+            <Typography variant="h3">Reports Page</Typography>
+            <AddAdmin/>
+        </Container>
+    );
 };
 
 export default Report;
