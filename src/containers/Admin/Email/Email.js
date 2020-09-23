@@ -20,6 +20,8 @@ import formStyles from "../../../components/UI/Styles/formStyle";
 import ReminderForm from "./Forms/Reminder/Reminder";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import {firestore} from "../../../firebase";
+import TransitionModal from "../../../components/UI/Modal/Modal";
+import SendMail from "./Forms/SendMail/SendMail";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -35,10 +37,15 @@ const Email = (props) => {
     const [role, setRole] = useState([]);
     const [subject, setSubject] = useState("Event Reminder");
     const [message, setMessage] = useState("");
+
     const [emails, setEmails] = useState([]);
     const [eventEmails, setEventEmails] = useState([]);
+
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [formData, setFormData] = useState({});
 
     const list = props.roleList;
 
@@ -78,12 +85,15 @@ const Email = (props) => {
     const onSubmitHandler = (event) => {
         event.preventDefault();
         let err = null;
+        let emailsTemp = [];
 
         if(emailType === "Custom Email"){
             if(role.length > 0){
                 getEmailsByRole()
                     .then(res => {
+                        emailsTemp = res;
                         setEmails(res);
+                        handleModalOpen(emailsTemp);
                     })
                     .catch(error => console.log(error));
             }else {
@@ -95,12 +105,14 @@ const Email = (props) => {
                 if(role.length > 0){
                     getEmailsByRole()
                         .then(res => {
-                            const emailsTemp = eventEmails.filter(email => res.includes(email));
+                            emailsTemp = eventEmails.filter(email => res.includes(email));
                             setEmails(emailsTemp);
+                            handleModalOpen(emailsTemp);
                         })
                         .catch(error => console.log(error));
                 }else{
                     setEmails(eventEmails);
+                    handleModalOpen(eventEmails);
                 }
             }else {
                 setEmails([]);
@@ -109,6 +121,20 @@ const Email = (props) => {
         }
         setError(err);
     };
+
+    const handleModalOpen = (emails) => {
+        setFormData(emails);
+        setModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setModalOpen(false);
+    };
+
+    function submitHandler(emails) {
+        handleModalClose();
+        console.table(emails);
+    }
 
     const form = (
         <Container component="main" maxWidth="md" style={{textAlign:"center"}}>
@@ -198,17 +224,24 @@ const Email = (props) => {
                     <ReminderForm getPositions={getPositions}/>
                 }
                 <Typography color="error">{error}</Typography>
-                {emails.map(email => <p key={email}>{email}</p>)}
-                {loading && <Spinner/>}
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
-                    Send Reminders
-                </Button>
+                {loading ?
+                    <Spinner/> :
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Get Emails
+                    </Button>}
             </form>
+            <TransitionModal
+                open={modalOpen}
+                handleOpen={handleModalOpen}
+                handleClose={handleModalClose}
+                form={<SendMail submit={submitHandler} cancel={handleModalClose} formData={formData} button={"Send Mail"}/>}
+                title={"Add Positions"}
+            />
         </Container>
     );
 
