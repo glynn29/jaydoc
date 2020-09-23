@@ -22,6 +22,20 @@ const ApprovedVolunteer = (props) => {
         setTableData(props.tableData);
     }, [props.tableData]);
 
+    //add modal functions
+    function addVolunteer() {
+        handleAddClose();
+        props.getVolunteers().catch(error => console.log(error));
+    }
+
+    const handleAddOpen = () => {
+        setAddOpen(true);
+    };
+
+    const handleAddClose = () => {
+        setAddOpen(false);
+    };
+
     //edit modal functions
     function editVolunteer() {
         handleEditClose();
@@ -39,20 +53,6 @@ const ApprovedVolunteer = (props) => {
 
     const handleEditClose = () => {
         setEditOpen(false);
-    };
-
-    //add modal functions
-    function addVolunteer() {
-        handleAddClose();
-        props.getVolunteers().catch(error => console.log(error));
-    }
-
-    const handleAddOpen = () => {
-        setAddOpen(true);
-    };
-
-    const handleAddClose = () => {
-        setAddOpen(false);
     };
 
     //delete modal functions

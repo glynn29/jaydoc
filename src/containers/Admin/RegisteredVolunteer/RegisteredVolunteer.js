@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
+
 import Container from "@material-ui/core/Container";
+
 import EnhancedTable from "../../../components/UI/Table/Table";
 import {firestore} from "../../../firebase";
 import {DeleteUser} from "../../../CloudFunctions/deleteUser";
