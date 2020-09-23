@@ -52,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "blue",
         color: "white"
     },
+    addButton: {
+        margin: theme.spacing(2, 4, 3),
+        minWidth: 200
+    },
     table: {
         //minWidth: 700,
     },
@@ -63,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
     },
     menuPaper: {
         maxHeight: 300
+    },
+    Container: {
+        textAlign: 'center'
     }
 }));
 
