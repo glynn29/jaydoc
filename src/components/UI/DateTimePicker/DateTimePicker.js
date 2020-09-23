@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 export const CustomDatePicker = (props) => (
     <TextField
+        required
         fullWidth
         variant="outlined"
         value={props.value}
@@ -19,6 +20,7 @@ export const CustomDatePicker = (props) => (
 
 export const CustomTimePicker = (props) => (
     <TextField
+        required
         fullWidth
         variant="outlined"
         value={props.value}
