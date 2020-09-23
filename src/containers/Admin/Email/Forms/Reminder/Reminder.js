@@ -1,46 +1,50 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import EnhancedTable from "../../../../../components/UI/Table/Table";
-//import TransitionModal from "../../Modal/Modal";
+import {firestore} from "../../../../../firebase";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const headCells = [
-    { id: 'time', label: 'Start Time' },
-    { id: 'event', label: 'Event Name' },
-    { id: 'position',  label: 'Position' },
-    { id: 'volunteer',  label: 'Volunteer' },
-    { id: 'email',  label: 'Email' },
+    { id: 'name', label: 'Event Name' },
+    { id: 'date', label: 'Date'},
+    { id: 'start', label: 'Start Time' },
+    { id: 'end',  label: 'End Time' }
 ];
 
-const rowLabels = [
-    { id: 'time'},
-    { id: 'event'},
-    { id: 'position'},
-    { id: 'volunteer'},
-    { id: 'email'},
-];
+const Reminder = (props) => {
+    const [tableData, setTableData] = useState([]);
+    const [event, setEvent] = useState({});
 
-function createData(time, event, position, volunteer, email) {
-    return { time, event, position, volunteer, email };
-}
+    const isSelected = (id) => event.id === id;
 
-let rows = [
-    createData('08-24-2020 5:00PM', 'Jaydoc clinic', 'Director', 'John Cena1', 'email1@email.com'),
-    createData('08-24-2020 6:00PM', 'Jaydoc clinic', 'Director', 'John Cena2', 'email2@email.com'),
-    createData('08-24-2020 7:00PM', 'Jaydoc clinic', 'Director', 'John Cena3', 'email3@email.com'),
-    createData('08-24-2020 5:00PM', 'Jaydoc clinic', 'Front Desk', 'John Cena4', 'email4@email.com'),
-    createData('08-24-2020 5:00PM', 'Jaydoc clinic', 'Front Desk', 'John Cena5', 'email5@email.com'),
-];
+    const handleChange = (events) =>{
+        props.getPositions(events.positions);
+        console.log(events);
+        isSelected(events.name);
+        setEvent(events);
+    };
 
-const Reminder = () => {
-    //const [tableData, setTableData] = useState(rows);
+    async function getEvents() {
+        let events = [];
+        const eventsRef = await firestore.collection('scheduledEvents').orderBy("date","desc").get();
+        eventsRef.forEach((row) => {
+            events.push({...row.data(), id: row.id});
+        });
+        setTableData(events);
+    }
+
+    useEffect( () => {
+        getEvents().catch(error => {console.log(error)});
+    },[]);
 
     return (
         <div>
             <p>Scheduled Events</p>
             <EnhancedTable
-                data={rows}
+                data={tableData}
                 headCells={headCells}
-                rowLables={rowLabels}
+                checkbox={handleChange}
+                isSelected={isSelected}
             />
         </div>
     );
