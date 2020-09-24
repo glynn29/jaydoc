@@ -31,7 +31,7 @@ const Account = (props) => {
                 futureEvents.push(<p  key={index}> Event: {event.eventName}, Date: {date.toDateString()}, Position: {event.position}, Start: {event.startTime}, End: {event.endTime} {button}</p>);
                 console.log("Future")
             }else {
-                pastEvents.push(<p  key={index}> Event: {event.eventName}, Date: {date.toDateString()}, Position: {event.position}, Start: {event.startTime}, End: {event.endTime} {button}</p>);
+                pastEvents.push(<p  key={index}> Event: {event.eventName}, Date: {date.toDateString()}, Position: {event.position}, Start: {event.startTime}, End: {event.endTime}</p>);
                 console.log("past")
             }
         userEvents.push(<p  key={index}> Event: {event.eventName}, Date: {event.date}, Position: {event.position}, Start: {event.startTime}, End: {event.endTime}</p>)
