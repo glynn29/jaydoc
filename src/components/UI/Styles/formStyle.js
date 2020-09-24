@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2, 4, 3),
         minWidth: 200
     },
+    cancelButton: {
+        color: "red",
+    },
     table: {
         //minWidth: 700,
     },
