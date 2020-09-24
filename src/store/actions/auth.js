@@ -33,6 +33,7 @@ export const getCurrentUser = (user) => {
         positions: user.positions,
         email: user.email,
         userId: user.id,
+        role: user.role,
         userDocId: user.userDocId,
         name: user.first + " " + user.last,
         events: user.events,
@@ -92,15 +93,25 @@ export const register = (registerData) => {
 };
 
 export const getUser = () => {
-    return dispatch => {
+     return dispatch => {
+
         const {uid} = auth.currentUser;
         firestore.collection('users').where('id', '==', uid).get()
             .then((res) => {
                 res.forEach(user => {
-                    console.log("get User");
-                    dispatch(getCurrentUser({...user.data(), userDocId: user.id}))
+                    console.log("get User", user.data());
+                    firestore.collection('users').doc(user.id).collection("volunteerEvents").get()
+                        .then((res)=> {
+                            let eventList = [];
+                           res.forEach(event => {
+                               console.log("get events", event.data());
+                               eventList.push(event.data());
+                           });
+                            dispatch(getCurrentUser({...user.data(), userDocId: user.id, events:eventList}))
+                        });
+
                 });
-            });
+          });
     }
 };
 

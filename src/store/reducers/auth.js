@@ -6,6 +6,7 @@ const initialState = {
     userId: null,
     userDocId: null,
     name: null,
+    role: null,
     events: [],
     error: null,
     loading: false,
@@ -50,6 +51,7 @@ const authLogout = (state, action) => {
         userId: null,
         userDocId: null,
         name: null,
+        role: null,
         events: [],
         error: null,
         loading: false,
@@ -61,6 +63,7 @@ const authLogout = (state, action) => {
 
 const getCurrentUser = (state, action) => {
     return updateObject(state, {
+        role: action.role,
         positions: action.positions,
         email: action.email,
         userId: action.userId,
