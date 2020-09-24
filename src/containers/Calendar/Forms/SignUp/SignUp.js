@@ -16,14 +16,15 @@ const headCells = [
 ];
 
 const SignUp = (props) => {
-    const {positions, name, userId} = props;
-    const [tableData, setTableData] = useState(props.formData.positions);
+    const {positions, name, email} = props;
+    const eventName = props.formData.name;
+    const startTime = props.formData.start;
+    const endTime = props.formData.end;
+    const date = props.formData.date;
+    const tableData = props.formData.positions;
+
     const [filteredTableData, setFilteredTableData] = useState([]);
     const [formData, setFormData] = useState({});
-    const [eventName, setEventName] = useState(props.formData.name);
-    const [startTime, setStartTime] = useState(props.formData.start);
-    const [endTime, setEndTime] = useState(props.formData.end);
-    const [date, setDate] = useState(props.formData.date);
     const [modalOpen, setModalOpen] = useState(false);
     const [confirm, setConfirm] = useState(null);
     const [alreadyInEvent, setAlreadyInEvent] = useState(false);
@@ -51,18 +52,14 @@ const SignUp = (props) => {
         );
     }
 
-    const handleModalOpen = () => {
-        setModalOpen(true);
-    };
-
     const handleModalClose = () => {
         setModalOpen(false);
     };
 
-    const toggleModal = (props) => {
+    const handleModalOpen = (props) => {
         console.log(props);
         setFormData({position: props.position, name, eventName, startTime, endTime, date, index: props.index});
-        setModalOpen(!modalOpen);
+        setModalOpen(true);
     };
 
     function submitHandler({index, position, date}) {
@@ -70,30 +67,27 @@ const SignUp = (props) => {
         props.onConfirm(formData);
         let newTableData = tableData;
         const newRow = newTableData[index];
-        newTableData[index] = {...newRow, volunteer: name};
+        newTableData[index] = {...newRow, volunteer: name, email};
 
-        firestore.collection('scheduledEvents').doc(props.formData.id).set({
-            positions: newTableData
-        }, {merge: true})
-            .then(() => {
-                let newEvents = [];
-                if(props.events)
-                    newEvents = props.events;
-                newEvents.push({
-                    eventId: props.formData.id,
-                    eventName,
-                    position: position,
-                    startTime,
-                    endTime,
-                    date: date
-                });
+        firestore.collection('scheduledEvents').doc(props.formData.id)
+            .set({
+                positions: newTableData
+            },{merge: true})
+            .catch(error => console.log(error));
 
-                firestore.collection('users').doc(props.userDocId).set({
-                    events: newEvents
-                }, {merge: true})
-                .catch();
-        })
-            .catch();
+        firestore.collection('users').doc(props.userDocId).collection('volunteerEvents')
+            .add({
+                eventId: props.formData.id,
+                eventName,
+                position: position,
+                startTime,
+                endTime,
+                date: date,
+                id: props.userId,
+                role: props.role,
+                name
+            })
+            .catch(error => console.log(error));
         setConfirm(true);
     }
 
@@ -108,7 +102,7 @@ const SignUp = (props) => {
     return(
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
             <p>{eventName} From {formattedStart} to {formattedEnd} on {formattedDate}</p>
-            { !alreadyInEvent ? <EnhancedTable data={filteredTableData} headCells={headCells} signUp={toggleModal}/> : <p>Already signed up for this event as {position}</p>}
+            { !alreadyInEvent ? <EnhancedTable data={filteredTableData} headCells={headCells} signUp={handleModalOpen}/> : <p>Already signed up for this event as {position}</p>}
             <TransitionModal
                 open={modalOpen}
                 handleOpen={handleModalOpen}
@@ -122,6 +116,8 @@ const SignUp = (props) => {
 
 const mapStateToProps = state => {
     return{
+        role: state.auth.role,
+        email: state.auth.email,
         positions: state.auth.positions,
         userId: state.auth.userId,
         name: state.auth.name,
