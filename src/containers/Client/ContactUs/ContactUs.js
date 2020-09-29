@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 const ContactUs = () => {
-    const formClasses = formStyles();
+    const classes = formStyles();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [category, setCategory] = useState("");
@@ -26,92 +26,107 @@ const ContactUs = () => {
     ];
 
     const form = (
-       <div style={{textAlign:"center", width: "70%", margin:"auto"}}>
+        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
             <Typography variant="h3">Contact Us</Typography>
             <Typography>If you are having technical difficulty with the website, or if you have a general question about JayDoc Free Clinic, please use the following form to submit your query:</Typography>
-            <Container component="main" maxWidth="md">
-            <CssBaseline />
-            <form className={formClasses.root} noValidate autoComplete="off">
-                <Grid container spacing={2} direction={"column"} alignItems={"stretch"}>
-                    <TextField
-                        value={name}
-                        onChange={event => setName(event.target.value)}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="subject"
-                        label="Subject"
-                        name="subject"
-                        autoFocus
-                    />
-                    <TextField
-                        value={email}
-                        onChange={event => setEmail(event.target.value)}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                    />
-                    <FormControl variant="outlined" className={formStyles.formControl}>
-                        <InputLabel htmlFor="outlined-age-native-simple" required>Category</InputLabel>
-                        <Select
-                            native
-                            value={category}
-                            onChange={event => setCategory(event.target.value) }
-                            label="Category"
-                            inputProps={{
-                                name: 'category',
-                                id: 'outlined-age-native-simple',
-                            }}
-                        >
-                            <option aria-label="Select a category" value="" />
-                            {list.map( listItem => {
-                                return (
-                                    <option key={listItem} value={listItem}>{listItem}</option>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                    <TextField
-                        value={subject}
-                        onChange={event => setSubject(event.target.value)}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="subject"
-                        label="Subject"
-                        name="subject"
-                    />
-                    <TextField
-                        value={message}
-                        onChange={event => setMessage(event.target.value)}
-                        id="outlined-textarea"
-                        label="Message"
-                        placeholder="Keep up the good work"
-                        multiline
-                        variant="outlined"
-                        fullWidth
-                        required
-                        rows={15}
-                        inputProps={{ className: formClasses.textarea }}
-                    />
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        className={formClasses.submit}>
-                        SEND
-                    </Button>
-                </Grid>
-            </form>
+                <CssBaseline />
+                <form noValidate autoComplete="off">
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} >
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <TextField
+                                    value={name}
+                                    onChange={event => setName(event.target.value)}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="subject"
+                                    label="Subject"
+                                    name="subject"
+                                    autoFocus
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} >
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <TextField
+                                    value={email}
+                                    onChange={event => setEmail(event.target.value)}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} >
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <InputLabel htmlFor="outlined-age-native-simple" required>Category</InputLabel>
+                                <Select
+                                    native
+                                    value={category}
+                                    onChange={event => setCategory(event.target.value) }
+                                    label="Category"
+                                    inputProps={{
+                                        name: 'category',
+                                        id: 'outlined-age-native-simple',
+                                    }}
+                                >
+                                    <option aria-label="Select a category" value="" />
+                                    {list.map( listItem => {
+                                        return (
+                                            <option key={listItem} value={listItem}>{listItem}</option>
+                                        );
+                                    })}
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} >
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <TextField
+                                    value={subject}
+                                    onChange={event => setSubject(event.target.value)}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="subject"
+                                    label="Subject"
+                                    name="subject"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} >
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <TextField
+                                    value={message}
+                                    onChange={event => setMessage(event.target.value)}
+                                    id="outlined-textarea"
+                                    label="Message"
+                                    placeholder="Keep up the good work"
+                                    multiline
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    rows={15}
+                                    inputProps={{ className: classes.textarea }}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} >
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}>
+                                SEND
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </form>
             </Container>
-        </div>
     );
 
     return form;
