@@ -71,11 +71,12 @@ const App = (props) =>{
             );
         }
 
-        if(isAdmin){
+        if(isAdmin) {
             routes = (
                 <Switch>
                     <Route path="/email" component={Email}/>
                     <Route path="/report" component={Report}/>
+                    <Route path="/calendar" component={Calendar}/>
                     <Route path="/eventList" component={EventList}/>
                     <Route path="/volunteerList" component={Users}/>
                     <Route path="/scheduledEventList" component={ScheduledEventList}/>
@@ -86,21 +87,6 @@ const App = (props) =>{
             );
         }
     }
-
-    // if(currentUser && isAdmin) {
-    //     routes = (
-    //         <Switch>
-    //             <Route path="/email" component={Email}/>
-    //             <Route path="/report" component={Report}/>
-    //             <Route path="/eventList" component={EventList}/>
-    //             <Route path="/volunteerList" component={Users}/>
-    //             <Route path="/scheduledEventList" component={ScheduledEventList}/>
-    //             <Route path="/logout" component={Logout}/>
-    //             <Route path="/login" component={Login}/>
-    //             <Route path="/" exact component={Dashboard}/>
-    //         </Switch>
-    //     );
-    // }
 
     return (
         <div>

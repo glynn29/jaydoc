@@ -17,10 +17,11 @@ const NavigationItems = (props) => {
                 <NavigationItem link="/login" clicked={props.clicked}><Typography>Login</Typography></NavigationItem>;
 
     const adminLinks = (<ul className={classes.NavigationItems}>
-        <NavigationItem link="/" exact clicked={props.clicked}><Typography>DashBoard</Typography></NavigationItem>
+        <NavigationItem link="/" exact clicked={props.clicked}><Typography>Dashboard</Typography></NavigationItem>
+        <NavigationItem link="/volunteerList" clicked={props.clicked}><Typography>Volunteers</Typography></NavigationItem>
         <NavigationItem link="/eventList" clicked={props.clicked}><Typography>Events</Typography></NavigationItem>
         <NavigationItem link="/scheduledEventList" clicked={props.clicked}><Typography>Schedule Events</Typography></NavigationItem>
-        <NavigationItem link="/volunteerList" clicked={props.clicked}><Typography>Volunteers</Typography></NavigationItem>
+        <NavigationItem link="/calendar" clicked={props.clicked}><Typography>Calendar</Typography></NavigationItem>
         <NavigationItem link="/email" clicked={props.clicked}><Typography>Email</Typography></NavigationItem>
         <NavigationItem link="/report" clicked={props.clicked}><Typography>Report</Typography></NavigationItem>
         {nav}
