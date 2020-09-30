@@ -98,7 +98,7 @@ const Email = (props) => {
                     .catch(error => console.log(error));
             }else {
                 setEmails([]);
-                err ="No emails";
+                err ="Select one or more roles to retrieve emails for";
             }
         }else{
             if(emails.length > 0){
@@ -116,7 +116,7 @@ const Email = (props) => {
                 }
             }else {
                 setEmails([]);
-                err ="No emails";
+                err ="Select an event to retrieve emails for. Filter the event by selecting ore or more roles";
             }
         }
         setError(err);
