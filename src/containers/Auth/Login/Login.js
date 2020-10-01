@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
@@ -22,7 +22,27 @@ const Login = (props) => {
     const {currentUser} = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [rememberMe, setRememberMe] = useState(false);
     const classes = formStyles();
+
+    useEffect(() => {
+       if (localStorage.getItem('rememberMe')){
+           setRememberMe(true);
+           setEmail(localStorage.getItem("email"));
+           setPassword(localStorage.getItem("password"));
+       }
+    },[]);
+
+    const onChangeHandler = () =>{
+        if(!rememberMe){
+            localStorage.setItem("rememberMe", true);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+        }else {
+            localStorage.clear();
+        }
+        setRememberMe(!rememberMe);
+    };
 
     const submitHandler = (event) =>{
         event.preventDefault();
@@ -45,8 +65,9 @@ const Login = (props) => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Login
                 </Typography>
+                {props.error}
                 <form className={classes.form} noValidate onSubmit={submitHandler}>
                     <TextField
                         value={email}
@@ -75,7 +96,11 @@ const Login = (props) => {
                         autoComplete="current-password"
                     />
                     <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
+                        control={<Checkbox
+                            value={rememberMe}
+                            checked={rememberMe}
+                            onChange={onChangeHandler}
+                            color="primary" />}
                         label="Remember me"
                     />
                     <Button
@@ -95,7 +120,7 @@ const Login = (props) => {
                         </Grid>
                         <Grid item>
                             <Link href="/register" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                Don't have an account? Register
                             </Link>
                         </Grid>
                     </Grid>
