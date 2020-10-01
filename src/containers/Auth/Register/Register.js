@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
-import Spinner from "../../../components/UI/Spinner/Spinner";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,6 +17,8 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import Spinner from "../../../components/UI/Spinner/Spinner";
 import formStyles from "../../../components/UI/Styles/formStyle";
 import * as actions from "../../../store/actions";
 
@@ -39,22 +40,110 @@ const Register = (props) => {
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [role, setRole] = useState("");
-    const [spanish, setSpanish] = useState(false);
+    const [otherRole, setOtherRole] = useState("");
+    const [positions, setPositions] = useState([]);
+    const [secondLanguage, setSecondLanguage] = useState(false);
+    const [language, setLanguage] = useState("");
+    const [error, setError] = useState({});
     const list = props.roleList;
     const classes = formStyles();
 
+
+    const formValidator = () => {
+        let tempErrors = {};
+        let isValid = true;
+        const letters = /^[A-Za-z\s]+$/;
+        const validEmail = /\S+@\S+\.\S+/;
+
+        if(!first.match(letters)){
+            tempErrors.first = "Name must only contain letters";
+            isValid = false
+        }
+
+        if(first.trim() === ""){
+            tempErrors.first = "Name must not be empty";
+            isValid = false
+        }
+
+        if(!last.match(letters)){
+            tempErrors.last = "Name must only contain letters";
+            isValid = false
+        }
+
+        if(last.trim() === ""){
+            tempErrors.last = "Name must not be empty";
+            isValid = false
+        }
+
+        if(!email.match(validEmail)){
+            tempErrors.email = "Poorly formatted email";
+            isValid = false;
+        }
+
+        if(password !== passwordConfirm){
+            tempErrors.password = "Passwords do not match";
+            isValid = false;
+        }
+
+        if(password.length < 6){
+            tempErrors.password = "Password must be at least 6 characters";
+            isValid = false;
+        }
+
+        if(role === "Other" && !otherRole.match(letters)){
+            tempErrors.role = "Role must only contain letters";
+            isValid = false
+        }
+
+        if(role === "Other" &&  otherRole.trim() === ""){
+            tempErrors.role = "Role must not be empty";
+            isValid = false
+        }
+
+        if(secondLanguage && !language.match(letters)){
+            tempErrors.language = "Language must only contain letters";
+            isValid = false
+        }
+
+        if(secondLanguage && language.trim() === ""){
+            tempErrors.language = "Language must not be empty";
+            isValid = false
+        }
+
+        setError({...tempErrors});
+        return isValid;
+    };
+
     const submitHandler = (event) =>{
         event.preventDefault();
-        const formData = {
-            first: first,
-            last: last,
-            email: email,
-            password: password,
-            passwordConfirm: passwordConfirm,
-            role: role,
-            spanish: spanish
-        };
-        props.onRegister(formData);
+        if(formValidator()) {
+            const tempFirst = first.trim().charAt(0).toUpperCase() + first.trim().slice(1);
+            const tempLast = last.trim().charAt(0).toUpperCase() + last.trim().slice(1);
+            const tempLanguage = secondLanguage ? language.trim().charAt(0).toUpperCase() + language.trim().slice(1) : language;
+            const tempRole = (role === "Other") ? otherRole.trim().charAt(0).toUpperCase() + otherRole.trim().slice(1) : role;
+            const tempPositions = (role === "Other") ? props.positionList: positions;
+
+            console.log(tempFirst, tempLast, tempLanguage, tempRole);
+
+            const formData = {
+                first: tempFirst,
+                last: tempLast,
+                email: email,
+                password: password,
+                role: tempRole,
+                language: tempLanguage,
+                positions: tempPositions,
+            };
+
+            console.table(formData);
+
+            //props.onRegister(formData);
+        }
+    };
+
+    const onSelectHandler = (event) => {
+        setRole(event.target.value);
+        list.filter(e => e.name === event.target.value).map(row => setPositions(row.positions));
     };
 
     if(props.isRegistered){
@@ -78,14 +167,13 @@ const Register = (props) => {
                             <TextField
                                 value={first}
                                 onChange={event => setFirst(event.target.value)}
-                                autoComplete="fname"
-                                name="firstName"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
+                                {...(error.first && {error: true, helperText: error.first})}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -97,8 +185,7 @@ const Register = (props) => {
                                 fullWidth
                                 id="lastName"
                                 label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
+                                {...(error.last && {error: true, helperText: error.last})}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -110,8 +197,7 @@ const Register = (props) => {
                                 fullWidth
                                 id="email"
                                 label="Email Address"
-                                name="email"
-                                autoComplete="email"
+                                {...(error.email && {error: true, helperText: error.email})}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -125,7 +211,7 @@ const Register = (props) => {
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
+                                {...(error.password && {error: true, helperText: error.password})}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -135,46 +221,70 @@ const Register = (props) => {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                name="passwordConfirm"
                                 label="Password Confirm"
                                 type="password"
                                 id="passwordConfirm"
-                                autoComplete="current-password"
+                                {...(error.password && {error: true, helperText: error.password})}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl variant="outlined" className={classes.formControl}>
+                            <FormControl variant="outlined" className={classes.formControl} required>
                                 <InputLabel>Role</InputLabel>
                                 <Select
                                     MenuProps={MenuProps}
                                     value={role}
-                                    onChange={event => setRole(event.target.value) }
+                                    onChange={onSelectHandler}
                                     label="Role"
-                                    inputProps={{
-                                        name: 'role',
-                                        id: 'outlined-age-native-simple',
-                                    }}
                                 >
                                     <MenuItem aria-label="None" value="" />
                                     {list.map( listItem => {
                                         return (
-                                            <MenuItem key={listItem} value={listItem}>{listItem}</MenuItem>
+                                            <MenuItem key={listItem.name} value={listItem.name}>{listItem.name}</MenuItem>
                                         );
                                     })}
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item xs={12} align="center" >
+                        {role === "Other" &&
+                        <Grid item xs={12}>
+                            <FormControl variant="outlined" className={classes.formControl} >
+                                <TextField
+                                    value={otherRole}
+                                    onChange={event => setOtherRole(event.target.value)}
+                                    label="Enter Role"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="role"
+                                    {...(error.role && {error: true, helperText: error.role})}
+                                />
+                            </FormControl>
+                        </Grid>}
+                        <Grid item xs={12}>
                             <FormControlLabel
                                 style={{alignItems: 'center',}}
                                 className={classes.formControl}
-                                checked={spanish}
-                                value={spanish}
-                                onChange={event => setSpanish(!spanish)}
-                                control={<Checkbox value="spanish" color="primary" />}
-                                label="Speak Spanish"
+                                value={secondLanguage}
+                                onChange={event => setSecondLanguage(!secondLanguage)}
+                                control={<Checkbox color="primary" />}
+                                label="Second Language?"
                             />
                         </Grid>
+                        {secondLanguage &&
+                        <Grid item xs={12}>
+                            <FormControl variant="outlined" className={classes.formControl} >
+                                <TextField
+                                    value={language}
+                                    onChange={event => setLanguage(event.target.value)}
+                                    label="Enter Language"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="language"
+                                    {...(error.language && {error: true, helperText: error.language})}
+                                />
+                            </FormControl>
+                        </Grid>}
                     </Grid>
                     <Button
                         type="submit"
@@ -188,7 +298,7 @@ const Register = (props) => {
                     <Grid container justify="flex-end">
                         <Grid item>
                             <Link href="/login" variant="body2">
-                                Already have an account? Sign in
+                                Already have an account? Login
                             </Link>
                         </Grid>
                     </Grid>
@@ -205,7 +315,8 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isRegistered: state.auth.registered,
-        roleList: state.lists.roleList
+        roleList: state.lists.roleList,
+        positionList: state.lists.positionList,
     };
 };
 
