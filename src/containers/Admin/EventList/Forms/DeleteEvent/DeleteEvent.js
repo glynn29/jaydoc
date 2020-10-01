@@ -6,7 +6,7 @@ import useStyles from "../../../../../components/UI/Styles/formStyle";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-const DeleteVolunteer = props => {
+const DeleteEvent = props => {
     const classes = useStyles();
     const formData = props.formData;
 
@@ -15,7 +15,7 @@ const DeleteVolunteer = props => {
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
-                    <Typography>Delete {formData.first + " " + formData.last} ?</Typography>
+                    <Typography>Delete {formData.name}?</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Button
@@ -29,7 +29,7 @@ const DeleteVolunteer = props => {
                     <Button
                         variant="contained"
                         className={classes.detailsButton}
-                        onClick={() => props.submit({userDocId: formData.userDocId, id: formData.id})}
+                        onClick={() => props.submit({id: formData.id})}
                         fullWidth
                     >Confirm</Button>
                 </Grid>
@@ -38,4 +38,4 @@ const DeleteVolunteer = props => {
     )
 };
 
-export default DeleteVolunteer;
+export default DeleteEvent;
