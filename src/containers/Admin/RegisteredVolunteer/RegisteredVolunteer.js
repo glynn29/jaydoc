@@ -5,9 +5,12 @@ import Container from "@material-ui/core/Container";
 import EnhancedTable from "../../../components/UI/Table/Table";
 import {firestore} from "../../../firebase";
 import {DeleteUser} from "../../../CloudFunctions/deleteUser";
+import DeleteVolunteer from "../ApprovedVolunteer/Forms/DeleteVolunteer/DeleteVolunteer";
+import TransitionModal from "../../../components/UI/Modal/Modal";
 
 const RegisteredVolunteer = (props) => {
     const {headCells} = props;
+    const [deleteOpen, setDeleteOpen] = useState(false);
     const [tableData, setTableData] = useState(props.tableData);
     const [formData, setFormData] = useState({});
 
@@ -15,22 +18,7 @@ const RegisteredVolunteer = (props) => {
         setTableData(props.tableData);
     }, [props.tableData]);
 
-    const handleDeleteOpen = ({userDocId, id}) => {
-        console.log(props);
-        setFormData({...props});
-        firestore.collection('users').doc(userDocId).delete()
-            .then(() => {
-                const newList = tableData.filter(user => user.id !== id);
-                setTableData(newList);
-            })
-            .then(() => DeleteUser(id))
-                // .then(() => {
-                //     props.getVolunteers().catch(error => console.log(error));
-                // })
-            .catch(error => console.log(error));
-        //setDeleteOpen(true);
-    };
-
+    //functions to accept a registered user
     async function acceptVolunteer(userDocId) {
         await firestore.collection('users').doc(userDocId).set({
             approved: "true",
@@ -38,27 +26,48 @@ const RegisteredVolunteer = (props) => {
         props.getVolunteers();
     }
 
-    const handleAcceptOpen = ({userDocId}) => {
-        //console.log(props);
-        //setFormData({...props});
-        // firestore.collection('users').doc(userDocId).set({
-        //     approved: "true",
-        // }, {merge: true})
-        //     .then(()=>{props.getVolunteers().catch(error => console.log(error));})
+    const handleAccept = ({userDocId}) => {
         acceptVolunteer(userDocId)
             .catch(error => {console.log(error)});
         console.log("user Accepted");
-        //setDeleteOpen(true);
+    };
+
+    //delete modal functions
+    const deleteVolunteer = ({userDocId, id}) => {
+        setFormData({...props});
+        firestore.collection('users').doc(userDocId).delete()
+            .then(() => DeleteUser(id))
+            .then(() => {
+                props.getVolunteers().catch(error => console.log(error));
+            })
+            .catch(error => console.log(error));
+        handleDeleteClose();
+    };
+
+    const handleDeleteOpen = (props) => {
+        setFormData({...props});
+        setDeleteOpen(true);
+    };
+
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
     };
 
     return (
-        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+        <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
             <p>Newly Registered Volunteers</p>
             <EnhancedTable
                 data={tableData}
                 headCells={headCells}
-                accept={handleAcceptOpen}
+                accept={handleAccept}
                 delete={handleDeleteOpen}
+            />
+            <TransitionModal
+                open={deleteOpen}
+                handleOpen={handleDeleteOpen}
+                handleClose={handleDeleteClose}
+                form={<DeleteVolunteer formData={formData} submit={deleteVolunteer} cancel={handleDeleteClose} />}
+                title={"Are You Sure?"}
             />
         </Container>
     );

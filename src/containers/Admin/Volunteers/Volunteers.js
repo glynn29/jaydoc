@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import ApprovedVolunteer from "../ApprovedVolunteer/ApprovedVolunteer";
 import RegisteredVolunteer from "../RegisteredVolunteer/RegisteredVolunteer";
 import {firestore} from "../../../firebase";
-import useStyles from "../../../components/UI/Styles/formStyle";
 
 const headCells = [
     { id: 'first' , label: 'First Name' },
@@ -14,10 +13,10 @@ const headCells = [
     { id: 'role' , label: 'Role' },
     { id: 'approved', label: 'Approved'},
     { id: 'language', label: 'Language'},
+    {id: 'email', label: 'Email'}
 ];
 
-const Volunteers = props => {
-    const classes = useStyles();
+const Volunteers = () => {
     const [tableData, setTableData] = useState([]);
     const [approvedVolunteers, setApprovedVolunteers] = useState([]);
     const [registeredVolunteers, setRegisteredVolunteers] = useState([]);
@@ -39,6 +38,7 @@ const Volunteers = props => {
     },[]);
 
     useEffect(() => {
+        //split users into approved and not approved tables
         let AVList = [];
         let RVList = [];
         tableData.map(row => {
@@ -51,6 +51,11 @@ const Volunteers = props => {
         setApprovedVolunteers(AVList);
         setRegisteredVolunteers(RVList)
     },[tableData]);
+
+    // function updateList(id) {
+    //     const newList = tableData.filter(user => user.id !== id);
+    //     setTableData(newList);
+    // }
 
     const toggleView = () => {
         setToggle(!toggle);
@@ -76,10 +81,18 @@ const Volunteers = props => {
                 New Volunteers: ({registeredVolunteers.length})
             </Button>
             {!toggle &&
-                <ApprovedVolunteer headCells={headCells} tableData={approvedVolunteers} getVolunteers={getVolunteers}/>
+                <ApprovedVolunteer
+                    headCells={headCells}
+                    tableData={approvedVolunteers}
+                    getVolunteers={getVolunteers}
+                />
             }
             {toggle &&
-                <RegisteredVolunteer headCells={headCells} tableData={registeredVolunteers} getVolunteers={getVolunteers}/>
+                <RegisteredVolunteer
+                    headCells={headCells}
+                    tableData={registeredVolunteers}
+                    getVolunteers={getVolunteers}
+                />
             }
         </div>
     );

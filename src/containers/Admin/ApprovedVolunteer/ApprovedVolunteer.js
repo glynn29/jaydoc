@@ -57,13 +57,9 @@ const ApprovedVolunteer = (props) => {
 
     //delete modal functions
     function deleteVolunteer({userDocId, id}) {
-        console.log(userDocId, id);
         firestore.collection('users').doc(userDocId).delete()
-            // .then(() => {
-            //     const newList = tableData.filter(user => user.id !== id);
-            //     setTableData(newList);
-            // })
-            .then(() => DeleteUser(id)).then(() => {
+            .then(() => DeleteUser(id))
+            .then(() => {
                 props.getVolunteers().catch(error => console.log(error));
         })
             .catch(error => console.log(error));
@@ -82,14 +78,14 @@ const ApprovedVolunteer = (props) => {
     };
 
     return (
-        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+        <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
             <p>Approved Volunteers</p>
             <EnhancedTable
                 data={tableData}
                 headCells={headCells}
                 delete={handleDeleteOpen}
                 add={handleAddOpen}
-                edit={(row) => handleEditOpen(row)}
+                edit={handleEditOpen}
             />
             <TransitionModal
                 open={editOpen}
