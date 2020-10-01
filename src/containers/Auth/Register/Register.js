@@ -135,9 +135,7 @@ const Register = (props) => {
                 positions: tempPositions,
             };
 
-            console.table(formData);
-
-            //props.onRegister(formData);
+            props.onRegister(formData);
         }
     };
 

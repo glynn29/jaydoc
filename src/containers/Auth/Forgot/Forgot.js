@@ -16,8 +16,12 @@ const Forgot = () => {
 
     const submitHandler = (event) =>{
         event.preventDefault();
+        const actionCodeSettings = {
+            url: 'https://jaydoc-cb1af.web.app/login',
+            handleCodeInApp: false
+        };
 
-         auth.sendPasswordResetEmail(email)
+         auth.sendPasswordResetEmail(email,actionCodeSettings)
             .then(() => setResult("Successfully sent reset email to: " + email))
             .catch(error => setResult("Error sending Email: " + error.message));
     };
