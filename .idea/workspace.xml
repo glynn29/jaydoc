@@ -2,21 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa0d9f9a-f944-4d4d-9fec-e968e2dae6ae" name="Default Changelist" comment="added logo component">
+      <change afterPath="$PROJECT_DIR$/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/logo512.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/axiosHelper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Auth/Forgot/Forgot.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/Modal/Modal.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/Modal/Modal.module.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/containers/hoc/withErrorHandler/hooks/http-error-handler.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/firebase.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/functions/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/functions/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/UI/Table/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Table/Table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ApprovedVolunteer/ApprovedVolunteer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Email/Email.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/EventList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/Add/AddEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/Add/AddEvent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/EditEvent/EditEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/EventList/Forms/EditEvent/EditEvent.js" afterDir="false" />
@@ -27,7 +27,7 @@
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/Forms/EditScheduledEvent/EditScheduledEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/Forms/EditScheduledEvent/EditScheduledEvent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/ScheduledEventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/ScheduledEventList/ScheduledEventList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Admin/Volunteers/Volunteers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Admin/Volunteers/Volunteers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Forgot/Forgot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Forgot/Forgot.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Auth/Register/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Register/Register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Calendar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Calendar/Forms/AreYouSure/AreYouSure.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Calendar/Forms/AreYouSure/AreYouSure.js" afterDir="false" />
@@ -73,19 +73,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\public" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\CloudFunctions" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin\EventList\Forms\Positions" />
+      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin\Email\Forms" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\public" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\hoc\withErrorHandler" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\components\UI" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src" />
       <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\public" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\CloudFunctions" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin\EventList\Forms\Positions" />
-      <recent name="C:\Users\Glynn\IdeaProjects\jaydoc\src\containers\Admin\Email\Forms" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -136,28 +136,7 @@
       <workItem from="1598900487270" duration="50198000" />
       <workItem from="1599171593267" duration="94188000" />
       <workItem from="1600104947275" duration="141058000" />
-      <workItem from="1601417361282" duration="16680000" />
-    </task>
-    <task id="LOCAL-00050" summary="made two new DateTimePickers">
-      <created>1599708035372</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1599708035373</updated>
-    </task>
-    <task id="LOCAL-00051" summary="added ScheduleEvent to navbar">
-      <created>1599708090122</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1599708090122</updated>
-    </task>
-    <task id="LOCAL-00052" summary="added Singup functionality">
-      <created>1599776884682</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1599776884682</updated>
+      <workItem from="1601417361282" duration="25425000" />
     </task>
     <task id="LOCAL-00053" summary="minor changes">
       <created>1599776910223</created>
@@ -481,16 +460,34 @@
       <option name="project" value="LOCAL" />
       <updated>1601442296781</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="added forgot password pass and functionality for sending an email">
+      <created>1601529382031</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1601529382031</updated>
+    </task>
+    <task id="LOCAL-00100" summary="added errors ot login">
+      <created>1601531112737</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1601531112737</updated>
+    </task>
+    <task id="LOCAL-00101" summary="added form validation to register">
+      <created>1601531134245</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1601531134245</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changes to show past and future events" />
-    <MESSAGE value="cloud functions for deleting a user" />
-    <MESSAGE value="changed to block users from signing up more than once for an event" />
     <MESSAGE value="Turned into stateless component" />
     <MESSAGE value="added error page for users that haven't been approved yet" />
     <MESSAGE value="added approved state for users that have just registered" />
@@ -513,7 +510,10 @@
     <MESSAGE value="added calendar to admin side" />
     <MESSAGE value="fixed error messages. also correctly filters events by roles and gets all emails for an event" />
     <MESSAGE value="changed title" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed title" />
+    <MESSAGE value="added forgot password pass and functionality for sending an email" />
+    <MESSAGE value="added errors ot login" />
+    <MESSAGE value="added form validation to register" />
+    <option name="LAST_COMMIT_MESSAGE" value="added form validation to register" />
   </component>
   <component name="WindowStateProjectService">
     <state x="225" y="69" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601063036667">
@@ -524,35 +524,35 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1598236201772" />
-    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1601442295944">
+    <state x="320" y="17" key="CommitChangelistDialog2" timestamp="1601531133446">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601442295944" />
+    <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601531133446" />
     <state x="4425" y="652" key="CommitChangelistDialog2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598636771189" />
     <state x="320" y="17" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1599708117030" />
-    <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1601518472783">
+    <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1601572272291">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601518472783" />
-    <state width="1493" height="152" key="GridCell.Tab.0.bottom" timestamp="1601418546930">
+    <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601572272291" />
+    <state width="1493" height="152" key="GridCell.Tab.0.bottom" timestamp="1601588269554">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="152" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601418546930" />
+    <state width="1493" height="152" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601588269554" />
     <state width="1877" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961417" />
-    <state width="1493" height="152" key="GridCell.Tab.0.center" timestamp="1601418546930">
+    <state width="1493" height="152" key="GridCell.Tab.0.center" timestamp="1601588269554">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="152" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601418546930" />
+    <state width="1493" height="152" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601588269554" />
     <state width="1877" height="217" key="GridCell.Tab.0.center/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961416" />
-    <state width="1493" height="152" key="GridCell.Tab.0.left" timestamp="1601418546930">
+    <state width="1493" height="152" key="GridCell.Tab.0.left" timestamp="1601588269554">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="152" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601418546930" />
+    <state width="1493" height="152" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601588269554" />
     <state width="1877" height="217" key="GridCell.Tab.0.left/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961416" />
-    <state width="1493" height="152" key="GridCell.Tab.0.right" timestamp="1601418546930">
+    <state width="1493" height="152" key="GridCell.Tab.0.right" timestamp="1601588269554">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="152" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601418546930" />
+    <state width="1493" height="152" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601588269554" />
     <state width="1877" height="217" key="GridCell.Tab.0.right/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599067961416" />
     <state x="483" y="130" key="MultipleFileMergeDialog" timestamp="1599013793839">
       <screen x="0" y="0" width="1536" height="824" />
@@ -562,10 +562,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="250" y="0" key="SettingsEditor/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601062981452" />
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1601438986854">
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1601533399383">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601438986854" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601533399383" />
     <state x="4392" y="791" key="Vcs.Push.Dialog.v2/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1598636775418" />
     <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1599781835967" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1600113567999">
@@ -573,10 +573,10 @@
     </state>
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1600113567999" />
     <state x="4424" y="839" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3840.537.1920.1040@3840.537.1920.1040" timestamp="1599171616765" />
-    <state x="579" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600826169815">
+    <state x="579" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601531090237">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="579" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1600826169815" />
+    <state x="579" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/3840.537.1920.1040@0.0.1536.824" timestamp="1601531090237" />
     <state x="203" y="139" key="new project wizard" timestamp="1598294505628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
