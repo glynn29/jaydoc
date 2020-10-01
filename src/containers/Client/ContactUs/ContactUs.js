@@ -40,9 +40,8 @@ const ContactUs = () => {
                                     variant="outlined"
                                     required
                                     fullWidth
-                                    id="subject"
-                                    label="Subject"
-                                    name="subject"
+                                    id="Name"
+                                    label="Name"
                                     autoFocus
                                 />
                             </FormControl>
@@ -57,7 +56,6 @@ const ContactUs = () => {
                                     fullWidth
                                     id="email"
                                     label="Email Address"
-                                    name="email"
                                     autoComplete="email"
                                 />
                             </FormControl>
