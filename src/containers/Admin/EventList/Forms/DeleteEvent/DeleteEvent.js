@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
@@ -10,7 +10,6 @@ const DeleteEvent = props => {
     const classes = useStyles();
     const formData = props.formData;
 
-    console.log(formData);
     return(
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={1}>

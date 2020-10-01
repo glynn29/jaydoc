@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
@@ -10,12 +10,11 @@ const DeleteVolunteer = props => {
     const classes = useStyles();
     const formData = props.formData;
 
-    console.log(formData);
     return(
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
-                    <Typography>Delete {formData.first + " " + formData.last} ?</Typography>
+                    <Typography>Delete {formData.first + " " + formData.last}?</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Button
