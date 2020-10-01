@@ -19,6 +19,7 @@ import Report from "./containers/Admin/Report/Reports";
 import Users from "./containers/Admin/Volunteers/Volunteers";
 import Layout from "./containers/hoc/Layout/Layout";
 import Error from "./containers/Client/Error/Error";
+import Forgot from "./containers/Auth/Forgot/Forgot";
 import {AuthContext} from "./containers/Auth/Auth";
 import * as actions from './store/actions/index';
 //import withErrorHandler from "./containers/hoc/withErrorHandler/withErrorHandler";
@@ -41,6 +42,7 @@ const App = (props) =>{
             <Route path="/comments" component={Comment}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
+            <Route path="/forgot" component={Forgot}/>
             <Route path="/" exact component={Home}/>
         </Switch>
     );
@@ -54,6 +56,7 @@ const App = (props) =>{
                 <Route path="/comments" component={Comment}/>
                 <Route path="/logout" component={Logout}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/forgot" component={Forgot}/>
                 <Route path="/confirm" component={Confirmation}/>
                 <Route path="/" exact component={Home}/>
             </Switch>
@@ -66,6 +69,7 @@ const App = (props) =>{
                     <Route path="/comments" component={Comment}/>
                     <Route path="/logout" component={Logout}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/forgot" component={Forgot}/>
                     <Route path="/" exact component={Error}/>
                 </Switch>
             );
@@ -82,6 +86,7 @@ const App = (props) =>{
                     <Route path="/scheduledEventList" component={ScheduledEventList}/>
                     <Route path="/logout" component={Logout}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/forgot" component={Forgot}/>
                     <Route path="/" exact component={Dashboard}/>
                 </Switch>
             );

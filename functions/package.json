@@ -17,6 +17,7 @@
     "firebase-functions": "^3.6.1"
   },
   "devDependencies": {
+    "firebase-auth": "^0.1.2",
     "firebase-functions-test": "^0.2.0"
   },
   "private": true
