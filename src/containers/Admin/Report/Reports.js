@@ -134,9 +134,7 @@ const Report = (props) => {
         </div>
         );
 
-
     const volunteerReport = () => {
-        console.log("called 1");
         if(eventName){
             let list = [];
             console.log(" vol event report", eventName);
@@ -163,7 +161,6 @@ const Report = (props) => {
     };
 
     const groupReport = () => {
-        console.log("called 2");
         if(role){
             setError(null);
             let list = [];
@@ -184,7 +181,6 @@ const Report = (props) => {
     };
 
     const dateRangeReport = () => {
-        console.log("called 3");
         if(startDate && endDate){
             setError(null);
             let list = [];
