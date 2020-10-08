@@ -7,6 +7,8 @@ import * as actions from "../../../store/actions";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import useStyles from "../../../components/UI/Styles/formStyle";
+import Typography from "@material-ui/core/Typography";
+import {getCurrentUser} from "../../../store/actions/auth";
 
 const Account = (props) => {
     const classes = useStyles();
@@ -14,40 +16,35 @@ const Account = (props) => {
 
     useEffect(() => {
        props.getCurrentUser();
-    },[]);
+    },[getCurrentUser]);
 
-    let userEvents = [];
     let futureEvents = [];
     let pastEvents = [];
-    console.log("events",events);
 
     if(events){
         events.map((event, index) => {
             let currentDate = new Date();
-            let date = new Date(event.date);
-            const button = <Button onClick={e => {console.log(event)}} variant="contained" className={classes.deleteButton}>Cancel</Button>
-
-            if(date > currentDate){
-                futureEvents.push(<p  key={index}> Event: {event.eventName}, Date: {date.toDateString()}, Position: {event.position}, Start: {event.startTime}, End: {event.endTime} {button}</p>);
-                console.log("Future")
+            const date = new Date(event.date + "T17:00");
+            const startTime = new Date(event.date + "T" + event.startTime);
+            const endTime = new Date(event.date + "T" + event.endTime);
+            const button = <Button onClick={e => {console.log("trying to cancel this event")}} variant="contained" className={classes.deleteButton}>Cancel</Button>;
+            const eventRow = <p  key={index}> Event: {event.eventName} <br/> Position: {event.position}<br/> Date: {date.toDateString()}, from {startTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})} - {endTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})}<br/> {date >= currentDate && button}</p>
+            if(date >= currentDate){
+                futureEvents.push(eventRow);
             }else {
-                pastEvents.push(<p  key={index}> Event: {event.eventName}, Date: {date.toDateString()}, Position: {event.position}, Start: {event.startTime}, End: {event.endTime}</p>);
-                console.log("past")
+                pastEvents.push(eventRow);
             }
-        userEvents.push(<p  key={index}> Event: {event.eventName}, Date: {event.date}, Position: {event.position}, Start: {event.startTime}, End: {event.endTime}</p>)
         });
-    }else {
-        userEvents = <p> No events</p>
     }
 
 
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <p>Account pages</p>
-            <p>Future Events</p>
-            {futureEvents}
-            <p>Past Events</p>
-            {pastEvents}
+            <Typography variant="h3">Account Page</Typography>
+            <Typography variant="h4">Future Events:</Typography>
+            {futureEvents.length > 0 ? futureEvents : "No events"}
+            <Typography variant="h4">Past Events:</Typography>
+            {pastEvents.length > 0 ? pastEvents : "No events"}
         </Container>);
 };
 
