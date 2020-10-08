@@ -27,7 +27,7 @@ const CalendarBox = (props) => {
 
     useEffect(() => {
         getEvents().catch(error => {console.log(error)});
-        props.getCurrentUser();
+        //props.getCurrentUser();
     }, []);
 
     function editModal() {
@@ -35,17 +35,13 @@ const CalendarBox = (props) => {
         getEvents().catch(error => {console.log(error)});
     }
 
-    const handleModalOpen = () => {
-        setModalOpen(true);
-    };
-
     const handleModalClose = () => {
         setModalOpen(false);
     };
 
-    const toggleModal = ({name, date, start, end, positions, eventId, id}) => {
+    const handleModalOpen = ({name, date, start, end, positions, eventId, id}) => {
         setFormData({name, date, start, end, positions, eventId, id});
-        setModalOpen(!modalOpen);
+        setModalOpen(true);
     };
 
     return (
@@ -67,20 +63,40 @@ const CalendarBox = (props) => {
                     tileContent={
                         ({ date, view }) => {
                             const table = tableData.map((row)=>{
-                                //console.log(row);
-                                const tempDate = new Date(row.date);
-                                const day = tempDate.getDate();
-                                const month = tempDate.getMonth();
-                                //console.log("Day of week", date.getDate(), "date",day);
+
+                                const currentDate = new Date();
+                                const rowDate = new Date(row.date + "T17:00");
+                                const day = rowDate.getDate();
+                                const month = rowDate.getMonth();
+                                const year = rowDate.getFullYear();
+                                //console.log("Day of week", date, "date",rowDate, "rowDate", row.date);
+                                //console.log(date.getDate());
+                                const isPastDate = currentDate > rowDate;
+                                const itemClass = isPastDate ? //console.log("true"): console.log("false");
+                                classes.PastCalenderItem : classes.CalenderItem;
                                 return(
-                                    view === 'month' && date.getDate() === day && date.getMonth() === month ? <p key={row.id} onClick={()=>toggleModal(row)} className={classes.CalenderItem}>{row.name}</p>: null
+                                    view === 'month' &&
+                                    date.getDate() === day &&
+                                    date.getMonth() === month &&
+                                    date.getFullYear() === year
+                                        ?
+                                        <p
+                                            key={row.id}
+                                            onClick={()=> !isPastDate && handleModalOpen(row)}
+                                            className={itemClass}>
+                                            {row.name}
+                                        </p>
+                                        : null
                                 );
                             });
-                            return(<div className={classes.CalenderItemBlock}>{table}</div>);
+                            return(
+                                <div className={classes.CalenderItemBlock}>{table}</div>
+                            );
                         }
                     }
                 />
             <p>{date.toDateString()}</p>
+            <p style={{textAlign: 'flexEnd'}}>Red = Past, Blue = Scheduled</p>
             <TransitionModal
                 open={modalOpen}
                 handleOpen={handleModalOpen}
