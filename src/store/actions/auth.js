@@ -94,17 +94,14 @@ export const register = (registerData) => {
 
 export const getUser = () => {
      return dispatch => {
-
         const {uid} = auth.currentUser;
         firestore.collection('users').where('id', '==', uid).get()
             .then((res) => {
                 res.forEach(user => {
-                    console.log("get User", user.data());
-                    firestore.collection('users').doc(user.id).collection("volunteerEvents").get()
+                    firestore.collection('users').doc(user.id).collection("volunteerEvents").orderBy("date","desc").get()
                         .then((res)=> {
                             let eventList = [];
                            res.forEach(event => {
-                               console.log("get events", event.data());
                                eventList.push(event.data());
                            });
                             dispatch(getCurrentUser({...user.data(), userDocId: user.id, events:eventList}))
