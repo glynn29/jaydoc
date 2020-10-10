@@ -254,12 +254,12 @@ const Report = (props) => {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <CustomDatePicker value={startDate} onChange={setStartDate} label="Start Date"/>
                     </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <CustomDatePicker value={endDate} onChange={setEndDate} label="End Date"/>
                     </FormControl>
@@ -267,7 +267,7 @@ const Report = (props) => {
                 <Grid item xs={12}>
                     {error}
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                     <Tooltip title={volunteerInfo}>
                         <Button
                             onClick={volunteerReport}
@@ -279,7 +279,7 @@ const Report = (props) => {
                         </Button>
                     </Tooltip>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                     <Tooltip title={groupInfo}>
                         <Button
                             onClick={groupReport}
@@ -291,7 +291,7 @@ const Report = (props) => {
                         </Button>
                     </Tooltip>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                     <Tooltip title={dateRangeInfo}>
                         <Button
                             onClick={dateRangeReport}
