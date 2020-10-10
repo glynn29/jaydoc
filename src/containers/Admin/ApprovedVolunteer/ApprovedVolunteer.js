@@ -91,14 +91,14 @@ const ApprovedVolunteer = (props) => {
                 open={editOpen}
                 handleOpen={handleEditOpen}
                 handleClose={handleEditClose}
-                form={<EditVolunteerForm formData={formData} onEdit={editVolunteer}/>}
+                form={<EditVolunteerForm formData={formData} onEdit={editVolunteer} handleClose={handleEditClose}/>}
                 title={"Edit Approved Volunteer"}
             />
             <TransitionModal
                 open={addOpen}
                 handleOpen={handleAddOpen}
                 handleClose={handleAddClose}
-                form={<AddVolunteer onAdd={addVolunteer}/>}
+                form={<AddVolunteer onAdd={addVolunteer} handleClose={handleAddClose}/>}
                 title={"Add Approved Volunteer"}
             />
             <TransitionModal

@@ -116,16 +116,27 @@ const EditVolunteer = props => {
                             label="Approved"
                         />
                     </Grid>
+                    <Grid item sm={6}>
+                        <Button
+                            onClick={props.handleClose}
+                            fullWidth
+                            className={classes.cancelButton}
+                            variant="outlined"
+                        >
+                            Cancel
+                        </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                        >
+                            Edit Volunteer
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    className={classes.submit}
-                >
-                    Edit User
-                </Button>
             </form>
         </Container>
     );
