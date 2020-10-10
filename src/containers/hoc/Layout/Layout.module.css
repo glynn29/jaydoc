@@ -2,3 +2,6 @@
     margin-top: 72px;
     align-content: center;
 }
+.Box{
+    min-height: calc(100vh - 92px);
+}
