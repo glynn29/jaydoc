@@ -57,13 +57,17 @@ const Email = (props) => {
     },[]);
 
     const getPositions = (positions) => {
-        console.log(positions);
         let emailList = positions
             .filter(position => position.email)
             .map(position => position.email);
 
         setEventEmails(emailList);
-        setEmails(emailList);
+        if(emailList.length > 0) {
+            setEmails(emailList);
+            setError(null);
+        }else {
+            setEmails([]);
+        }
     };
 
     async function getEmailsByRole() {
@@ -85,15 +89,12 @@ const Email = (props) => {
     const onSubmitHandler = (event) => {
         event.preventDefault();
         let err = null;
-        let emailsTemp = [];
 
         if(emailType === "Custom Email"){
             if(role.length > 0){
                 getEmailsByRole()
-                    .then(res => {
-                        emailsTemp = res;
-                        setEmails(res);
-                        handleModalOpen(emailsTemp);
+                    .then(emailsResponse => {
+                        handleModalOpen(emailsResponse);
                     })
                     .catch(error => console.log(error));
             }else {
@@ -104,27 +105,33 @@ const Email = (props) => {
             if(emails.length > 0){
                 if(role.length > 0){
                     getEmailsByRole()
-                        .then(res => {
-                            emailsTemp = eventEmails.filter(email => res.includes(email));
-                            setEmails(emailsTemp);
+                        .then(emailResponse => {
+                            const emailsTemp = eventEmails.filter(email => emailResponse.includes(email));
                             handleModalOpen(emailsTemp);
                         })
                         .catch(error => console.log(error));
                 }else{
-                    setEmails(eventEmails);
                     handleModalOpen(eventEmails);
                 }
             }else {
-                setEmails([]);
-                err ="Select an event to retrieve emails for. Filter the event by selecting ore or more roles";
+                if (eventEmails.length <= 0)
+                    err = "No emails found";
+                else
+                    err ="Select an event to retrieve emails for. Filter the event by selecting one or more roles";
             }
         }
         setError(err);
     };
 
     const handleModalOpen = (emails) => {
-        setFormData(emails);
-        setModalOpen(true);
+        if(emails.length > 0) {
+            setEmails(emails);
+            setFormData(emails);
+            setModalOpen(true);
+        }
+        else{
+            setError("No emails found")
+        }
     };
 
     const handleModalClose = () => {
@@ -209,12 +216,11 @@ const Email = (props) => {
                                 onChange={event => setMessage(event.target.value)}
                                 id="outlined-textarea"
                                 label="Message"
-                                placeholder="Keep up the good work"
                                 multiline
                                 variant="outlined"
                                 fullWidth
                                 required
-                                rows={10}
+                                rows={8}
                                 inputProps={{ className: classes.textarea }}
                             />
                         </FormControl>
@@ -240,7 +246,7 @@ const Email = (props) => {
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
                 form={<SendMail submit={submitHandler} cancel={handleModalClose} formData={formData} button={"Send Mail"}/>}
-                title={"Add Positions"}
+                title={"Emails"}
             />
         </Container>
     );
