@@ -3,5 +3,5 @@
     align-content: center;
 }
 .Box{
-    min-height: calc(100vh - 92px);
+    min-height: calc(100vh - 100px);
 }
