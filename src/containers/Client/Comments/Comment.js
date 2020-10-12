@@ -9,22 +9,35 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import {firestore} from "../../../firebase";
+
 const Comment = () => {
-    const formClasses = formStyles();
+    const classes = formStyles();
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+    const [response, setResponse] = useState(null);
+
+    const submitHandler = (event) =>{
+        event.preventDefault();
+        firestore.collection('comments').add({
+            subject,
+            message
+        }).then(function () {
+            setResponse("Message sent");
+        }).catch(function (error) {
+            setResponse(error.message);
+        });
+    };
 
     const form = (
-        <div style={{textAlign:"center", width: "70%", margin:"auto"}}>
+        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
             <Typography variant="h3">Comments</Typography>
             <Typography variant="body1">We appreciate everything our volunteers do to make the clinic function. If there's something that you'd like to pass along to us in private, please do it below. We appreciate the feedback - constructive, of course. If you're having technical difficulty with the site or with your account please use the 'Contact' tab to report it.</Typography>
-            <Container maxWidth="md">
-
-                <CssBaseline />
-
-                    <form className={formClasses.root} noValidate autoComplete="off">
-                        <Grid container spacing={2} direction={"column"} alignItems={"stretch"}>
-                            <FormControl variant="outlined" className={formStyles.formControl}>
+            <CssBaseline />
+            <form autoComplete="off" onSubmit={submitHandler}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 value={subject}
                                 onChange={event => setSubject(event.target.value)}
@@ -36,35 +49,40 @@ const Comment = () => {
                                 label="Subject"
                                 name="subject"
                                 autoFocus
-                            /></FormControl>
-
-                            <FormControl variant="outlined" className={formStyles.formControl}>
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 value={message}
                                 onChange={event => setMessage(event.target.value)}
                                 id="outlined-textarea"
                                 label="Message"
-                                placeholder="Keep up the good work"
                                 multiline
                                 variant="outlined"
                                 fullWidth
                                 required
-                                rows={15}
-                                inputProps={{ className: formClasses.textarea }}
+                                rows={10}
+                                inputProps={{ className: classes.textarea }}
                             />
-                            </FormControl>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                className={formClasses.submit}>
-                                SEND
-                            </Button>
-                        </Grid>
-                    </form>
-
-            </Container>
-        </div>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        {response}
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            fullWidth
+                            type="submit"
+                            variant="contained"
+                            color="primary">
+                            SEND
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+        </Container>
     );
 
     return form;

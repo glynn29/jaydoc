@@ -10,15 +10,16 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import {AddAdmin} from "../../../CloudFunctions/addAdmin";
+
+import {firestore} from "../../../firebase";
 
 const ContactUs = () => {
     const classes = formStyles();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [category, setCategory] = useState("");
-    const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+    const [response, setResponse] = useState(null);
 
     const list = [
         "Technical Issue",
@@ -26,106 +27,110 @@ const ContactUs = () => {
         "General Issue"
     ];
 
+    const submitHandler = (event) =>{
+        event.preventDefault();
+        firestore.collection('contact').add({
+            name,
+            email,
+            category,
+            message
+        }).then(function () {
+            setResponse("Message sent");
+        }).catch(function (error) {
+            setResponse(error.message);
+        });
+    };
+
     const form = (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
             <Typography variant="h3">Contact Us</Typography>
-            <Typography>If you are having technical difficulty with the website, or if you have a general question about JayDoc Free Clinic, please use the following form to submit your query:</Typography>
-                <CssBaseline />
-                <form noValidate autoComplete="off">
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} >
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <TextField
-                                    value={name}
-                                    onChange={event => setName(event.target.value)}
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="Name"
-                                    label="Name"
-                                    autoFocus
-                                />
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} >
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <TextField
-                                    value={email}
-                                    onChange={event => setEmail(event.target.value)}
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    autoComplete="email"
-                                />
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} >
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <InputLabel htmlFor="outlined-age-native-simple" required>Category</InputLabel>
-                                <Select
-                                    native
-                                    value={category}
-                                    onChange={event => setCategory(event.target.value) }
-                                    label="Category"
-                                    inputProps={{
-                                        name: 'category',
-                                        id: 'outlined-age-native-simple',
-                                    }}
-                                >
-                                    <option aria-label="Select a category" value="" />
-                                    {list.map( listItem => {
-                                        return (
-                                            <option key={listItem} value={listItem}>{listItem}</option>
-                                        );
-                                    })}
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} >
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <TextField
-                                    value={subject}
-                                    onChange={event => setSubject(event.target.value)}
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="subject"
-                                    label="Subject"
-                                    name="subject"
-                                />
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} >
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <TextField
-                                    value={message}
-                                    onChange={event => setMessage(event.target.value)}
-                                    id="outlined-textarea"
-                                    label="Message"
-                                    placeholder="Keep up the good work"
-                                    multiline
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                    rows={15}
-                                    inputProps={{ className: classes.textarea }}
-                                />
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} >
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}>
-                                SEND
-                            </Button>
-                        </Grid>
+            <Typography>If you are having technical difficulty with the website, or if you have a general question about JayDoc Free Clinic, please use the following form.</Typography>
+            <CssBaseline />
+            <form autoComplete="off" onSubmit={submitHandler}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                value={name}
+                                onChange={event => setName(event.target.value)}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="Name"
+                                label="Name"
+                                autoFocus
+                            />
+                        </FormControl>
                     </Grid>
-                </form>
-            </Container>
+                    <Grid item xs={12} >
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                value={email}
+                                onChange={event => setEmail(event.target.value)}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                autoComplete="email"
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} >
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel htmlFor="outlined-age-native-simple" required>Category</InputLabel>
+                            <Select
+                                native
+                                value={category}
+                                onChange={event => setCategory(event.target.value) }
+                                label="Category"
+                                inputProps={{
+                                    name: 'category',
+                                    id: 'outlined-age-native-simple',
+                                }}
+                            >
+                                <option aria-label="Select a category" value="" />
+                                {list.map( listItem => {
+                                    return (
+                                        <option key={listItem} value={listItem}>{listItem}</option>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} >
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                value={message}
+                                onChange={event => setMessage(event.target.value)}
+                                id="outlined-textarea"
+                                label="Message"
+                                placeholder="Keep up the good work"
+                                multiline
+                                variant="outlined"
+                                fullWidth
+                                required
+                                rows={15}
+                                inputProps={{ className: classes.textarea }}
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        {response}
+                    </Grid>
+                    <Grid item xs={12} >
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                        >
+                            SEND
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+        </Container>
     );
 
     return form;
