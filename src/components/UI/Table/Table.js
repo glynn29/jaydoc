@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -16,6 +16,7 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import useStyles from "../../../components/UI/Styles/formStyle";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from "@material-ui/core/Checkbox";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -93,6 +94,7 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
+                {props.checkbox && <StyledTableCell align="left">Select Event</StyledTableCell>}
                 {props.headCells.map((headCell) => (
                     <StyledTableCell
                         key={headCell.id}
@@ -137,8 +139,7 @@ function EnhancedTable(props) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('first');
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const [dense, setDense] = React.useState(false);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [rows, setRows] = useState(props.data);
 
     const {data} = props;
@@ -161,21 +162,16 @@ function EnhancedTable(props) {
         setPage(0);
     };
 
-    const handleChangeDense = (event) => {
-        setDense(event.target.checked);
-    };
-
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
-        <div className={classes.root}>
             <Container>
-                {props.add && <Button variant="contained" color="primary" onClick={() => props.add()}>Add</Button>}
+                {props.add && <Button className={classes.addButton} variant="contained" color="primary" onClick={() => props.add()}>Add</Button>}
                 <TableContainer component={Paper}>
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
-                        size={dense ? 'small' : 'medium'}
+                        size={'small'}
                         aria-label="enhanced table"
                     >
                         <EnhancedTableHead
@@ -187,6 +183,7 @@ function EnhancedTable(props) {
                             rowCount={rows.length}
                         />
                         <TableBody>
+
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
@@ -195,21 +192,47 @@ function EnhancedTable(props) {
                                             hover
                                             key={index}
                                         >
+                                            {props.checkbox && <StyledTableCell align="left">
+                                                <Checkbox
+                                                    onChange={e => props.checkbox(row)}
+                                                    checked={props.isSelected(row.id)}
+                                                    inputProps={{ 'aria-labelledby': index }}/>
+                                            </StyledTableCell>}
+
+
                                             {props.headCells.map((cell, index)=>{
+                                                let data = row[cell.id];
+                                                // if(cell.time){
+                                                //     data = new Date("2020-01-11T" + data).toLocaleTimeString('en-US', {
+                                                //          hour: 'numeric',
+                                                //          minute: 'numeric',
+                                                //          hour12: true
+                                                //      });
+                                                // }
                                                 return(
-                                                    <StyledTableCell component="th" key={index} scope="row" align="left">{row[cell.id]}</StyledTableCell>
+                                                    <StyledTableCell component="th" key={index} scope="row" align="left">{data}</StyledTableCell>
                                                 );
                                             })}
-                                            {props.details && <StyledTableCell align="left"><Button onClick={() => {props.details(row)}} variant="contained" className={classes.detailsButton}>Details</Button></StyledTableCell>}
-                                            {props.edit && <StyledTableCell align="left"><Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button></StyledTableCell>}
-                                            {props.accept && <StyledTableCell align="left"><Button onClick={() => {props.accept(row)}} variant="contained" className={classes.detailsButton}>Accept</Button></StyledTableCell>}
-                                            {props.delete && <StyledTableCell align="left"><Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button></StyledTableCell>}
-                                            {props.signUp && <StyledTableCell align="left">{row.volunteer === 'none' && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}</StyledTableCell> }
+                                            {props.details && <StyledTableCell align="left">
+                                                <Button onClick={() => {props.details(row)}} variant="contained" className={classes.detailsButton}>Details</Button>
+                                            </StyledTableCell>}
+                                            {props.edit && <StyledTableCell align="left">
+                                                <Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button>
+                                            </StyledTableCell>}
+                                            {props.accept && <StyledTableCell align="left">
+                                                <Button onClick={() => {props.accept(row)}} variant="contained" className={classes.detailsButton}>Accept</Button>
+                                            </StyledTableCell>}
+                                            {props.delete && <StyledTableCell align="left">
+                                                <Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button>
+                                            </StyledTableCell>}
+                                            {props.signUp && <StyledTableCell align="left">
+                                                {row.volunteer === 'none' && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}
+                                            </StyledTableCell> }
                                         </StyledTableRow>
                                     );
                                 })}
                             {emptyRows > 0 && (
-                                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows, }}>
+                                <TableRow style={{ height: 33 * emptyRows }}>
                                     <TableCell colSpan={6} />
                                 </TableRow>
                             )}
@@ -217,7 +240,7 @@ function EnhancedTable(props) {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[5,10, 25, 40]}
+                    rowsPerPageOptions={[5, 10, 25, 40]}
                     component="div"
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
@@ -225,12 +248,7 @@ function EnhancedTable(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
-                <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
-                    label="Dense padding"
-                />
             </Container>
-        </div>
     );
 }
 export default EnhancedTable;
