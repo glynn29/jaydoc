@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 
 import EnhancedTable from "../../../../../components/UI/Table/Table";
 import {firestore} from "../../../../../firebase";
-import Checkbox from "@material-ui/core/Checkbox";
 
 const headCells = [
     { id: 'name', label: 'Event Name' },
@@ -19,7 +18,6 @@ const Reminder = (props) => {
 
     const handleChange = (events) =>{
         props.getPositions(events.positions);
-        console.log(events);
         isSelected(events.name);
         setEvent(events);
     };

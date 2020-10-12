@@ -15,7 +15,13 @@ const SendMail = props => {
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={2}  >
                 <Grid item xs={12}>
-                    {<ul>{formData.map(email => <li style={{textAlign: 'left'}} key={email}>{email}</li>)}</ul>}
+                    {<ul>
+                        {formData.map(row =>
+                            <li style={{textAlign: 'left'}} key={row}>
+                                {row}
+                            </li>)
+                        }
+                    </ul>}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Button variant="outlined" className={classes.cancelButton} onClick={props.cancel}>Cancel</Button>
