@@ -13,10 +13,12 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+
 import formStyles from "../../../components/UI/Styles/formStyle";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import * as actions from '../../../store/actions/index'
 import {AuthContext} from "../../../containers/Auth/Auth";
+import FormControl from "@material-ui/core/FormControl";
 
 const Login = (props) => {
     const {currentUser} = useContext(AuthContext);
@@ -67,52 +69,60 @@ const Login = (props) => {
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
-                {props.error}
-                <form className={classes.form} noValidate onSubmit={submitHandler}>
-                    <TextField
-                        value={email}
-                        onChange={event => setEmail(event.target.value)}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        value={password}
-                        onChange={event => setPassword(event.target.value)}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox
-                            value={rememberMe}
-                            checked={rememberMe}
-                            onChange={onChangeHandler}
-                            color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
-                    </Button>
-                    <Grid container>
+                <br/>
+                <form onSubmit={submitHandler}>
+                    <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <FormControl className={classes.formControl}>
+                            <TextField
+                                value={email}
+                                onChange={event => setEmail(event.target.value)}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                autoFocus
+                            />
+                        </FormControl>
+                    </Grid>
+                        <Grid item xs={12}>
+                            <FormControl className={classes.formControl}>
+                                <TextField
+                                    value={password}
+                                    onChange={event => setPassword(event.target.value)}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControlLabel
+                                control={<Checkbox
+                                    value={rememberMe}
+                                    checked={rememberMe}
+                                    onChange={onChangeHandler}
+                                    color="primary" />}
+                                label="Remember me"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            {props.error}
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                            >
+                                Login
+                            </Button>
+                        </Grid>
                         <Grid item xs>
                             <Link href="/forgot" variant="body2">
                                 Forgot password?

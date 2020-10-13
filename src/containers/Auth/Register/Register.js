@@ -158,8 +158,8 @@ const Register = (props) => {
                 <Typography component="h1" variant="h5">
                     Register
                 </Typography>
+                <br/>
                 <form className={classes.form} onSubmit={submitHandler}>
-                    {props.error}
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -261,7 +261,6 @@ const Register = (props) => {
                         <Grid item xs={12}>
                             <FormControlLabel
                                 style={{alignItems: 'center',}}
-                                className={classes.formControl}
                                 value={secondLanguage}
                                 onChange={event => setSecondLanguage(!secondLanguage)}
                                 control={<Checkbox color="primary" />}
@@ -283,21 +282,25 @@ const Register = (props) => {
                                 />
                             </FormControl>
                         </Grid>}
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign Up
-                    </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="/login" variant="body2">
-                                Already have an account? Login
-                            </Link>
+                        <Grid item xs={12}>
+                            {props.error}
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                            >
+                                Sign Up
+                            </Button>
+                        </Grid>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link href="/login" variant="body2">
+                                    Already have an account? Login
+                                </Link>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </form>
