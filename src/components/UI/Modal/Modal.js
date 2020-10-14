@@ -6,18 +6,18 @@ import Fade from '@material-ui/core/Fade';
 import useStyles from "../Styles/formStyle";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 const TransitionModal = (props) => {
-    const formStyles = useStyles();
+    const classes = useStyles();
 
     return (
         <div >
             <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
                 <Modal
-                    //className={classes.Box}
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
-                    className={formStyles.modal}
+                    className={classes.modal}
                     open={props.open}
                     onClose={props.handleClose}
                     closeAfterTransition
@@ -27,10 +27,13 @@ const TransitionModal = (props) => {
                     }}
                 >
                     <Fade in={props.open}>
-                        <div className={formStyles.modalPaper}>
+                        <div className={classes.modalPaper}>
                             <Grid container spacing={2} direction={"column"} alignItems={"center"}>
-                            <h2>{props.title}</h2>
-                            {props.form}
+                                <Typography component="h1" variant="h5">
+                                    {props.title}
+                                </Typography>
+                                <br/>
+                                {props.form}
                             </Grid>
                         </div>
                     </Fade>
