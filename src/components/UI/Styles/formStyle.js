@@ -2,18 +2,19 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(6),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -73,7 +74,8 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: 300
     },
     Container: {
-        textAlign: 'center'
+        textAlign: 'center',
+        alignItems: 'center',
     }
 }));
 
