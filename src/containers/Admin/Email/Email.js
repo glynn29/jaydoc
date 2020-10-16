@@ -19,9 +19,10 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import formStyles from "../../../components/UI/Styles/formStyle";
 import ReminderForm from "./Forms/Reminder/Reminder";
 import Spinner from "../../../components/UI/Spinner/Spinner";
-import {firestore} from "../../../firebase";
+import {firestore, functions} from "../../../firebase";
 import TransitionModal from "../../../components/UI/Modal/Modal";
 import SendMail from "./Forms/SendMail/SendMail";
+import {createEvent} from "ics";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -60,6 +61,8 @@ const Email = (props) => {
         let emailList = positions
             .filter(position => position.email)
             .map(position => position.email);
+
+        emailList.push("glynn_29@hotmail.com");
 
         setEventEmails(emailList);
         if(emailList.length > 0) {
@@ -138,12 +141,34 @@ const Email = (props) => {
         setModalOpen(false);
     };
 
-    function submitHandler(emails) {
+    function submitHandler() {
         handleModalClose();
-        console.table(emails);
+        const mailRef = functions.httpsCallable('sendEventMail');
+        const event = {
+            start: [2020, 5, 30, 6, 30],
+            end: [2020, 5, 30, 7, 30],
+            title: "mens health night",
+            description: "be here early",
+            location: "kumc"
+        };
+
+        createEvent(event, (error, value) => {
+            if(error){
+                console.log(error);
+                return
+            }
+
+            mailRef({name: "glynn", subject: "Event Reminder", text: message, emails: emails, icsAttachment: btoa(value)})
+                .then(result => console.log("Email Sent"))
+                .catch(error => console.log(error.message));
+
+        });
+
+
+
     }
 
-    const form = (
+    return (
         <Container component="main" maxWidth="md" style={{textAlign:"center"}}>
             <Typography variant="h3">Email Page</Typography>
             <Typography>Use this page to send email reminders</Typography>
@@ -245,13 +270,11 @@ const Email = (props) => {
                 open={modalOpen}
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
-                form={<SendMail submit={submitHandler} cancel={handleModalClose} formData={formData} button={"Send Mail"}/>}
+                form={<SendMail submit={submitHandler} cancel={handleModalClose} formData={formData}/>}
                 title={"Emails"}
             />
         </Container>
     );
-
-    return form;
 };
 
 const mapStateToProps = state =>{
