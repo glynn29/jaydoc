@@ -122,6 +122,7 @@ function EnhancedTableHead(props) {
                 {props.accept && <StyledTableCell align="left">Accept</StyledTableCell>}
                 {props.delete && <StyledTableCell align="left">Delete</StyledTableCell>}
                 {props.signUp && <StyledTableCell align="left">Sign Up</StyledTableCell>}
+                {props.set && <StyledTableCell align="left">Change</StyledTableCell>}
             </TableRow>
         </TableHead>
     );
@@ -139,7 +140,7 @@ function EnhancedTable(props) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('first');
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(-1);
     const [rows, setRows] = useState(props.data);
 
     const {data} = props;
@@ -167,13 +168,14 @@ function EnhancedTable(props) {
     return (
             <Container>
                 {props.add && <Button className={classes.addButton} variant="contained" color="primary" onClick={() => props.add()}>Add</Button>}
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} style={{maxHeight: 550}}>
                     <Table
-                        className={classes.table}
+                        stickyHeader
                         aria-labelledby="tableTitle"
                         size={'small'}
                         aria-label="enhanced table"
                     >
+                        {props.caption && <caption>{props.caption}</caption>}
                         <EnhancedTableHead
                             {...props}
                             classes={classes}
@@ -228,6 +230,12 @@ function EnhancedTable(props) {
                                             {props.signUp && <StyledTableCell align="left">
                                                 {row.volunteer === 'none' && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}
                                             </StyledTableCell> }
+                                            {props.set && <StyledTableCell align="left">
+                                                {row.volunteer ?
+                                                    <Button onClick={()=> {props.remove({...row, index})}}  variant="contained" className={classes.deleteButton}>Remove</Button>
+                                                    :
+                                                    <Button onClick={()=> {props.set({...row, index})}}  variant="contained" className={classes.detailsButton}>Add User</Button>}
+                                            </StyledTableCell> }
                                         </StyledTableRow>
                                     );
                                 })}
@@ -239,15 +247,15 @@ function EnhancedTable(props) {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25, 40]}
+                {!props.noPagination && <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                     component="div"
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
+                />}
             </Container>
     );
 }
