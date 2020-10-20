@@ -186,8 +186,9 @@ function EnhancedTable(props) {
                         />
                         <TableBody>
 
-                            {stableSort(rows, getComparator(order, orderBy))
+                            {(rowsPerPage > 0 ? stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                : stableSort(rows, getComparator(order, orderBy)))
                                 .map((row, index) => {
                                     return (
                                         <StyledTableRow
