@@ -14,7 +14,6 @@ function Copyright() {
             <Link color="inherit" href="">
                 Glynn Leininger
             </Link>
-            {'.'}
         </Typography>
     );
 }
