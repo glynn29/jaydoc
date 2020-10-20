@@ -12,34 +12,32 @@ const TransitionModal = (props) => {
     const classes = useStyles();
 
     return (
-        <div >
-            <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-                <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    className={classes.modal}
-                    open={props.open}
-                    onClose={props.handleClose}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                        timeout: 500,
-                    }}
-                >
-                    <Fade in={props.open}>
-                        <div className={classes.modalPaper}>
-                            <Grid container spacing={2} direction={"column"} alignItems={"center"}>
-                                <Typography component="h1" variant="h5">
-                                    {props.title}
-                                </Typography>
-                                <br/>
-                                {props.form}
-                            </Grid>
-                        </div>
-                    </Fade>
-                </Modal>
-            </Container>
-        </div>
+        <Container component="main" maxWidth="md" style={{textAlign: 'center', padding: 2}}>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={props.open}
+                onClose={props.handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={props.open}>
+                    <div className={classes.modalPaper}>
+                        <Grid container spacing={2} direction={"column"} alignItems={"center"}>
+                            <Typography component="h1" variant="h5">
+                                {props.title}
+                            </Typography>
+                            <br/>
+                            {props.form}
+                        </Grid>
+                    </div>
+                </Fade>
+            </Modal>
+        </Container>
     );
 };
 

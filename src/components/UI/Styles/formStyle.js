@@ -61,9 +61,6 @@ const useStyles = makeStyles((theme) => ({
     cancelButton: {
         color: "red",
     },
-    table: {
-        //minWidth: 700,
-    },
     visuallyHidden: {
         display: "none"
     },
