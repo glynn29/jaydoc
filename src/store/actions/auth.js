@@ -37,7 +37,8 @@ export const getCurrentUser = (user) => {
         userDocId: user.userDocId,
         name: user.first + " " + user.last,
         events: user.events,
-        approved: user.approved
+        approved: user.approved,
+        language: user.language
     }
 };
 

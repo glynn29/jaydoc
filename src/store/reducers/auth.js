@@ -13,6 +13,7 @@ const initialState = {
     registered: false,
     isAdmin: false,
     approved: false,
+    language: null,
     positions: []
 };
 
@@ -57,6 +58,7 @@ const authLogout = (state, action) => {
         loading: false,
         isAdmin: false,
         approved: false,
+        language: null,
         positions: []
     });
 };
@@ -71,6 +73,7 @@ const getCurrentUser = (state, action) => {
         events: action.events,
         userDocId: action.userDocId,
         approved: action.approved,
+        language: action.language
     })
 };
 
