@@ -110,7 +110,7 @@ const ContactUs = () => {
                                 variant="outlined"
                                 fullWidth
                                 required
-                                rows={15}
+                                rows={10}
                                 inputProps={{ className: classes.textarea }}
                             />
                         </FormControl>
