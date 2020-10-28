@@ -77,6 +77,12 @@ const getCurrentUser = (state, action) => {
     })
 };
 
+const setIsAdmin = (state, action) => {
+    return updateObject(state, {
+        isAdmin: action.isAdmin,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START:
@@ -91,6 +97,8 @@ const reducer = (state = initialState, action) => {
             return authLogout(state, action);
         case actionTypes.FETCH_CURRENT_USER:
             return getCurrentUser(state, action);
+        case actionTypes.SET_IS_ADMIN:
+            return setIsAdmin(state, action);
         default:
             return state;
     }

@@ -113,4 +113,9 @@ export const getUser = () => {
     }
 };
 
-
+export const setIsAdmin = (isAdmin) =>{
+    return {
+        type: actionTypes.SET_IS_ADMIN,
+        isAdmin: isAdmin
+    }
+};

@@ -22,19 +22,21 @@ import Error from "./containers/Client/Error/Error";
 import Forgot from "./containers/Auth/Forgot/Forgot";
 import {AuthContext} from "./containers/Auth/Auth";
 import * as actions from './store/actions/index';
-//import withErrorHandler from "./containers/hoc/withErrorHandler/withErrorHandler";
 
 const App = (props) =>{
     const {currentUser, isAdmin} = useContext(AuthContext);
 
-    const {onFetchRoleList, onFetchPositionList, getCurrentUser} = props;
+    const {onFetchRoleList, onFetchPositionList, getCurrentUser, setIsAdmin} = props;
     useEffect(() => {
         if(!isAdmin && currentUser){
             getCurrentUser();
         }
+        if(isAdmin){
+            setIsAdmin(isAdmin);
+        }
         onFetchRoleList();
         onFetchPositionList();
-    },[onFetchRoleList, onFetchPositionList, getCurrentUser, currentUser]);
+    },[onFetchRoleList, onFetchPositionList, getCurrentUser, currentUser, setIsAdmin]);
 
     let routes = (
         <Switch>
@@ -108,6 +110,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
+        setIsAdmin: (isAdmin)=> dispatch(actions.setIsAdmin(isAdmin)),
         onFetchRoleList: () => dispatch(actions.fetchRoleList()),
         onFetchPositionList: () => dispatch(actions.fetchPositionList()),
         getCurrentUser: () => dispatch(actions.getUser()),

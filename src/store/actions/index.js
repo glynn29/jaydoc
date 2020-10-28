@@ -2,7 +2,8 @@ export {
     login,
     logout,
     register,
-    getUser
+    getUser,
+    setIsAdmin
 } from './auth'
 
 export {
