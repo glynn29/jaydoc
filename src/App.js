@@ -38,8 +38,6 @@ const App = (props) =>{
 
     let routes = (
         <Switch>
-            <Route path="/contactUs" component={ContactUs}/>
-            <Route path="/comments" component={Comment}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
             <Route path="/forgot" component={Forgot}/>

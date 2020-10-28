@@ -29,8 +29,8 @@ const NavigationItems = (props) => {
 
     const userLinks = (<ul className={classes.NavigationItems}>
         <NavigationItem link="/" exact clicked={props.clicked}><Typography>Home</Typography></NavigationItem>
-        <NavigationItem link="/comments" clicked={props.clicked}><Typography>Comments</Typography></NavigationItem>
-        <NavigationItem link="/contactUs" clicked={props.clicked}><Typography>Contact</Typography></NavigationItem>
+        {currentUser && <NavigationItem link="/comments" clicked={props.clicked}><Typography>Comments</Typography></NavigationItem>}
+        {currentUser && <NavigationItem link="/contactUs" clicked={props.clicked}><Typography>Contact</Typography></NavigationItem>}
         {(currentUser && approved === "true") && <NavigationItem link="/account" clicked={props.clicked}><Typography>Account</Typography></NavigationItem>}
         {(currentUser && approved === "true") && <NavigationItem link="/calendar" clicked={props.clicked}><Typography>Calendar</Typography></NavigationItem>}
         {nav}
