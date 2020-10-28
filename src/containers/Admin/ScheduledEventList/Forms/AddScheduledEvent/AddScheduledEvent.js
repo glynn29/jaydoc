@@ -10,76 +10,129 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 
 import {firestore} from "../../../../../firebase";
-import DateTimePicker from "../../../../../components/UI/DateTimePicker/DateTimePicker";
+import {CustomTimePicker,
+        CustomDatePicker
+} from "../../../../../components/UI/DateTimePicker/DateTimePicker";
+import Container from "@material-ui/core/Container";
+import Positions from "../Positions/Positions";
+import TransitionModal from "../../../../../components/UI/Modal/Modal";
+import Spinner from "../../../../../components/UI/Spinner/Spinner";
+import firebase from "firebase";
 
 const AddScheduledEvent = props => {
-    const formClasses = formStyles();
+    const classes = formStyles();
+    const {eventList} = props;
     const [eventName, setEventName] = useState("");
-    const [eventId, setEventID] = useState("");
-    const [startDateTime, setStartDateTime] = useState("");
-    const [endDateTime, setEndDateTime] = useState("");
-    const [eventNotes, setEventNotes] = useState("");
-    const [eventList, setEventList] = useState([]);
-    //const [positions, setPositions] = useState([]);
+    const [eventId, setEventID] = useState(null);
+    const [startTime, setStartTime] = useState("");
+    const [endTime, setEndTime] = useState("");
+    const [date, setDate] = useState("");
+    const [details, setDetails] = useState("");
+    const [positions, setPositions] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [signedUpUsers, setSignedUpUsers] = useState([]);
 
-    async function getEvents() {
-        let events = [];
-        const eventsRef = await firestore.collection('events').get();
-        eventsRef.forEach((event) => {
-            events.push({...event.data(), id: event.id});
-        });
-        setEventList(events);
-    }
-
-    // async function getUserStuff() {
-    //     const userRef = await firestore.collection("users").get();
-    //     console.log(userRef);
-    //     userRef.forEach(event => {
-    //         let events = [];
-    //         //events = event.data().events;
-    //         console.log(events.length);
-    //     })
-    // }
+    const headCells = [
+        { id: 'position', label: 'Position' },
+        { id: 'volunteer', label: 'Volunteer' },
+    ];
 
     useEffect( () => {
-        getEvents().catch(error => {console.log(error)});
-    },[]);
+        if (eventId) {
+            getPositions().catch(error => console.log(error));
+        }
+    },[eventId]);
 
-    // useEffect(()=> {
-    //      eventList.filter(e => e.name === eventName).map(row => setEventID(row.id));
-    // },[eventName]);
+    async function getPositions() {
+        let positions = [];
+        setLoading(true);
+        const eventsRef = await firestore.collection('events').doc(eventId).get();
+        if (eventsRef.exists) {
+            console.log("positions",eventsRef.data());
+            setDetails(eventsRef.data().details);
+            eventsRef.data().positions.forEach((position) => {
+                for (let i = 0; i < position.count; i++){
+                    positions.push({position: position.name});
+                }
+            });
+        }else {
+            console.log("no doc", props.formData.eventId);
+        }
+        setLoading(false);
+        setPositions(positions);
+        console.table(positions);
+    }
 
     const submitFormHandler = (e) =>{
         e.preventDefault();
         console.log(eventName + " " + eventId);
+
         firestore.collection('scheduledEvents').add({
-            start: startDateTime,
-            end: endDateTime,
-            eventName: eventName,
+            start: startTime.toString(),
+            end: endTime.toString(),
+            date: date.toString(),
+            name: eventName,
             eventId: eventId,
-            notes: eventNotes,
-        }).then(()=>{props.onAdd();})
+            details: details,
+            positions: positions
+        }).then(function () {
+            signedUpUsers.forEach(user => {
+                if (user !== undefined){
+                    firestore.collection('users').doc(user.userDocId).collection('volunteerEvents').add({
+                        date,
+                        endTime,
+                        eventId,
+                        eventName,
+                        id: user.id,
+                        name: user.first + " " + user.last,
+                        position: user.position,
+                        role: user.role,
+                        startTime,
+                    }).catch(error => console.log(error));
+                }
+            });
+        })
+            .then(()=>{props.onAdd();})
             .catch(error => {console.log(error)});
         console.log("event Scheduled ");
     };
 
     const selectChangeHandler = (event) =>{
+        console.log(event.target.value);
         setEventName(event.target.value);
-        eventList.filter(e => e.name === event.target.name).map(row => setEventID(row.id));
+        eventList.filter(e => e.name === event.target.value).map(row => setEventID(row.id));
+    };
+
+    const handleModalOpen = () => {
+        setModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setModalOpen(false);
+    };
+
+    const updatePositions = (positions, signedUpUsers) => {
+        signedUpUsers.filter(row => row !== undefined);
+        console.log(signedUpUsers);
+        setSignedUpUsers(signedUpUsers);
+        setPositions(positions);
+        handleModalClose();
     };
 
     const form = (
-        <div>
+        <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <CssBaseline />
-            <form className={formClasses.root} autoComplete="off" onSubmit={submitFormHandler}>
-                <Grid container spacing={2} direction={"column"} alignItems={"stretch"}>
-                    <Grid item>
-                        <FormControl variant="outlined" className={formClasses.formControl} >
-                            <InputLabel htmlFor="outlined-age-native-simple" required>Event</InputLabel>
+            <form className={classes.root} autoComplete="off" onSubmit={submitFormHandler}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="outlined" className={classes.formControl} required>
+                            <InputLabel required>Event</InputLabel>
                             <Select
+                                fullWidth
                                 native
                                 value={eventName}
-                                onChange={e => selectChangeHandler(e)}
+                                onChange={selectChangeHandler}
                                 label="Event"
                             >
                                 <option aria-label="None" value="" />
@@ -91,44 +144,78 @@ const AddScheduledEvent = props => {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item>
-                        <FormControl variant="outlined" className={formClasses.formControl}>
-                            <DateTimePicker value={startDateTime} onChange={setStartDateTime} label="Start Time"/>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <CustomDatePicker value={date} onChange={setDate} label="Date"/>
                         </FormControl>
                     </Grid>
-                    <Grid item>
-                        <FormControl variant="outlined" className={formClasses.formControl}>
-                            <DateTimePicker value={endDateTime} onChange={setEndDateTime} label="End Time"/>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <CustomTimePicker value={startTime} onChange={setStartTime} label="Start Time"/>
                         </FormControl>
                     </Grid>
-                    <Grid item>
-                        <FormControl variant="outlined" className={formClasses.formControl}>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <CustomTimePicker value={endTime} onChange={setEndTime} label="End Time"/>
+                        </FormControl>
+                    </Grid>
+                    {positions && ( loading ? <Spinner/>:<Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <Button onClick={handleModalOpen}
+                                    fullWidth
+                                    variant="outlined"
+                                    color="secondary"
+                            >
+                                Add Volunteers
+                            </Button>
+                        </FormControl>
+                    </Grid>)}
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
-                                value={eventNotes}
-                                onChange={event => setEventNotes(event.target.value)}
+                                value={details}
+                                onChange={event => setDetails(event.target.value)}
                                 id="outlined-textarea"
-                                label="Event Notes"
+                                label="Details"
                                 multiline
                                 variant="outlined"
                                 fullWidth
                                 required
-                                rows={10}
-                                inputProps={{ className: formClasses.textarea }}
+                                rows={8}
+                                inputProps={{ className: classes.textarea }}
                             />
                         </FormControl>
                     </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={formClasses.submit}
-                    >
-                        Schedule Event
-                    </Button>
+                    <Grid item xs={6}>
+                        <Button
+                            onClick={props.handleClose}
+                            fullWidth
+                            className={classes.cancelButton}
+                            variant="outlined"
+                        >
+                            Cancel
+                        </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                        >
+                            Schedule Event
+                        </Button>
+                    </Grid>
                 </Grid>
             </form>
-        </div>
+            <TransitionModal
+                open={modalOpen}
+                handleOpen={handleModalOpen}
+                handleClose={handleModalClose}
+                form={<Positions cancel={handleModalClose} submit={updatePositions} positions={positions} headCells={headCells} signedUpUsers={signedUpUsers}/>}
+                title={"Add Positions"}
+            />
+        </Container>
     );
 
     return form;
