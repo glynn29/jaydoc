@@ -229,7 +229,7 @@ function EnhancedTable(props) {
                                                 <Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button>
                                             </StyledTableCell>}
                                             {props.signUp && <StyledTableCell align="left">
-                                                {row.volunteer === 'none' && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}
+                                                {!row.volunteer && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}
                                             </StyledTableCell> }
                                             {props.set && <StyledTableCell align="left">
                                                 {row.volunteer ?
