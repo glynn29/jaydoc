@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {connect} from "react-redux";
 import 'react-calendar/dist/Calendar.css'
 
@@ -9,8 +9,13 @@ import {firestore} from "../../firebase";
 import SignUp from "./Forms/SignUp/SignUp";
 import TransitionModal from "../../components/UI/Modal/Modal";
 import * as actions from "../../store/actions";
+import Typography from "@material-ui/core/Typography";
+import {AuthContext} from "../Auth/Auth";
+import AdminSingUp from "./Forms/AdminSignUp/AdminSignUp";
+import Container from "@material-ui/core/Container";
 
 const CalendarBox = (props) => {
+    const {isAdmin} = useContext(AuthContext);
     const [modalOpen, setModalOpen] = useState(false);
     const [date, setDate] = useState(new Date());
     const [formData, setFormData] = useState({});
@@ -39,14 +44,18 @@ const CalendarBox = (props) => {
         setModalOpen(false);
     };
 
-    const handleModalOpen = ({name, date, start, end, positions, eventId, id}) => {
-        setFormData({name, date, start, end, positions, eventId, id});
+    const handleModalOpen = (props) => {
+        const rowDate = new Date(props.date + "T17:00");
+        //setFormData({...props, date: rowDate});
+        setFormData({...props});
+        console.table(formData);
         setModalOpen(true);
     };
 
     return (
-        <div className={classes.Box}>
-            <p>Calendar page</p>
+        <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
+        {/*<div className={classes.Box}>*/}
+            <Typography variant="h3">Calendar Page</Typography>
                 <Calendar
                     className={classes.Box}
                     onChange={e => setDate(e)}
@@ -65,7 +74,7 @@ const CalendarBox = (props) => {
                             const table = tableData.map((row)=>{
 
                                 const currentDate = new Date();
-                                const rowDate = new Date(row.date + "T17:00");
+                                const rowDate = new Date(row.date + "T19:00");
                                 const day = rowDate.getDate();
                                 const month = rowDate.getMonth();
                                 const year = rowDate.getFullYear();
@@ -95,23 +104,18 @@ const CalendarBox = (props) => {
                         }
                     }
                 />
-            <p>{date.toDateString()}</p>
-            <p style={{textAlign: 'flexEnd'}}>Red = Past, Blue = Scheduled</p>
+            <div>{date.toDateString()}</div>
+
             <TransitionModal
                 open={modalOpen}
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
-                form={<SignUp formData={formData} onEdit={editModal} />}
-                title={"Edit Event"}
+                form={isAdmin ? <AdminSingUp formData={formData} cancel={handleModalClose} submit={editModal}/>:<SignUp formData={formData} onEdit={editModal} cancel={handleModalClose} />}
+                title={isAdmin ? "Edit Positions" : "Sign Up"}
             />
-        </div>
+        </Container>
+        // {/*</div>*/}
     );
-};
-
-const mapStateToProps = state => {
-    return{
-        positions: state.auth.positions
-    };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -120,4 +124,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarBox);
+export default connect(null, mapDispatchToProps)(CalendarBox);
