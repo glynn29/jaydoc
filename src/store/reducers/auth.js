@@ -11,7 +11,6 @@ const initialState = {
     error: null,
     loading: false,
     registered: false,
-    isAdmin: false,
     approved: false,
     language: null,
     positions: []
@@ -56,7 +55,6 @@ const authLogout = (state, action) => {
         events: [],
         error: null,
         loading: false,
-        isAdmin: false,
         approved: false,
         language: null,
         positions: []
@@ -77,11 +75,6 @@ const getCurrentUser = (state, action) => {
     })
 };
 
-const setIsAdmin = (state, action) => {
-    return updateObject(state, {
-        isAdmin: action.isAdmin,
-    });
-};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -97,8 +90,6 @@ const reducer = (state = initialState, action) => {
             return authLogout(state, action);
         case actionTypes.FETCH_CURRENT_USER:
             return getCurrentUser(state, action);
-        case actionTypes.SET_IS_ADMIN:
-            return setIsAdmin(state, action);
         default:
             return state;
     }

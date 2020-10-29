@@ -26,17 +26,14 @@ import * as actions from './store/actions/index';
 const App = (props) =>{
     const {currentUser, isAdmin} = useContext(AuthContext);
 
-    const {onFetchRoleList, onFetchPositionList, getCurrentUser, setIsAdmin} = props;
+    const {onFetchRoleList, onFetchPositionList, getCurrentUser} = props;
     useEffect(() => {
         if(!isAdmin && currentUser){
             getCurrentUser();
         }
-        if(isAdmin){
-            setIsAdmin(isAdmin);
-        }
         onFetchRoleList();
         onFetchPositionList();
-    },[onFetchRoleList, onFetchPositionList, getCurrentUser, currentUser, setIsAdmin]);
+    },[onFetchRoleList, onFetchPositionList, getCurrentUser, currentUser]);
 
     let routes = (
         <Switch>
@@ -110,7 +107,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        setIsAdmin: (isAdmin)=> dispatch(actions.setIsAdmin(isAdmin)),
         onFetchRoleList: () => dispatch(actions.fetchRoleList()),
         onFetchPositionList: () => dispatch(actions.fetchPositionList()),
         getCurrentUser: () => dispatch(actions.getUser()),
