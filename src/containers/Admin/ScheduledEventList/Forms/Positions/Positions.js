@@ -13,6 +13,7 @@ const Positions = props => {
     const classes = formStyles();
     const [volunteers, setVolunteers] = useState([]);
     const [positions, setPositions] = useState(props.positions);
+    const [signedUpUsers, setSignedUpUsers] = useState(props.signedUpUsers);
     const [positionIndex, setPositionIndex] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -39,8 +40,12 @@ const Positions = props => {
 
     const removeVolunteer = (props) => {
         let list = [...positions];
-        list[props.index] = {...list[props.index], volunteer: null};
+        list[props.index] = {position: props.position};
         setPositions(list);
+
+        let userList = [...signedUpUsers];
+        userList[props.index] = undefined;
+        setSignedUpUsers(userList);
     };
 
     const handleModalOpen = () => {
@@ -54,24 +59,29 @@ const Positions = props => {
     const onSelectHandler = (props) => {
         console.log(props, positionIndex);
         let list = [...positions];
-        list[positionIndex] = {...list[positionIndex], volunteer: props.first + " " + props.last};
+        list[positionIndex] = {...list[positionIndex], volunteer: props.first + " " + props.last, email: props.email, language: props.language};
         setPositions(list);
+
+        const position = list[positionIndex].position;
+        let userList = [...signedUpUsers];
+        userList[positionIndex] = {...props, position};
+        setSignedUpUsers(userList);
         handleModalClose();
     };
 
     return (
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={2}>
-
                 <EnhancedTable
                     data={positions}
                     headCells={props.headCells}
                     set={setVolunteer}
                     remove={removeVolunteer}
+                    noPagination
                 />
                 <Grid item xs={6}>
                     <Button
-                        onClick={props.handleClose}
+                        onClick={props.cancel}
                         fullWidth
                         className={classes.cancelButton}
                         variant="outlined"
@@ -81,7 +91,7 @@ const Positions = props => {
                 </Grid>
                 <Grid item xs={6}>
                     <Button
-                        type="submit"
+                        onClick={() => props.submit(positions, signedUpUsers)}
                         fullWidth
                         variant="contained"
                         color="primary"
