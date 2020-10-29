@@ -17,7 +17,11 @@ import Container from "@material-ui/core/Container";
 import Positions from "../Positions/Positions";
 import TransitionModal from "../../../../../components/UI/Modal/Modal";
 import Spinner from "../../../../../components/UI/Spinner/Spinner";
-import firebase from "firebase";
+
+const headCells = [
+    { id: 'position', label: 'Position' },
+    { id: 'volunteer', label: 'Volunteer' },
+];
 
 const AddScheduledEvent = props => {
     const classes = formStyles();
@@ -32,11 +36,6 @@ const AddScheduledEvent = props => {
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [signedUpUsers, setSignedUpUsers] = useState([]);
-
-    const headCells = [
-        { id: 'position', label: 'Position' },
-        { id: 'volunteer', label: 'Volunteer' },
-    ];
 
     useEffect( () => {
         if (eventId) {
@@ -76,7 +75,7 @@ const AddScheduledEvent = props => {
             eventId: eventId,
             details: details,
             positions: positions
-        }).then(function () {
+        }).then(function (res) {
             signedUpUsers.forEach(user => {
                 if (user !== undefined){
                     firestore.collection('users').doc(user.userDocId).collection('volunteerEvents').add({
@@ -89,6 +88,7 @@ const AddScheduledEvent = props => {
                         position: user.position,
                         role: user.role,
                         startTime,
+                        scheduledEventId: res.id
                     }).catch(error => console.log(error));
                 }
             });
@@ -120,7 +120,7 @@ const AddScheduledEvent = props => {
         handleModalClose();
     };
 
-    const form = (
+    return (
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <CssBaseline />
             <form className={classes.root} autoComplete="off" onSubmit={submitFormHandler}>
@@ -217,8 +217,6 @@ const AddScheduledEvent = props => {
             />
         </Container>
     );
-
-    return form;
 };
 
 export default AddScheduledEvent;
