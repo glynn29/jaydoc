@@ -12,10 +12,12 @@ const AreYouSure = props => {
 
     return(
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
-            <Grid container spacing={1} direction={"column"} alignItems={"stretch"} >
-                <p>{formData.eventName}</p>
-                <p>{formData.name}, are you Sure you want to signup for {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
-                <p>Once you signup you will need Admin approval to cancel</p>
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <p>{formData.eventName}</p>
+                    <p>{formData.name}, are you sure you want to signup for {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
+                    <p>Once you signup you will need Admin approval to cancel</p>
+                </Grid>
                 <Grid item xs={6}>
                     <Button
                         variant="outlined"
