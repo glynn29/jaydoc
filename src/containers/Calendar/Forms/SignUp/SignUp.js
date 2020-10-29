@@ -9,6 +9,9 @@ import AreYouSure from "../AreYouSure/AreYouSure";
 import TransitionModal from "../../../../components/UI/Modal/Modal";
 import * as actions from "../../../../store/actions";
 import {firestore} from "../../../../firebase";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import useStyles from "../../../../components/UI/Styles/formStyle";
 
 const headCells = [
     { id: 'position', label: 'Position' },
@@ -16,7 +19,8 @@ const headCells = [
 ];
 
 const SignUp = (props) => {
-    const {positions, name, email} = props;
+    const classes = useStyles();
+    const {positions, name, email, language} = props;
     const eventName = props.formData.name;
     const startTime = props.formData.start;
     const endTime = props.formData.end;
@@ -32,6 +36,7 @@ const SignUp = (props) => {
 
     useEffect(()=> {
         let filteredTableData = [];
+        // eslint-disable-next-line array-callback-return
         props.formData.positions.map((row, index) => {
             for(let i = 0; i < positions.length; i++){
                 if(positions[i] === row.position){
@@ -39,12 +44,13 @@ const SignUp = (props) => {
                     if (row.volunteer === name){
                         setAlreadyInEvent(true);
                         setPosition(row.position);
+                        break;
                     }
                 }
             }
         });
         setFilteredTableData(filteredTableData);
-    },[]);
+    },[name, positions, props.formData.positions]);
 
     if(confirm){
         return(
@@ -67,7 +73,7 @@ const SignUp = (props) => {
         props.onConfirm(formData);
         let newTableData = tableData;
         const newRow = newTableData[index];
-        newTableData[index] = {...newRow, volunteer: name, email};
+        newTableData[index] = {...newRow, volunteer: name, email, language};
 
         firestore.collection('scheduledEvents').doc(props.formData.id)
             .set({
@@ -97,17 +103,33 @@ const SignUp = (props) => {
 
     const formattedStart = new Date(date + "T" + startTime).toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
     const formattedEnd = new Date(date + "T" + endTime).toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
-    const formattedDate = new Date(date).toDateString();
+    const formattedDate = new Date(date + "T17:00").toDateString();
 
     return(
-        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <p>{eventName} From {formattedStart} to {formattedEnd} on {formattedDate}</p>
-            { !alreadyInEvent ? <EnhancedTable data={filteredTableData} headCells={headCells} signUp={handleModalOpen}/> : <p>Already signed up for this event as {position}</p>}
+        <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <p>{eventName} From {formattedStart} to {formattedEnd} on {formattedDate}</p>
+                </Grid>
+                <Grid item xs={12}>
+                    { !alreadyInEvent ? <EnhancedTable data={filteredTableData} headCells={headCells} signUp={handleModalOpen}/> : <p>Already signed up for this event as {position}</p>}
+                </Grid>
+                <Grid item xs={12}>
+                    <Button
+                        variant="outlined"
+                        className={classes.cancelButton}
+                        onClick={props.cancel}
+                        fullWidth
+                    >
+                        Cancel
+                    </Button>
+                </Grid>
+            </Grid>
             <TransitionModal
                 open={modalOpen}
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
-                form={<AreYouSure formData={formData} submit={submitHandler} cancel={cancelHandler} />}
+                form={<AreYouSure formData={formData} submit={submitHandler} cancel={cancelHandler}/>}
                 title={"Are You Sure?"}
             />
         </Container>
@@ -122,7 +144,8 @@ const mapStateToProps = state => {
         userId: state.auth.userId,
         name: state.auth.name,
         events: state.auth.events,
-        userDocId: state.auth.userDocId
+        userDocId: state.auth.userDocId,
+        language: state.auth.language
     };
 };
 
