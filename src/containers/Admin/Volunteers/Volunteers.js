@@ -41,7 +41,7 @@ const Volunteers = () => {
         //split users into approved and not approved tables
         let AVList = [];
         let RVList = [];
-        tableData.map(row => {
+        tableData.forEach(row => {
             if (row.approved === "true"){
                 AVList.push(row);
             }else {
@@ -52,20 +52,19 @@ const Volunteers = () => {
         setRegisteredVolunteers(RVList)
     },[tableData]);
 
-    // function updateList(id) {
-    //     const newList = tableData.filter(user => user.id !== id);
-    //     setTableData(newList);
-    // }
+    const toggleUsers = () => {
+        setToggle(false);
+    };
 
-    const toggleView = () => {
-        setToggle(!toggle);
+    const toggleNewUsers = () =>{
+        setToggle(true);
     };
 
     return(
         <div style={{textAlign: 'center'}}>
             <Typography variant="h3">Volunteers Page</Typography>
             <Button
-                onClick={toggleView}
+                onClick={toggleUsers}
                 color="primary"
                 variant="contained"
                 style={{margin: 4}}
@@ -73,7 +72,7 @@ const Volunteers = () => {
                 Approved Volunteers
             </Button>
             <Button
-                onClick={toggleView}
+                onClick={toggleNewUsers}
                 color="primary"
                 variant="contained"
                 style={{margin: 4}}
