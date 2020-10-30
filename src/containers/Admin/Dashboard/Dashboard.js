@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
 import {firestore} from "../../../firebase";
-import {AddAdmin} from "../../../CloudFunctions/addAdmin";
 import AdminContact from "./Forms/AdminContact/AdminContact";
 import AdminComments from "./Forms/AdminComments/AdminComments";
 import Grid from "@material-ui/core/Grid";
@@ -90,10 +89,6 @@ const Dashboard = () => {
                     getElement()
                 }
             </Grid>
-            {/*<AddAdmin/>*/}
-            {/*<br/>*/}
-            {/*<AdminContact contact={contact}/>*/}
-            {/*<AdminComments comments={comment}/>*/}
         </Container>
     );
 };
