@@ -24,7 +24,7 @@ const AddEvent = props => {
     useEffect(() => {
         const updatedPositionList = [];
         props.positionList.map(position => {
-            updatedPositionList.push({name: position, count: 0});
+            updatedPositionList.push({name: position, count: "0"});
         });
         setPositionList(updatedPositionList);
     },[]);
@@ -57,14 +57,13 @@ const AddEvent = props => {
     const form = (
         <Container component="main" maxWidth="sm" className={classes.Container}>
             <CssBaseline />
-            <form className={classes.root} autoComplete="off" onSubmit={submitFormHandler}>
+            <form autoComplete="off" onSubmit={submitFormHandler}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={6}>
                         <FormControl className={classes.formControl}>
                             <TextField
                                 value={name}
                                 onChange={event => setName(event.target.value)}
-                                name="name"
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -74,17 +73,15 @@ const AddEvent = props => {
                             />
                         </FormControl>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={6}>
                         <FormControl className={classes.formControl}>
                         <TextField
                             value={sponsor}
                                 onChange={event => setSponsor(event.target.value)}
                                 variant="outlined"
-                                required
                                 fullWidth
                                 id="sponsor"
                                 label="Sponsor"
-                                name="sponsor"
                             />
                         </FormControl>
                     </Grid>
@@ -94,13 +91,11 @@ const AddEvent = props => {
                                 value={details}
                                 onChange={event => setDetails(event.target.value)}
                                 id="outlined-textarea"
-                                label="Message"
-                                placeholder="Keep up the good work"
+                                label="Event Details"
                                 multiline
                                 variant="outlined"
                                 fullWidth
-                                required
-                                rows={10}
+                                rows={8}
                                 inputProps={{ className: classes.textarea }}
                             />
                         </FormControl>
@@ -109,13 +104,23 @@ const AddEvent = props => {
                         <Button
                             onClick={handleModalOpen}
                             fullWidth
-                            variant="contained"
-                            color="primary"
+                            variant="outlined"
+                            color="secondary"
                             >
                             Add Positions
                         </Button>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item sm={6}>
+                        <Button
+                            onClick={props.handleClose}
+                            fullWidth
+                            className={classes.cancelButton}
+                            variant="outlined"
+                        >
+                            Cancel
+                        </Button>
+                    </Grid>
+                    <Grid item xs={6}>
                         <Button
                             type="submit"
                             fullWidth
@@ -125,7 +130,6 @@ const AddEvent = props => {
                             Add Event
                         </Button>
                     </Grid>
-
                 </Grid>
             </form>
             <TransitionModal

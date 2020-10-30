@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
@@ -48,85 +48,92 @@ const EditEvent= props => {
         console.table(positionsForm);
     }
 
-    const form = (
+    return (
         <Container component="main" maxWidth="sm" className={classes.Container}>
-        <CssBaseline />
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={submitFormHandler}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <TextField
-                        value={name}
-                        onChange={event => setName(event.target.value)}
-                        name="name"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="name"
-                        label="Event Name"
-                        autoFocus
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        value={sponsor}
-                        onChange={event => setSponsor(event.target.value)}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="sponsor"
-                        label="Sponsor"
-                        name="sponsor"
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl variant="outlined" className={classes.formControl}>
+            <CssBaseline />
+            <form autoComplete="off" onSubmit={submitFormHandler}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
-                            value={details}
-                            onChange={event => setDetails(event.target.value)}
-                            id="outlined-textarea"
-                            label="Details"
-                            multiline
+                            value={name}
+                            onChange={event => setName(event.target.value)}
+                            name="name"
                             variant="outlined"
-                            fullWidth
                             required
-                            rows={10}
-                            inputProps={{ className: classes.textarea }}
-                        /></FormControl>
+                            fullWidth
+                            id="name"
+                            label="Event Name"
+                            autoFocus
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            value={sponsor}
+                            onChange={event => setSponsor(event.target.value)}
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="sponsor"
+                            label="Sponsor"
+                            name="sponsor"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                value={details}
+                                onChange={event => setDetails(event.target.value)}
+                                id="outlined-textarea"
+                                label="Details"
+                                multiline
+                                variant="outlined"
+                                fullWidth
+                                required
+                                rows={8}
+                                inputProps={{ className: classes.textarea }}
+                            /></FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            onClick={handleModalOpen}
+                            fullWidth
+                            variant="outlined"
+                            color="secondary"
+                        >
+                            Edit Positions
+                        </Button>
+                    </Grid>
+                    <Grid item sm={6}>
+                        <Button
+                            onClick={props.handleClose}
+                            fullWidth
+                            className={classes.cancelButton}
+                            variant="outlined"
+                        >
+                            Cancel
+                        </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                        >
+                            Edit Event
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <Button
-                        onClick={handleModalOpen}
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                    >
-                        Edit Positions
-                    </Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Edit Event
-                    </Button>
-                </Grid>
-            </Grid>
-        </form>
-        <TransitionModal
-            open={modalOpen}
-            handleOpen={handleModalOpen}
-            handleClose={handleModalClose}
-            form={<Positions submit={submitHandler} cancel={handleModalClose} positionList={positionList} button={"Edit Positions"}/>}
-            title={"Edit Positions"}
-        />
+            </form>
+            <TransitionModal
+                open={modalOpen}
+                handleOpen={handleModalOpen}
+                handleClose={handleModalClose}
+                form={<Positions submit={submitHandler} cancel={handleModalClose} positionList={positionList} button={"Edit Positions"}/>}
+                title={"Edit Positions"}
+            />
         </Container>
     );
-
-    return form;
 };
 
 const mapStateToProps = state => {
