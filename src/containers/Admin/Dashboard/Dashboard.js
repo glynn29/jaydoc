@@ -2,13 +2,11 @@ import React, {useEffect, useState} from "react";
 
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
 
 import {firestore} from "../../../firebase";
 import {AddAdmin} from "../../../CloudFunctions/addAdmin";
 import AdminContact from "./Forms/AdminContact/AdminContact";
 import AdminComments from "./Forms/AdminComments/AdminComments";
-import Cancellation from "./Forms/Cancellation/Cancellation";
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -25,7 +23,6 @@ const Dashboard = () => {
     const list = [
         'contact',
         'comment',
-        'cancel',
     ];
 
     useEffect(() => {
@@ -58,7 +55,7 @@ const Dashboard = () => {
             case 'comment':
                 return <AdminComments comments={comment}/>;
             default:
-                return <Cancellation/>;
+                return <div>Error</div>;
         }
     };
 
