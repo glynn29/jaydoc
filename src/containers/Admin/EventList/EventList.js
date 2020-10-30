@@ -7,6 +7,8 @@ import EditEventForm from "./Forms/EditEvent/EditEvent";
 import AddEventForm from "./Forms/Add/AddEvent";
 import TransitionModal from "../../../components/UI/Modal/Modal";
 import {firestore} from "../../../firebase";
+import Typography from "@material-ui/core/Typography";
+import DeleteEvent from "./Forms/DeleteEvent/DeleteEvent";
 
 const headCells = [
     { id: 'name', label: 'Event Name' },
@@ -17,6 +19,7 @@ const headCells = [
 const EventList = () => {
     const [editOpen, setEditOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
     const [formData, setFormData] = useState({});
     const [tableData, setTableData] = useState([]);
 
@@ -73,36 +76,46 @@ const EventList = () => {
         console.log("event removed");
     }
 
-    //details modal functions
-    function detailsEvent(event) {
-        console.log(event);
-        alert(event.name + " " + event.details + " " +event.positions.map(position => position.name +  " "+ position.count ))
-    }
+    const handleDeleteOpen = (props) => {
+        console.log(props);
+        setFormData({...props});
+        setDeleteOpen(true);
+    };
+
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
+    };
 
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <p>Event page</p>
+            <Typography variant="h3">Event Page</Typography>
             <EnhancedTable
                 data={tableData}
                 headCells={headCells}
-                delete={deleteEvent}
+                delete={handleDeleteOpen}
                 add={handleAddOpen}
-                edit={(row) => handleEditOpen(row)}
-                details={detailsEvent}
+                edit={handleEditOpen}
             />
             <TransitionModal
                 open={editOpen}
                 handleOpen={handleEditOpen}
                 handleClose={handleEditClose}
-                form={<EditEventForm formData={formData} onEdit={editEvent} />}
+                form={<EditEventForm formData={formData} onEdit={editEvent} handleClose={handleEditClose}/>}
                 title={"Edit Event"}
             />
             <TransitionModal
                 open={addOpen}
                 handleOpen={handleAddOpen}
                 handleClose={handleAddClose}
-                form={<AddEventForm onAdd={addEvent} />}
+                form={<AddEventForm onAdd={addEvent} handleClose={handleAddClose}/>}
                 title={"Add Event"}
+            />
+            <TransitionModal
+                open={deleteOpen}
+                handleOpen={handleDeleteOpen}
+                handleClose={handleDeleteClose}
+                form={<DeleteEvent formData={formData} submit={deleteEvent} cancel={handleDeleteClose} />}
+                title={"Are You Sure?"}
             />
         </Container>
     );
