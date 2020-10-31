@@ -36,17 +36,18 @@ exports.sendEventMail = functions.https.onCall(async (data, context) => {
             name: data.name,
             text: data.text,
         },
-        attachments: [
+    };
+
+    if (data.icsAttachment) {
+        msg.attachments = [
             {
                 content: data.icsAttachment,
                 filename: "event.ics",
                 type: "text/plain",
                 disposition: "attachment"
-            },
-        ]
-
-    };
-
+            }
+        ];
+    }
     await sendGrid.send(msg);
 
     return {success: true};
