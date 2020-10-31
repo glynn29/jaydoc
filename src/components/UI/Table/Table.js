@@ -123,6 +123,7 @@ function EnhancedTableHead(props) {
                 {props.delete && <StyledTableCell align="left">Delete</StyledTableCell>}
                 {props.signUp && <StyledTableCell align="left">Sign Up</StyledTableCell>}
                 {props.set && <StyledTableCell align="left">Change</StyledTableCell>}
+                {props.respond && <StyledTableCell align="left">Respond</StyledTableCell>}
             </TableRow>
         </TableHead>
     );
@@ -237,6 +238,9 @@ function EnhancedTable(props) {
                                                     :
                                                     <Button onClick={()=> {props.set({...row, index})}}  variant="contained" className={classes.detailsButton}>Add User</Button>}
                                             </StyledTableCell> }
+                                            {props.respond && <StyledTableCell align="left">
+                                                <Button onClick={() => {props.respond(row)}} variant="contained" className={classes.detailsButton}>Respond</Button>
+                                            </StyledTableCell>}
                                         </StyledTableRow>
                                     );
                                 })}
