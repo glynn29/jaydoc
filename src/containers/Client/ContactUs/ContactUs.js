@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -12,14 +12,22 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 import {firestore} from "../../../firebase";
+import {connect} from "react-redux";
 
-const ContactUs = () => {
+const ContactUs = (props) => {
     const classes = formStyles();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [category, setCategory] = useState("");
     const [message, setMessage] = useState("");
     const [response, setResponse] = useState(null);
+
+    useEffect(function () {
+        if(props.email)
+            setEmail(props.email);
+        if(props.name)
+            setName(props.name);
+    }, [props.email, props.name]);
 
     const list = [
         "Technical Issue",
@@ -58,7 +66,6 @@ const ContactUs = () => {
                                 fullWidth
                                 id="Name"
                                 label="Name"
-                                autoFocus
                             />
                         </FormControl>
                     </Grid>
@@ -80,6 +87,7 @@ const ContactUs = () => {
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel htmlFor="outlined-age-native-simple" required>Category</InputLabel>
                             <Select
+                                autoFocus
                                 native
                                 value={category}
                                 onChange={event => setCategory(event.target.value) }
@@ -136,6 +144,12 @@ const ContactUs = () => {
     return form;
 };
 
-export default ContactUs;
+const mapStateToProps = state => {
+    return{
+        email: state.auth.email,
+        name: state.auth.name
+    };
+};
 
+export default connect(mapStateToProps)(ContactUs);
 
