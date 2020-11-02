@@ -92,16 +92,17 @@ const Report = (props) => {
         list = list.map((user) => {
             const id = user.key[0].id;
             const name = user.key[0].name;
+            const role = user.key[0].role;
             const count = user.key.length;
 
-            //return (<td key={id}>Name: {name}, Count: {count}</td>);
-            return {id, name, count}
+            return {id, name, count, role}
         });
         setResults(list);
     };
 
     const headCells = [
         { id: 'name' , label: 'Name' },
+        { id: 'role' , label: 'Role' },
         { id: 'count' , label: 'Count' },
     ];
 
@@ -112,25 +113,6 @@ const Report = (props) => {
                     data={results}
                     headCells={headCells}
                 />
-            {/*<table>*/}
-            {/*    <thead>*/}
-            {/*    <tr>*/}
-            {/*        <th>Name</th>*/}
-            {/*        <th>Count</th>*/}
-            {/*    </tr>*/}
-            {/*    </thead>*/}
-            {/*    <tbody>*/}
-            {/*    {results.map((user) => {*/}
-            {/*        return(*/}
-            {/*            <tr key={user.id}>*/}
-            {/*                <td>{user.name}</td>*/}
-            {/*                <td>{user.count}</td>*/}
-            {/*            </tr>*/}
-            {/*        )*/}
-            {/*    })*/}
-            {/*    }*/}
-            {/*    </tbody>*/}
-            {/*</table>*/}
         </div>
         );
 
