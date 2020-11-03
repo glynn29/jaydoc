@@ -120,10 +120,10 @@ function EnhancedTableHead(props) {
                 {props.details && <StyledTableCell align="left">Details</StyledTableCell>}
                 {props.edit &&<StyledTableCell align="left">Edit</StyledTableCell>}
                 {props.accept && <StyledTableCell align="left">Accept</StyledTableCell>}
-                {props.delete && <StyledTableCell align="left">Delete</StyledTableCell>}
                 {props.signUp && <StyledTableCell align="left">Sign Up</StyledTableCell>}
                 {props.set && <StyledTableCell align="left">Change</StyledTableCell>}
                 {props.respond && <StyledTableCell align="left">Respond</StyledTableCell>}
+                {props.delete && <StyledTableCell align="left">Delete</StyledTableCell>}
             </TableRow>
         </TableHead>
     );
@@ -226,9 +226,6 @@ function EnhancedTable(props) {
                                             {props.accept && <StyledTableCell align="left">
                                                 <Button onClick={() => {props.accept(row)}} variant="contained" className={classes.detailsButton}>Accept</Button>
                                             </StyledTableCell>}
-                                            {props.delete && <StyledTableCell align="left">
-                                                <Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button>
-                                            </StyledTableCell>}
                                             {props.signUp && <StyledTableCell align="left">
                                                 {!row.volunteer && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}
                                             </StyledTableCell> }
@@ -240,6 +237,9 @@ function EnhancedTable(props) {
                                             </StyledTableCell> }
                                             {props.respond && <StyledTableCell align="left">
                                                 <Button onClick={() => {props.respond(row)}} variant="contained" className={classes.detailsButton}>Respond</Button>
+                                            </StyledTableCell>}
+                                            {props.delete && <StyledTableCell align="left">
+                                                <Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button>
                                             </StyledTableCell>}
                                         </StyledTableRow>
                                     );
