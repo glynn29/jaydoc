@@ -16,7 +16,10 @@ const Respond = (props) => {
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
-                    <Typography>To: {formData.name}, email: {formData.email}</Typography>
+                    <Typography>To: {formData.name}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography>Email: {formData.email}</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography>Subject: {formData.category}</Typography>
