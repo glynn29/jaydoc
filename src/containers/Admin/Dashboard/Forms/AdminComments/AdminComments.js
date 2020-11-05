@@ -34,7 +34,6 @@ const AdminContact = (props) => {
             })
             .catch(error => {console.log(error)});
         console.log("event removed");
-
     }
 
     const handleDeleteOpen = (props) => {
