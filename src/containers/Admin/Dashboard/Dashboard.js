@@ -33,7 +33,7 @@ const Dashboard = () => {
         let contactList = [];
         const ref = await firestore.collection('contact').get();
         ref.forEach((res) => {
-            contactList.push(res.data());
+            contactList.push({...res.data(), id: res.id});
         });
         setContact(contactList);
     }
@@ -42,7 +42,7 @@ const Dashboard = () => {
         let commentList = [];
         const ref = await firestore.collection('comments').get();
         ref.forEach((res) => {
-            commentList.push(res.data());
+            commentList.push({...res.data(), id: res.id});
         });
         setComment(commentList);
     }
