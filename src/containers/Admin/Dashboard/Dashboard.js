@@ -21,7 +21,7 @@ const Dashboard = () => {
 
     const list = [
         'contact',
-        'comment',
+        'mandatory reporting',
     ];
 
     useEffect(() => {
@@ -51,7 +51,7 @@ const Dashboard = () => {
         switch(page){
             case 'contact':
                 return <AdminContact contact={contact}/>;
-            case 'comment':
+            case 'mandatory reporting':
                 return <AdminComments comments={comment}/>;
             default:
                 return <div>Error</div>;

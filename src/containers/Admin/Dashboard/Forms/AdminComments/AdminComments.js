@@ -47,7 +47,7 @@ const AdminContact = (props) => {
 
     return(
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <Typography variant="h4">Comment Messages</Typography>
+            <Typography variant="h4">Mandatory Reporting Messages</Typography>
             <EnhancedTable
                 data={comments}
                 headCells={headCells}
