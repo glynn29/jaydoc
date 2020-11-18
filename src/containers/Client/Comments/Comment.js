@@ -30,10 +30,10 @@ const Comment = () => {
         });
     };
 
-    const form = (
+    return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
             <Typography variant="h3">Mandatory Reporting</Typography>
-            <Typography variant="body1">You have reached our mandatory reporting portal. Please <a href={pdf} target="_blank">click here</a> to review the mandatory reporting protocol. We thank you for following JayDoc protocol and taking the time to submit your concerns. We are not simply here to reprimand – our goal is for JayDoc to continue to serve as a safe, respectful place for all our volunteers.  This messaging system is anonymous. There will be no connection of your name or email to this report. However, we would appreciate it if you would at least provide the subgroup that you are a part of in clinic (i.e. administrative intern, community resource intern, lab sciences volunteer, interpreter, student physician, pharmacy student, resident, or attending physician, etc.). We also ask that you provide either the other individuals names or subgroups who were involved in the incident at hand. Please use the space below to explain, in the best detail you can provide, what took place in clinic. Thank you for making JayDoc a better place!  - The MR Team</Typography>
+            <Typography variant="body1">You have reached our mandatory reporting portal. Please <a href={pdf} target="_blank" rel="noopener noreferrer">click here</a> to review the mandatory reporting protocol. We thank you for following JayDoc protocol and taking the time to submit your concerns. We are not simply here to reprimand – our goal is for JayDoc to continue to serve as a safe, respectful place for all our volunteers.  This messaging system is anonymous. There will be no connection of your name or email to this report. However, we would appreciate it if you would at least provide the subgroup that you are a part of in clinic (i.e. administrative intern, community resource intern, lab sciences volunteer, interpreter, student physician, pharmacy student, resident, or attending physician, etc.). We also ask that you provide either the other individuals names or subgroups who were involved in the incident at hand. Please use the space below to explain, in the best detail you can provide, what took place in clinic. Thank you for making JayDoc a better place!  - The MR Team</Typography>
             <CssBaseline />
             <form autoComplete="off" onSubmit={submitHandler}>
                 <Grid container spacing={2}>
@@ -85,8 +85,6 @@ const Comment = () => {
             </form>
         </Container>
     );
-
-    return form;
 };
 
 export default Comment;
