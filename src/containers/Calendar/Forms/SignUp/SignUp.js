@@ -26,6 +26,7 @@ const SignUp = (props) => {
     const endTime = props.formData.end;
     const date = props.formData.date;
     const tableData = props.formData.positions;
+    const details = props.formData.details;
 
     const [filteredTableData, setFilteredTableData] = useState([]);
     const [formData, setFormData] = useState({});
@@ -36,8 +37,7 @@ const SignUp = (props) => {
 
     useEffect(()=> {
         let filteredTableData = [];
-        // eslint-disable-next-line array-callback-return
-        props.formData.positions.map((row, index) => {
+        props.formData.positions.forEach((row, index) => {
             for(let i = 0; i < positions.length; i++){
                 if(positions[i] === row.position){
                     filteredTableData.push({...row, index, name});
@@ -64,7 +64,7 @@ const SignUp = (props) => {
 
     const handleModalOpen = (props) => {
         console.log(props);
-        setFormData({position: props.position, name, eventName, startTime, endTime, date, index: props.index});
+        setFormData({position: props.position, name, eventName, startTime, endTime, date, index: props.index, details});
         setModalOpen(true);
     };
 
