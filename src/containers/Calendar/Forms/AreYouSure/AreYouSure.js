@@ -16,6 +16,7 @@ const AreYouSure = props => {
                 <Grid item xs={12}>
                     <p>{formData.eventName}</p>
                     <p>{formData.name}, are you sure you want to signup for {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
+                    <p>{formData.details}</p>
                     <p>Once you signup you will need Admin approval to cancel</p>
                 </Grid>
                 <Grid item xs={6}>
@@ -32,7 +33,7 @@ const AreYouSure = props => {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => props.submit({index: formData.index, position: formData.position, date: formData.date})}
+                        onClick={() => props.submit({index: formData.index, position: formData.position, date: formData.date, details: formData.details})}
                         fullWidth
                     >
                         Confirm
