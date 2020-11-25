@@ -14,9 +14,10 @@ const Confirmation = props => {
 
     return(
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-                <p>Sign Up Successful!</p>
-                <p>{formData.eventName}</p>
-                <p>You signed up as {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
+            <p>Sign Up Successful!</p>
+            <p>{formData.eventName}</p>
+            <p>You signed up as {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
+            <p>{formData.details}</p>
         </Container>
     )
 };
