@@ -18,3 +18,5 @@ export const AddAdmin = () => {
 
     return form;
 };
+
+export default AddAdmin;
