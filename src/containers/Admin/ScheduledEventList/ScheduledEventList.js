@@ -6,30 +6,41 @@ import TransitionModal from "../../../components/UI/Modal/Modal";
 import EnhancedTable from "../../../components/UI/Table/Table";
 import Container from "@material-ui/core/Container";
 
-import DateTimePicker from "../../../components/UI/DateTimePicker/DateTimePicker";
 import {firestore} from "../../../firebase";
+import Typography from "@material-ui/core/Typography";
+import DeleteScheduledEvent from "./Forms/DeleteScheduledEvent/DeleteScheduledEvent";
 
 const headCells = [
-    { id: 'nameName', label: 'Event Name' },
-    { id: 'start', label: 'Start' },
-    { id: 'end',  label: 'End' },
-];
-
-const rowLabels = [
-    { id: 'eventName' },
-    { id: 'start' },
-    { id: 'end',   }
+    { id: 'name', label: 'Event Name' },
+    { id: 'date', label: 'Date (Y-M-D)',},
+    { id: 'start', label: 'Start Time', time: true },
+    { id: 'end',  label: 'End Time', time: true }
 ];
 
 const ScheduledEventList = () => {
     const [editOpen, setEditOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
     const [formData, setFormData] = useState({});
     const [tableData, setTableData] = useState([]);
+    const [eventList, setEventList] = useState([]);
 
     async function getEvents() {
         let events = [];
-        const eventsRef = await firestore.collection('scheduledEvents').get();
+        const eventsRef = await firestore.collection('events').get();
+        eventsRef.forEach((event) => {
+            events.push({...event.data(), id: event.id});
+        });
+        setEventList(events);
+    }
+
+    useEffect( () => {
+        getEvents().catch(error => {console.log(error)});
+    },[]);
+
+    async function getScheduledEvents() {
+        let events = [];
+        const eventsRef = await firestore.collection('scheduledEvents').orderBy("date","desc").get();
         eventsRef.forEach((event) => {
             events.push({...event.data(), id: event.id});
         });
@@ -37,41 +48,14 @@ const ScheduledEventList = () => {
     }
 
     useEffect( () => {
-        getEvents().catch(error => {console.log(error)});
+        getScheduledEvents().catch(error => {console.log(error)});
     },[]);
 
+    //add modal functions
     function addEvent() {
         handleAddClose();
-        getEvents().catch(error => {console.log(error)});
+        getScheduledEvents().catch(error => {console.log(error)});
     }
-
-    function editEvent() {
-        handleEditClose();
-        getEvents().catch(error => {console.log(error)});
-    }
-
-    function deleteEvent(eventId) {
-        firestore.collection('scheduledEvents').doc(eventId).delete()
-            .then(()=>{
-                const newList = tableData.filter(event => event.id !== eventId);
-                setTableData(newList);
-            })
-            .catch(error => {console.log(error)});
-        console.log("event removed");
-    }
-
-    const handleEditOpen = () => {
-        setEditOpen(true);
-    };
-
-    const handleEditClose = () => {
-        setEditOpen(false);
-    };
-
-    const toggleEdit = ({eventName, start, id, end, notes}) => {
-        setFormData({eventName, start, id, end, notes});
-        setEditOpen(!editOpen);
-    };
 
     const handleAddOpen = () => {
         setAddOpen(true);
@@ -81,33 +65,79 @@ const ScheduledEventList = () => {
         setAddOpen(false);
     };
 
-    const toggleAdd = () => {
-        setAddOpen(!addOpen);
+    //edit modal functions
+    function editEvent() {
+        handleEditClose();
+        getScheduledEvents().catch(error => {console.log(error)});
+    }
+
+    const handleEditOpen = (props) => {
+        setFormData({...props});
+        setEditOpen(true);
     };
+
+    const handleEditClose = () => {
+        setEditOpen(false);
+    };
+
+    //delete modal functions
+    function deleteEvent({id}) {
+        firestore.collection('scheduledEvents').doc(id).delete()
+            .then(()=>{
+                getScheduledEvents().catch(error => {console.log(error)});
+            })
+            .catch(error => {console.log(error)});
+        console.log("event removed");
+        handleDeleteClose();
+    }
+
+    const handleDeleteOpen = (props) => {
+        console.log(props);
+        setFormData({...props});
+        setDeleteOpen(true);
+    };
+
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
+    };
+
+    //details modal functions
+    function detailsEvent(event) {
+        console.log(event);
+        alert(event.name + " " + event.details + " " +event.positions.map(position => position.position + ": " + position.volunteer))
+    }
+
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <p>Event page</p>
+            <Typography variant="h3">Schedule Event Page</Typography>
             <EnhancedTable
                 data={tableData}
                 headCells={headCells}
-                rowLables={rowLabels}
-                delete={deleteEvent}
-                add={toggleAdd}
-                edit={(row) => toggleEdit(row)}
+                delete={handleDeleteOpen}
+                add={handleAddOpen}
+                edit={handleEditOpen}
+                details={detailsEvent}
             />
             <TransitionModal
                 open={editOpen}
                 handleOpen={handleEditOpen}
                 handleClose={handleEditClose}
-                form={<EditScheduledEvent formData={formData} onEdit={editEvent} />}
+                form={<EditScheduledEvent formData={formData} onEdit={editEvent} eventList={eventList} handleClose={handleEditClose}/>}
                 title={"Edit Scheduled Event"}
             />
             <TransitionModal
                 open={addOpen}
                 handleOpen={handleAddOpen}
                 handleClose={handleAddClose}
-                form={<AddScheduledEvent onAdd={addEvent} />}
+                form={<AddScheduledEvent onAdd={addEvent} eventList={eventList} handleClose={handleAddClose}/>}
                 title={"Schedule Event"}
+            />
+            <TransitionModal
+                open={deleteOpen}
+                handleOpen={handleDeleteOpen}
+                handleClose={handleDeleteClose}
+                form={<DeleteScheduledEvent formData={formData} submit={deleteEvent} cancel={handleDeleteClose}/>}
+                title={"Are You Sure?"}
             />
         </Container>
     );
