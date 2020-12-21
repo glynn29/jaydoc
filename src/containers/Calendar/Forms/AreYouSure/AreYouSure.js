@@ -13,6 +13,10 @@ const AreYouSure = props => {
     const {formData} = props;
     const [loading, setLoading] = useState(false);
 
+    const formattedStart = new Date(formData.date + "T" + formData.startTime).toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
+    const formattedEnd = new Date(formData.date + "T" + formData.endTime).toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
+    const formattedDate = new Date(formData.date + "T17:00").toDateString();
+
     const form = (
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={1}>
@@ -23,7 +27,7 @@ const AreYouSure = props => {
                 </Grid>
                 <Grid item xs={12}>
                     <p>{formData.eventName}</p>
-                    <p>Are you sure you want to sign up for {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
+                    <p>Are you sure you want to sign up for {formData.position} from {formattedStart} to {formattedEnd} on {formattedDate}?</p>
                     <p>{formData.details}</p>
                     <p>Once you sign up you will need Admin approval to cancel</p>
                 </Grid>
