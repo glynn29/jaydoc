@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from "react";
 import {connect} from "react-redux";
 import 'react-calendar/dist/Calendar.css'
 
-//import {Calender} from '@material-ui/pickers/views/Calendar/Calendar';
 import Calendar from 'react-calendar';
 import * as classes from './Calendar.module.css';
 import {firestore} from "../../firebase";
@@ -48,7 +47,6 @@ const CalendarBox = (props) => {
         const rowDate = new Date(props.date + "T17:00");
         //setFormData({...props, date: rowDate});
         setFormData({...props});
-        console.table(formData);
         setModalOpen(true);
     };
 
@@ -114,7 +112,6 @@ const CalendarBox = (props) => {
                 title={isAdmin ? "Edit Positions" : "Sign Up"}
             />
         </Container>
-        // {/*</div>*/}
     );
 };
 

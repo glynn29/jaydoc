@@ -68,33 +68,54 @@ const SignUp = (props) => {
         setModalOpen(true);
     };
 
+    function arraysEqual(a, b) {
+        //checks to see if two arrays of objects are the same
+        return a.every((o,i) => Object.keys(o).length === Object.keys(b[i]).length && Object.keys(o).every(k => o[k] === b[i][k]));
+    }
+
     function submitHandler({index, position, date}) {
         handleModalClose();
         props.onConfirm(formData);
-        let newTableData = tableData;
+        let newTableData = [...tableData];
         const newRow = newTableData[index];
         newTableData[index] = {...newRow, volunteer: name, email, language};
 
-        firestore.collection('scheduledEvents').doc(props.formData.id)
-            .set({
-                positions: newTableData
-            },{merge: true})
-            .catch(error => console.log(error));
+        //get the current event in the database, and see if its out of sync with client before updating
+        firestore.collection('scheduledEvents').doc(props.formData.id).get().then(
+            function (res) {
+                const currentPos = res.data().positions; // current database positions array
+                console.table(currentPos);
+                console.table(tableData);
+                console.table(newTableData);
+                if (arraysEqual(currentPos, tableData)){
+                    //update event with new positions array
+                    firestore.collection('scheduledEvents').doc(props.formData.id)
+                        .set({
+                            positions: newTableData
+                        },{merge: true})
+                        .catch(error => console.log(error));
 
-        firestore.collection('users').doc(props.userDocId).collection('volunteerEvents')
-            .add({
-                eventId: props.formData.id,
-                eventName,
-                position: position,
-                startTime,
-                endTime,
-                date: date,
-                id: props.userId,
-                role: props.role,
-                name
-            })
-            .catch(error => console.log(error));
-        setConfirm(true);
+                    //add event to users events
+                    firestore.collection('users').doc(props.userDocId).collection('volunteerEvents')
+                        .add({
+                            eventId: props.formData.id,
+                            eventName,
+                            position: position,
+                            startTime,
+                            endTime,
+                            date: date,
+                            id: props.userId,
+                            role: props.role,
+                            name
+                        })
+                        .catch(error => console.log(error));
+                    setConfirm(true);
+                }else {
+                    alert("error signing up, please try again.")
+                }
+            }
+        );
+
     }
 
     function cancelHandler() {
