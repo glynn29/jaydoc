@@ -23,9 +23,9 @@ const AreYouSure = props => {
                 </Grid>
                 <Grid item xs={12}>
                     <p>{formData.eventName}</p>
-                    <p>{formData.name}, are you sure you want to signup for {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
+                    <p>Are you sure you want to sign up for {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
                     <p>{formData.details}</p>
-                    <p>Once you signup you will need Admin approval to cancel</p>
+                    <p>Once you sign up you will need Admin approval to cancel</p>
                 </Grid>
                 <Grid item xs={6}>
                     <Button
