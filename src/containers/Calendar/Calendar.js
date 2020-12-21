@@ -13,7 +13,7 @@ import {AuthContext} from "../Auth/Auth";
 import AdminSingUp from "./Forms/AdminSignUp/AdminSignUp";
 import Container from "@material-ui/core/Container";
 
-const CalendarBox = (props) => {
+const CalendarBox = () => {
     const {isAdmin} = useContext(AuthContext);
     const [modalOpen, setModalOpen] = useState(false);
     const [date, setDate] = useState(new Date());
@@ -31,7 +31,6 @@ const CalendarBox = (props) => {
 
     useEffect(() => {
         getEvents().catch(error => {console.log(error)});
-        //props.getCurrentUser();
     }, []);
 
     function editModal() {
@@ -44,7 +43,7 @@ const CalendarBox = (props) => {
     };
 
     const handleModalOpen = (props) => {
-        const rowDate = new Date(props.date + "T17:00");
+        //const rowDate = new Date(props.date + "T17:00");
         //setFormData({...props, date: rowDate});
         setFormData({...props});
         setModalOpen(true);
@@ -52,7 +51,6 @@ const CalendarBox = (props) => {
 
     return (
         <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
-        {/*<div className={classes.Box}>*/}
             <Typography variant="h3">Calendar Page</Typography>
                 <Calendar
                     className={classes.Box}
@@ -66,7 +64,6 @@ const CalendarBox = (props) => {
                     next2Label={"Next Year >"}
                     prevLabel={"< Previous Month"}
                     prev2Label={"< Previous Year"}
-                    //onClickDay={(value, event) => console.table(event)}
                     tileContent={
                         ({ date, view }) => {
                             const table = tableData.map((row)=>{
@@ -76,11 +73,8 @@ const CalendarBox = (props) => {
                                 const day = rowDate.getDate();
                                 const month = rowDate.getMonth();
                                 const year = rowDate.getFullYear();
-                                //console.log("Day of week", date, "date",rowDate, "rowDate", row.date);
-                                //console.log(date.getDate());
                                 const isPastDate = currentDate > rowDate;
-                                const itemClass = isPastDate ? //console.log("true"): console.log("false");
-                                classes.PastCalenderItem : classes.CalenderItem;
+                                const itemClass = isPastDate ? classes.PastCalenderItem : classes.CalenderItem;
                                 return(
                                     view === 'month' &&
                                     date.getDate() === day &&
@@ -108,7 +102,7 @@ const CalendarBox = (props) => {
                 open={modalOpen}
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
-                form={isAdmin ? <AdminSingUp formData={formData} cancel={handleModalClose} submit={editModal}/>:<SignUp formData={formData} onEdit={editModal} cancel={handleModalClose} />}
+                form={isAdmin ? <AdminSingUp formData={formData} cancel={handleModalClose} submit={editModal}/>:<SignUp formData={formData} onEdit={editModal} cancel={handleModalClose} getEvents={getEvents} />}
                 title={isAdmin ? "Edit Positions" : "Sign Up"}
             />
         </Container>
