@@ -1,18 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
 import useStyles from "../../../../components/UI/Styles/formStyle";
+import Spinner from "../../../../components/UI/Spinner/Spinner";
+import Typography from "@material-ui/core/Typography";
 
 const AreYouSure = props => {
     const classes = useStyles();
     const {formData} = props;
+    const [loading, setLoading] = useState(false);
 
-    return(
+    const form = (
         <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <Typography component="h1" variant="h5">
+                        Are You Sure?
+                    </Typography>
+                </Grid>
                 <Grid item xs={12}>
                     <p>{formData.eventName}</p>
                     <p>{formData.name}, are you sure you want to signup for {formData.position} from {formData.startTime} to {formData.endTime} on {formData.date}?</p>
@@ -33,7 +41,10 @@ const AreYouSure = props => {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => props.submit({index: formData.index, position: formData.position, date: formData.date, details: formData.details})}
+                        onClick={() => {
+                            setLoading(true);
+                            props.submit({index: formData.index, position: formData.position, date: formData.date, details: formData.details});
+                        }}
                         fullWidth
                     >
                         Confirm
@@ -41,7 +52,9 @@ const AreYouSure = props => {
                 </Grid>
             </Grid>
         </Container>
-    )
+    );
+
+    return loading ? <Spinner/> : form;
 };
 
 export default AreYouSure;
