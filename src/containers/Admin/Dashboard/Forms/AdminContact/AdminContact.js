@@ -8,7 +8,6 @@ import {firestore, functions} from "../../../../../firebase";
 import Respond from "../AdminComments/Respond/Respond";
 import TransitionModal from "../../../../../components/UI/Modal/Modal";
 import DeleteComment from "../DeleteComment/DeleteComment";
-import DeleteEvent from "../../../EventList/Forms/DeleteEvent/DeleteEvent";
 
 const headCells = [
     {id: 'name', label: 'Name'},
@@ -77,7 +76,7 @@ const AdminContact = (props) => {
     };
 
     return(
-        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+        <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
             <Typography variant="h4">Contact Us Messages</Typography>
             <EnhancedTable
                 data={contact}

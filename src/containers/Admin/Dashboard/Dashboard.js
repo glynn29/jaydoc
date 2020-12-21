@@ -59,7 +59,7 @@ const Dashboard = () => {
     };
 
     return (
-        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+        <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
             <Grid container spacing={2} direction={"column"} alignItems={"stretch"}>
                 <Grid item>
                     <Typography variant="h3">Admin Dashboard Page</Typography>
