@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from "react";
 
+import Typography from "@material-ui/core/Typography";
+
 import AddScheduledEvent from "./Forms/AddScheduledEvent/AddScheduledEvent";
 import EditScheduledEvent from "./Forms/EditScheduledEvent/EditScheduledEvent";
+import DetailsEvent from "./Forms/DetailsEvent/DetailsEvent";
+import DeleteScheduledEvent from "./Forms/DeleteScheduledEvent/DeleteScheduledEvent";
 import TransitionModal from "../../../components/UI/Modal/Modal";
 import EnhancedTable from "../../../components/UI/Table/Table";
 import Container from "@material-ui/core/Container";
-
 import {firestore} from "../../../firebase";
-import Typography from "@material-ui/core/Typography";
-import DeleteScheduledEvent from "./Forms/DeleteScheduledEvent/DeleteScheduledEvent";
 
 const headCells = [
     { id: 'name', label: 'Event Name' },
@@ -21,6 +22,7 @@ const ScheduledEventList = () => {
     const [editOpen, setEditOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const [detailsOpen, setDetailsOpen] = useState(false);
     const [formData, setFormData] = useState({});
     const [tableData, setTableData] = useState([]);
     const [eventList, setEventList] = useState([]);
@@ -92,7 +94,6 @@ const ScheduledEventList = () => {
     }
 
     const handleDeleteOpen = (props) => {
-        console.log(props);
         setFormData({...props});
         setDeleteOpen(true);
     };
@@ -102,10 +103,14 @@ const ScheduledEventList = () => {
     };
 
     //details modal functions
-    function detailsEvent(event) {
-        console.log(event);
-        alert(event.name + " " + event.details + " " +event.positions.map(position => position.position + ": " + position.volunteer))
-    }
+    const handleDetailsOpen = (props) => {
+        setFormData({...props});
+        setDetailsOpen(true);
+    };
+
+    const handleDetailsClose = () => {
+        setDetailsOpen(false);
+    };
 
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
@@ -116,7 +121,7 @@ const ScheduledEventList = () => {
                 delete={handleDeleteOpen}
                 add={handleAddOpen}
                 edit={handleEditOpen}
-                details={detailsEvent}
+                details={handleDetailsOpen}
             />
             <TransitionModal
                 open={editOpen}
@@ -138,6 +143,13 @@ const ScheduledEventList = () => {
                 handleClose={handleDeleteClose}
                 form={<DeleteScheduledEvent formData={formData} submit={deleteEvent} cancel={handleDeleteClose}/>}
                 title={"Are You Sure?"}
+            />
+            <TransitionModal
+                open={detailsOpen}
+                handleOpen={handleDetailsOpen}
+                handleClose={handleDetailsClose}
+                form={<DetailsEvent formData={formData} close={handleDetailsClose}/>}
+                title={"Details"}
             />
         </Container>
     );
