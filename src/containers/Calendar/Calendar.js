@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from "react";
-import {connect} from "react-redux";
 import 'react-calendar/dist/Calendar.css'
 
 import Calendar from 'react-calendar';
@@ -7,7 +6,6 @@ import * as classes from './Calendar.module.css';
 import {firestore} from "../../firebase";
 import SignUp from "./Forms/SignUp/SignUp";
 import TransitionModal from "../../components/UI/Modal/Modal";
-import * as actions from "../../store/actions";
 import Typography from "@material-ui/core/Typography";
 import {AuthContext} from "../Auth/Auth";
 import AdminSingUp from "./Forms/AdminSignUp/AdminSignUp";
@@ -109,10 +107,4 @@ const CalendarBox = () => {
     );
 };
 
-const mapDispatchToProps = dispatch => {
-    return{
-        getCurrentUser: () => dispatch(actions.getUser()),
-    }
-};
-
-export default connect(null, mapDispatchToProps)(CalendarBox);
+export default CalendarBox;
