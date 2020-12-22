@@ -20,8 +20,9 @@ const SendMail = props => {
     formData.forEach(row => {
         tableData.push({"email": row});
     });
+
     return(
-        <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
+        <Container component="main" maxWidth="xs" style={{textAlign: 'center'}}>
             <Grid container spacing={2}  >
                 <EnhancedTable
                     data={tableData}
