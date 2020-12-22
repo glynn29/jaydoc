@@ -13,7 +13,6 @@ import DeleteEvent from "./Forms/DeleteEvent/DeleteEvent";
 const headCells = [
     { id: 'name', label: 'Event Name' },
     { id: 'sponsor', label: 'Sponsor' },
-    { id: 'id',  label: 'ID' },
 ];
 
 const EventList = () => {
