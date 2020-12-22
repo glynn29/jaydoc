@@ -16,10 +16,10 @@ const Reminder = (props) => {
 
     const isSelected = (id) => event.id === id;
 
-    const handleChange = (events) =>{
-        props.getPositions(events.positions);
-        isSelected(events.name);
-        setEvent(events);
+    const handleChange = (event) =>{
+        props.getEvent(event);
+        isSelected(event.name);
+        setEvent(event);
     };
 
     async function getEvents() {
