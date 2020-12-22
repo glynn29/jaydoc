@@ -108,7 +108,6 @@ const Report = (props) => {
 
     const createTable = results.length > 0 &&
         (<div style={{margin: 'auto'}}>
-            Total number of volunteers: {results.length}
                 <EnhancedTable
                     data={results}
                     headCells={headCells}
@@ -288,7 +287,9 @@ const Report = (props) => {
                 {loading ?
                     <Spinner/>
                     :
-                    createTable
+                    <Grid item xs={12}>
+                        {createTable}
+                    </Grid>
                 }
             </Grid>
         </Container>
