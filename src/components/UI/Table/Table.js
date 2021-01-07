@@ -10,12 +10,10 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Switch from '@material-ui/core/Switch';
 import Paper from '@material-ui/core/Paper';
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import useStyles from "../../../components/UI/Styles/formStyle";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from "@material-ui/core/Checkbox";
 
 const StyledTableCell = withStyles((theme) => ({
@@ -28,7 +26,7 @@ const StyledTableCell = withStyles((theme) => ({
     },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(() => ({
     root: {
         '&:nth-of-type(odd)': {
             backgroundColor: "lightblue",
@@ -42,7 +40,7 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-const StyledSortLabel = withStyles((theme) => ({
+const StyledSortLabel = withStyles(() => ({
     root: {
         color: 'white',
         '&:hover': {
@@ -186,7 +184,6 @@ function EnhancedTable(props) {
                             rowCount={rows.length}
                         />
                         <TableBody>
-
                             {(rowsPerPage > 0 ? stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 : stableSort(rows, getComparator(order, orderBy)))
@@ -197,50 +194,65 @@ function EnhancedTable(props) {
                                             key={index}
                                         >
                                             {props.checkbox && <StyledTableCell align="left">
+                                                {//checkbox for email events
+                                                }
                                                 <Checkbox
-                                                    onChange={e => props.checkbox(row)}
+                                                    onChange={() => props.checkbox(row)}
                                                     checked={props.isSelected(row.id)}
                                                     inputProps={{ 'aria-labelledby': index }}/>
                                             </StyledTableCell>}
-
-
+                                            {/*go through all the normal cells in the head cells array*/}
                                             {props.headCells.map((cell, index)=>{
+
                                                 let data = row[cell.id];
-                                                // if(cell.time){
-                                                //     data = new Date("2020-01-11T" + data).toLocaleTimeString('en-US', {
-                                                //          hour: 'numeric',
-                                                //          minute: 'numeric',
-                                                //          hour12: true
-                                                //      });
-                                                // }
                                                 return(
                                                     <StyledTableCell component="th" key={index} scope="row" align="left">{data}</StyledTableCell>
                                                 );
                                             })}
-                                            {props.details && <StyledTableCell align="left">
-                                                <Button onClick={() => {props.details(row)}} variant="contained" className={classes.detailsButton}>Details</Button>
-                                            </StyledTableCell>}
-                                            {props.edit && <StyledTableCell align="left">
-                                                <Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button>
-                                            </StyledTableCell>}
-                                            {props.accept && <StyledTableCell align="left">
-                                                <Button onClick={() => {props.accept(row)}} variant="contained" className={classes.detailsButton}>Accept</Button>
-                                            </StyledTableCell>}
+
+                                            {//special columns for specific tables
+                                            }
+                                            {props.details &&
+                                                <StyledTableCell align="left">
+                                                    <Button onClick={() => {props.details(row)}} variant="contained" className={classes.detailsButton}>Details</Button>
+                                                </StyledTableCell>
+                                            }
+                                            {props.edit &&
+                                                <StyledTableCell align="left">
+                                                    <Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button>
+                                                </StyledTableCell>
+                                            }
+                                            {props.accept &&
+                                                <StyledTableCell align="left">
+                                                    <Button onClick={() => {props.accept(row)}} variant="contained" className={classes.detailsButton}>Accept</Button>
+                                                </StyledTableCell>
+                                            }
                                             {props.signUp && <StyledTableCell align="left">
-                                                {!row.volunteer && <Button onClick={()=> {props.signUp(row)}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>}
+                                                {
+
+                                                    (!row.volunteer &&  props.positions.indexOf(row.position) > -1)
+                                                    &&
+                                                    <Button onClick={()=> {props.signUp({...row , index})}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>
+                                                }
                                             </StyledTableCell> }
-                                            {props.set && <StyledTableCell align="left">
-                                                {row.volunteer ?
-                                                    <Button onClick={()=> {props.remove({...row, index})}}  variant="contained" className={classes.deleteButton}>Remove</Button>
-                                                    :
-                                                    <Button onClick={()=> {props.set({...row, index})}}  variant="contained" className={classes.detailsButton}>Add User</Button>}
-                                            </StyledTableCell> }
-                                            {props.respond && <StyledTableCell align="left">
-                                                <Button onClick={() => {props.respond(row)}} variant="contained" className={classes.detailsButton}>Respond</Button>
-                                            </StyledTableCell>}
-                                            {props.delete && <StyledTableCell align="left">
-                                                <Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button>
-                                            </StyledTableCell>}
+                                            {props.set &&
+                                                <StyledTableCell align="left">
+                                                    {row.volunteer ?
+                                                        <Button onClick={()=> {props.remove({...row, index})}}  variant="contained" className={classes.deleteButton}>Remove</Button>
+                                                        :
+                                                        <Button onClick={()=> {props.set({...row, index})}}  variant="contained" className={classes.detailsButton}>Add User</Button>}
+                                                </StyledTableCell>
+                                            }
+                                            {props.respond &&
+                                                <StyledTableCell align="left">
+                                                    <Button onClick={() => {props.respond(row)}} variant="contained" className={classes.detailsButton}>Respond</Button>
+                                                </StyledTableCell>
+                                            }
+                                            {props.delete &&
+                                                <StyledTableCell align="left">
+                                                    <Button onClick={() => {props.delete(row)}} variant="contained" className={classes.deleteButton}>Delete</Button>
+                                                </StyledTableCell>
+                                            }
                                         </StyledTableRow>
                                     );
                                 })}
