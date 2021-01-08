@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 
 import useStyles from "../../../components/UI/Styles/formStyle";
 import * as actions from "../../../store/actions";
@@ -27,9 +28,9 @@ const Account = (props) => {
             const endTime = new Date(event.date + "T" + event.endTime);
             const eventRow = <p  key={index}> Event: {event.eventName} <br/> Position: {event.position}<br/> Date: {date.toDateString()}, from {startTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})} - {endTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})}</p>;
             if(date >= currentDate){
-                futureEvents.push(eventRow);
+                futureEvents.push(<Paper key={index}>{eventRow}</Paper>);
             }else {
-                pastEvents.push(eventRow);
+                pastEvents.push(<Paper key={index}>{eventRow}</Paper>);
             }
         });
     }
