@@ -32,14 +32,9 @@ export const fetchRoleList = () => {
     return dispatch =>{
         dispatch(fetchListStart());
         let list = [];
-        firestore.collection('roles').get()
-            .then((roles) => {
-                roles.forEach((doc) => {
-                    doc.data().roles.map((role) => {
-                        return list.push(role);
-                    })
-                });
-                //console.log(list);
+        firestore.collection('roles').doc("roles").get()
+            .then((doc) => {
+                list = doc.data().roles;
             })
             .then(()=>{
                 console.log("dispatch success");
@@ -54,13 +49,9 @@ export const fetchPositionList = () => {
     return dispatch =>{
         dispatch(fetchListStart());
         let list = [];
-        firestore.collection('positions').get()
-            .then((positions) => {
-                positions.forEach((doc) => {
-                    doc.data().positions.map((position) => {
-                        return list.push(position);
-                    })
-                });
+        firestore.collection('positions').doc("positions").get()
+            .then((doc) => {
+                list = doc.data().positions;
             })
             .then(()=>{
                 console.log("dispatch success");
