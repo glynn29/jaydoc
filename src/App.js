@@ -25,15 +25,18 @@ import * as actions from './store/actions/index';
 
 const App = (props) =>{
     const {currentUser, isAdmin} = useContext(AuthContext);
-
     const {onFetchRoleList, onFetchPositionList, getCurrentUser} = props;
+
     useEffect(() => {
         if(!isAdmin && currentUser){
             getCurrentUser();
         }
+    },[isAdmin, getCurrentUser, currentUser]);
+
+    useEffect(() => {
         onFetchRoleList();
         onFetchPositionList();
-    },[onFetchRoleList, onFetchPositionList, getCurrentUser, currentUser]);
+    }, [onFetchRoleList, onFetchPositionList]);
 
     let routes = (
         <Switch>
