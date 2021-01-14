@@ -230,7 +230,7 @@ function EnhancedTable(props) {
 
                                             {props.signUp && <StyledTableCell align="left">
                                                 {
-                                                    (!row.volunteer &&  props.positions.indexOf(row.position) > -1 && !props.alreadyInEvent && !props.isPastDate)
+                                                    (!row.volunteer &&  props.positions.indexOf(row.position) > -1 && !props.alreadyInEvent)
                                                     &&
                                                     <Button onClick={()=> {props.signUp({...row , index})}}  variant="contained" className={classes.detailsButton}>Sign Up</Button>
                                                 }
