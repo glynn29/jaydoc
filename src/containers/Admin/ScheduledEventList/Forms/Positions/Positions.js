@@ -75,7 +75,7 @@ const Positions = props => {
                 <EnhancedTable
                     data={positions}
                     headCells={props.headCells}
-                    set={setVolunteer}
+                    set={!props.isPastDate ? setVolunteer : undefined}
                     remove={removeVolunteer}
                     noPagination
                 />
