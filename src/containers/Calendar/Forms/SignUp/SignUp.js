@@ -136,7 +136,7 @@ const SignUp = (props) => {
                     <p>{eventName} From {formattedStart} to {formattedEnd} on {formattedDate}</p>
                 </Grid>
                 <Grid item xs={12}>
-                    <EnhancedTable data={tableData} headCells={headCells} signUp={!props.formData.isPastDate ? handleModalOpen : undefined} positions={positions} alreadyInEvent={alreadyInEvent}/>
+                    <EnhancedTable data={tableData} headCells={headCells} signUp={(!props.formData.isPastDate && !alreadyInEvent) ? handleModalOpen : undefined} positions={positions}/>
                 </Grid>
                 <Grid item xs={12}>
                     <Button
