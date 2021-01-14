@@ -28,30 +28,26 @@ const SignUp = (props) => {
     const tableData = props.formData.positions;
     const details = props.formData.details;
 
-    const [filteredTableData, setFilteredTableData] = useState([]);
+    const [successIfStatement, setSuccessIfStatement] = useState(false);
+    const [successTransaction, setSuccessTransaction] = useState(false);
     const [formData, setFormData] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
     const [confirm, setConfirm] = useState(null);
     const [alreadyInEvent, setAlreadyInEvent] = useState(false);
-    const [position, setPosition] = useState();
-
 
     useEffect(()=> {
-        let filteredTableData = [];
-        props.formData.positions.forEach((row, index) => {
-            for(let i = 0; i < positions.length; i++){
-                if(positions[i] === row.position){
-                    filteredTableData.push({...row, index, name});
-                    if (row.volunteer === name){
-                        setAlreadyInEvent(true);
-                        setPosition(row.position);
-                        break;
-                    }
-                }
+        tableData.forEach((row) => {
+            if (row.volunteer === name){
+                setAlreadyInEvent(true);
             }
         });
-        setFilteredTableData(filteredTableData);
-    },[name, positions, props.formData.positions]);
+    },[name, positions, tableData]);
+
+    useEffect(()=>{
+        if(successIfStatement && successTransaction){
+            setConfirm(true);
+        }
+    }, [successIfStatement, successTransaction]);
 
     if(confirm){
         return(
@@ -68,55 +64,61 @@ const SignUp = (props) => {
         setModalOpen(true);
     };
 
-    function arraysEqual(a, b) {
-        //checks to see if two arrays of objects are the same
-        return a.every((o,i) => Object.keys(o).length === Object.keys(b[i]).length && Object.keys(o).every(k => o[k] === b[i][k]));
+    //async function that runs a transaction so client and server stay in sync for user event sign ups
+    async function eventSingUpEvent({index, position, date}) {
+        const eventRef = firestore.collection('scheduledEvents').doc(props.formData.id);
+        //create doc to update later
+        const userRef = firestore.collection('users').doc(props.userDocId).collection('volunteerEvents').doc();
+        try{
+            await firestore.runTransaction( async (t) =>{
+                //get the current event in the database, and see if its out of sync with client before updating
+                const doc = await t.get(eventRef);
+
+                // current database positions array
+                const currentPos = doc.data().positions;
+
+                //if it has a volunteer then that spot is taken
+                if(currentPos[index].volunteer){
+                    alert("An error has occurred while signing up, please try again.");
+                    props.getEvents();
+                    props.cancel();
+                    setSuccessIfStatement(false);
+                }else{
+                    let newTableData = [...currentPos];
+                    const newRow = newTableData[index];
+                    newTableData[index] = {...newRow, volunteer: name, email, language};
+                    //update event with new positions array
+                    t.update(eventRef, {positions: newTableData});
+                    //add event to users events
+                    t.set(userRef,
+                        {
+                            eventId: props.formData.id,
+                            eventName,
+                            position: position,
+                            startTime,
+                            endTime,
+                            date: date,
+                            id: props.userId,
+                            role: props.role,
+                            name
+                        }
+                    );
+                     setSuccessIfStatement(true);
+                }
+            });
+            setSuccessTransaction(true);
+        }catch (e) {
+            setSuccessTransaction(false);
+            alert("An error has occurred while signing up, please try again.");
+            props.getEvents(props.date);
+            props.cancel();
+        }
     }
 
     function submitHandler({index, position, date}) {
-        //timeout so database has time to update other peoples' requests
-        setTimeout( function() {
-            handleModalClose();
-            props.onConfirm(formData);
-            let newTableData = [...tableData];
-            const newRow = newTableData[index];
-            newTableData[index] = {...newRow, volunteer: name, email, language};
-
-            //get the current event in the database, and see if its out of sync with client before updating
-            firestore.collection('scheduledEvents').doc(props.formData.id).get().then(
-                function (res) {
-                    const currentPos = res.data().positions; // current database positions array
-                    if (arraysEqual(currentPos, tableData)){
-                        //update event with new positions array
-                        firestore.collection('scheduledEvents').doc(props.formData.id)
-                            .set({
-                                positions: newTableData
-                            },{merge: true})
-                            .catch(error => console.log(error));
-
-                        //add event to users events
-                        firestore.collection('users').doc(props.userDocId).collection('volunteerEvents')
-                            .add({
-                                eventId: props.formData.id,
-                                eventName,
-                                position: position,
-                                startTime,
-                                endTime,
-                                date: date,
-                                id: props.userId,
-                                role: props.role,
-                                name
-                            })
-                            .catch(error => console.log(error));
-                        setConfirm(true);
-                    }else {
-                        alert("An error has occurred while signing up, please try again.");
-                        props.getEvents();
-                        props.cancel();
-                    }
-                }
-            );
-        }, Math.random() * 3000);//variable timeout to try to prevent people from signing up at the same time
+        handleModalClose();
+        props.onConfirm(formData);
+        eventSingUpEvent({index, position, date}).catch(error => console.log(error));
     }
 
     function cancelHandler() {
@@ -134,7 +136,7 @@ const SignUp = (props) => {
                     <p>{eventName} From {formattedStart} to {formattedEnd} on {formattedDate}</p>
                 </Grid>
                 <Grid item xs={12}>
-                    { !alreadyInEvent ? <EnhancedTable data={filteredTableData} headCells={headCells} signUp={handleModalOpen}/> : <p>Already signed up for this event as {position}</p>}
+                    <EnhancedTable data={tableData} headCells={headCells} signUp={handleModalOpen} positions={positions} alreadyInEvent={alreadyInEvent} isPastDate={props.formData.isPastDate}/>
                 </Grid>
                 <Grid item xs={12}>
                     <Button
