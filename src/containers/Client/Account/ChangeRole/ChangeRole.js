@@ -92,8 +92,7 @@ const ChangeRole = (props) => {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="role"
-                                {...(response.role && {error: true, helperText: response.role})}
+                                id="otherRole"
                             />
                         </FormControl>
                     </Grid>}
