@@ -23,8 +23,8 @@ const Positions = props => {
 
         let newPositions = [...positionList];
 
-        if(count >= 0)
-            newPositions[index] = {name: position.name, count: count};
+        if(count >= 0 && count >= newPositions[index].minimum)
+            newPositions[index] = {...positionList[index], name: position.name, count: count};
 
         setPositionList(newPositions);
     };
