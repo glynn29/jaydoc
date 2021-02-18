@@ -1,12 +1,10 @@
 .Box {
     width: 90%;
     margin: auto;
-    background-color: rgba(218,243,255,0.58);
     text-align: center;
 }
 
 .Tile {
-    /*background-image: linear-gradient( rgba(255,255,255,.1), rgba(0,0,1,.2));*/
     box-shadow: inset 0 0 0 1px rgba(0, 0, 255, .20);
     min-height: 7rem;
     display: flex;
@@ -17,11 +15,10 @@
 }
 
 .CalenderItemBlock {
-    display: inline-block;
     flex-direction: column;
-    align-items: center;
-    align-self: center;
+    align-self: baseline;
     margin: 2px auto;
+    width: 100%;
 }
 
 .CalenderItem{
@@ -29,7 +26,7 @@
     color: white;
     border-radius: 20px;
     border: black 2px;
-    padding: 3%;
+    padding: 4%;
 }
 
 .CalenderItem:hover{
@@ -42,11 +39,10 @@
     color: white;
     border-radius: 20px;
     border: black 2px;
-    padding: 3px 5px;
+    padding: 3%;
 }
 
 .PastCalenderItem:hover{
     color: black;
     background-color: red;
 }
-
