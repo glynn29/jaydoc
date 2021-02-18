@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 
-import Positions from "../../../Admin/ScheduledEventList/Forms/Positions/Positions";
-import TransitionModal from "../../../../components/UI/Modal/Modal";
+import Positions from "../../../Admin/ScheduledEventList/Forms/Volunteers/Volunteers";
 import Container from "@material-ui/core/Container";
 import {firestore} from "../../../../firebase";
 
@@ -60,8 +59,8 @@ const AdminSingUp = (props) => {
     };
 
     return(
-        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <Positions cancel={props.cancel} submit={submitFormHandler} positions={positions} headCells={headCells} signedUpUsers={signedUpUsers}/>
+        <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
+            <Positions cancel={props.cancel} submit={submitFormHandler} positions={positions} headCells={headCells} signedUpUsers={signedUpUsers} isPastDate={props.formData.isPastDate}/>
         </Container>
     );
 };
