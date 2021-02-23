@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
@@ -14,9 +15,11 @@ import {CustomTimePicker,
         CustomDatePicker
 } from "../../../../../components/UI/DateTimePicker/DateTimePicker";
 import Container from "@material-ui/core/Container";
-import Positions from "../Positions/Positions";
+import Volunteers from "../Volunteers/Volunteers";
+import Positions from "../../../EventList/Forms/Positions/Positions";
 import TransitionModal from "../../../../../components/UI/Modal/Modal";
 import Spinner from "../../../../../components/UI/Spinner/Spinner";
+
 
 const headCells = [
     { id: 'position', label: 'Position' },
@@ -35,7 +38,10 @@ const AddScheduledEvent = props => {
     const [positions, setPositions] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [signedUpUsers, setSignedUpUsers] = useState([]);
+
+    const [positionList, setPositionList] = useState(props.positionList);
+    const [volunteersList, setVolunteersList] = useState([]);
+    const [positionsModalOpen, setPositionsModalOpen] = useState(false);
 
     useEffect( () => {
         if (eventId) {
@@ -49,6 +55,7 @@ const AddScheduledEvent = props => {
         const eventsRef = await firestore.collection('events').doc(eventId).get();
         if (eventsRef.exists) {
             console.log("positions",eventsRef.data());
+           // setPositionList(eventsRef.data().positions);
             setDetails(eventsRef.data().details);
             eventsRef.data().positions.forEach((position) => {
                 for (let i = 0; i < position.count; i++){
@@ -60,6 +67,8 @@ const AddScheduledEvent = props => {
         }
         setLoading(false);
         setPositions(positions);
+        setPositionList(props.positionList);
+        setVolunteersList([]);
         console.table(positions);
     }
 
@@ -76,20 +85,25 @@ const AddScheduledEvent = props => {
             details: details,
             positions: positions
         }).then(function (res) {
-            signedUpUsers.forEach(user => {
-                if (user !== undefined){
-                    firestore.collection('users').doc(user.userDocId).collection('volunteerEvents').add({
-                        date,
-                        endTime,
-                        eventId,
-                        eventName,
-                        id: user.id,
-                        name: user.first + " " + user.last,
-                        position: user.position,
-                        role: user.role,
-                        startTime,
-                        scheduledEventId: res.id
-                    }).catch(error => console.log(error));
+            positions.forEach(user => {
+                if (user.email){
+                    firestore.collection("users").where("email", "==", user.email).get().then(function (result) {
+                        result.forEach((row) =>{
+                            console.log(row.data(), row.id);
+                            firestore.collection('users').doc(row.id).collection('volunteerEvents').add({
+                                date,
+                                endTime,
+                                eventId,
+                                eventName,
+                                id: row.data().id,
+                                name: row.data().first + " " + row.data().last,
+                                position: user.position,
+                                role: row.data().role,
+                                startTime,
+                                scheduledEventId: res.id
+                            }).catch(error => console.log(error));
+                        })
+                    });
                 }
             });
         })
@@ -112,12 +126,94 @@ const AddScheduledEvent = props => {
         setModalOpen(false);
     };
 
-    const updatePositions = (positions, signedUpUsers) => {
-        signedUpUsers.filter(row => row !== undefined);
-        console.log(signedUpUsers);
-        setSignedUpUsers(signedUpUsers);
+    const updateVolunteers = (positions) => {
         setPositions(positions);
         handleModalClose();
+    };
+
+
+    //positions modal functions
+    const convertList = () => {
+        //turn positions into list or {name: , count:}
+        //from {email, position, language, volunteer}
+        let minimum = 0;
+        let i = 0;
+        let count = 0;
+        let tempPositionList = [...positionList];
+        let tempVolunteerList = [];
+        const tempPositions = [...positions];
+
+        let newList = [];
+        console.table(tempPositionList);
+        console.table(tempPositions);
+
+        tempPositionList.forEach((position, index) =>{
+            for (let j = i; j < tempPositions.length; j++){
+                if(tempPositions[j].position === position || tempPositions[j].position === position.name){
+                    count++;
+                    i++;
+                    if (tempPositions[j].volunteer){
+                        minimum++;
+                        tempVolunteerList.push(tempPositions[j]);
+                        console.log(i, j , minimum);
+                    }
+                }
+            }
+            let name = "";
+            if (position.name)
+                name = position.name;
+            else
+                name = position;
+
+            console.log(index, i, count);
+            newList[index] = {name: name, count: count, minimum: minimum};
+            count = 0;
+            minimum = 0;
+
+        });
+        setVolunteersList(tempVolunteerList);
+        setPositionList(newList);
+    };
+
+    const handlePositionsOpen = () => {
+        convertList();
+        setPositionsModalOpen(true);
+    };
+
+    const handlePositionsClose = () => {
+        setPositionsModalOpen(false);
+    };
+
+    const updatePositions = (positionsVar) => {
+        //take new positions list and add users back into it
+        //need to revert the list back
+        const updatedPositionList = [];
+        const positions = [...positionsVar];
+        positions.forEach((position) => {
+            for (let i = 0; i < position.count; i++){
+                updatedPositionList.push({position: position.name});
+            }
+        });
+        //outside go through each volunteer that was saved and check with inner loop
+        //inner loop go through the positions array and see if it matches the position on the volunteer
+        //positions {name, count, minimum}
+        let volunteerIndex = 0;
+        volunteersList.forEach(volunteer => {
+            for (let i = volunteerIndex; i < updatedPositionList.length; i++){
+                if (volunteer.position === updatedPositionList[i].position) {
+                    volunteerIndex = i;
+                    break;
+                }
+            }
+            updatedPositionList[volunteerIndex] = volunteer;
+            volunteerIndex++;
+        });
+        setPositionList(positions);
+        setPositions(updatedPositionList);
+
+        console.table(positions);
+        console.table(updatedPositionList);
+        handlePositionsClose();
     };
 
     return (
@@ -170,6 +266,17 @@ const AddScheduledEvent = props => {
                             </Button>
                         </FormControl>
                     </Grid>)}
+                    {positions && ( loading ? <Spinner/>:<Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <Button onClick={handlePositionsOpen}
+                                    fullWidth
+                                    variant="outlined"
+                                    color="secondary"
+                            >
+                                Edit Positions
+                            </Button>
+                        </FormControl>
+                    </Grid>)}
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
@@ -212,12 +319,25 @@ const AddScheduledEvent = props => {
                 open={modalOpen}
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
-                form={<Positions cancel={handleModalClose} submit={updatePositions} positions={positions} headCells={headCells} signedUpUsers={signedUpUsers}/>}
+                form={<Volunteers cancel={handleModalClose} submit={updateVolunteers} positions={positions} headCells={headCells}/>}
                 title={"Add Positions"}
+            />
+            <TransitionModal
+                open={positionsModalOpen}
+                handleOpen={handlePositionsOpen}
+                handleClose={handlePositionsClose}
+                form={<Positions cancel={handlePositionsClose} submit={updatePositions} positionList={positionList} button={"Edit Positions"}/>}
+                title={"Edit Positions"}
             />
         </Container>
     );
 };
 
-export default AddScheduledEvent;
+const mapStateToProps = state => {
+    return{
+        positionList: state.lists.positionList
+    };
+};
+
+export default connect(mapStateToProps)(AddScheduledEvent);
 
