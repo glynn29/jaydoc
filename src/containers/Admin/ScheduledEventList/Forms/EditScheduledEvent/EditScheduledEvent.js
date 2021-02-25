@@ -175,7 +175,7 @@ const EditScheduledEvent = props => {
                     }
                 }
             }
-            let name = "";
+            let name;
             if (position.name)
                 name = position.name;
             else
