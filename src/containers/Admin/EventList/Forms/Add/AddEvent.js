@@ -23,11 +23,11 @@ const AddEvent = props => {
 
     useEffect(() => {
         const updatedPositionList = [];
-        props.positionList.map(position => {
-            updatedPositionList.push({name: position, count: "0"});
+        props.positionList.forEach(position => {
+            updatedPositionList.push({name: position, count: "0", minimum: "0"});
         });
         setPositionList(updatedPositionList);
-    },[]);
+    },[props.positionList]);
 
     const submitFormHandler = (event) =>{
         event.preventDefault();
@@ -54,7 +54,7 @@ const AddEvent = props => {
         setPositionList(positionsForm);
     }
 
-    const form = (
+    return (
         <Container component="main" maxWidth="sm" className={classes.Container}>
             <CssBaseline />
             <form autoComplete="off" onSubmit={submitFormHandler}>
@@ -141,8 +141,6 @@ const AddEvent = props => {
             />
         </Container>
     );
-
-    return form;
 };
 
 const mapStateToProps = state => {
