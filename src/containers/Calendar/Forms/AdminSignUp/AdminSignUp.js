@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 
 import Volunteers from "../../../Admin/ScheduledEventList/Forms/Volunteers/Volunteers";
 import Container from "@material-ui/core/Container";
 import {firestore} from "../../../../firebase";
-
 
 const headCells = [
     { id: 'position', label: 'Position' },
     { id: 'volunteer', label: 'Volunteer'},
     { id: 'language', label: 'Language'},
 ];
+
 const AdminSingUp = (props) => {
     console.table(props.formData);
     const {start, end, date, name, eventId} = props.formData;
@@ -17,8 +17,6 @@ const AdminSingUp = (props) => {
     const submitFormHandler = (positions) =>{
         console.log(props.formData);
         firestore.collection('scheduledEvents').doc(props.formData.id).get().then(function (res) {
-            console.table(res.data().positions);
-            console.table(props.formData.positions);
             let upToDate = true;
             for (let i = 0; i < props.formData.positions.length; i++){
                 if (props.formData.positions[i].volunteer !== res.data().positions[i].volunteer){
@@ -34,9 +32,9 @@ const AdminSingUp = (props) => {
                             row.ref.delete().catch(error => console.log(error));
                         });
                     }).then(function () {
-                    firestore.collection('scheduledEvents').doc(props.formData.id).set({
+                    firestore.collection('scheduledEvents').doc(props.formData.id).update({
                         positions: positions
-                    },{merge: true}).catch(error => console.log(error));
+                    }).catch(error => console.log(error));
                 }).then(function () {
                     positions.forEach(user => {
                         if (user.email){
@@ -68,7 +66,6 @@ const AdminSingUp = (props) => {
                 alert("Error, someone may have just signed up, please try again");
             }
         });
-
     };
 
     return(
