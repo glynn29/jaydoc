@@ -66,6 +66,13 @@ const SignUp = (props) => {
 
     //async function that runs a transaction so client and server stay in sync for user event sign ups
     async function eventSingUpEvent({index, position, date}) {
+
+
+        //check if user is signing ip for the right position if admin edits it
+
+
+
+
         const eventRef = firestore.collection('scheduledEvents').doc(props.formData.id);
         //create doc to update later
         const userRef = firestore.collection('users').doc(props.userDocId).collection('volunteerEvents').doc();
@@ -73,12 +80,10 @@ const SignUp = (props) => {
             await firestore.runTransaction( async (t) =>{
                 //get the current event in the database, and see if its out of sync with client before updating
                 const doc = await t.get(eventRef);
-
                 // current database positions array
                 const currentPos = doc.data().positions;
-
                 //if it has a volunteer then that spot is taken
-                if(currentPos[index].volunteer){
+                if(currentPos[index].volunteer || currentPos[index].position !== position){//change havent tested this with positions
                     alert("An error has occurred while signing up, please try again.");
                     props.getEvents();
                     props.cancel();
@@ -92,7 +97,7 @@ const SignUp = (props) => {
                     //add event to users events
                     t.set(userRef,
                         {
-                            eventId: props.formData.id,
+                            eventId: doc.data().eventId,
                             eventName,
                             position: position,
                             startTime,
@@ -100,7 +105,8 @@ const SignUp = (props) => {
                             date: date,
                             id: props.userId,
                             role: props.role,
-                            name
+                            name,
+                            scheduledEventId: props.formData.id
                         }
                     );
                      setSuccessIfStatement(true);
