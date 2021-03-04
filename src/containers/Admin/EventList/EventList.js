@@ -73,6 +73,7 @@ const EventList = () => {
             })
             .catch(error => {console.log(error)});
         console.log("event removed");
+        handleDeleteClose();
     }
 
     const handleDeleteOpen = (props) => {
