@@ -7,7 +7,7 @@ import EnhancedTable from "../../../../../components/UI/Table/Table";
 import {firestore, functions} from "../../../../../firebase";
 import Respond from "../AdminComments/Respond/Respond";
 import TransitionModal from "../../../../../components/UI/Modal/Modal";
-import DeleteComment from "../DeleteComment/DeleteComment";
+import DeleteComment from "../AdminComments/DeleteComment/DeleteComment";
 
 const headCells = [
     {id: 'name', label: 'Name'},
