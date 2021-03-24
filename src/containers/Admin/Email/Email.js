@@ -38,6 +38,7 @@ const Email = (props) => {
     const [role, setRole] = useState([]);
     const [subject, setSubject] = useState("Event Reminder");
     const [message, setMessage] = useState("");
+    const [event, setEvent] = useState({});
 
     const [emails, setEmails] = useState([]);
     const [eventEmails, setEventEmails] = useState([]);
@@ -57,12 +58,15 @@ const Email = (props) => {
             })
     },[]);
 
-    const getPositions = (positions) => {
-        let emailList = positions
+    const getEvent = (event) => {
+        //get emails from event signed up positions
+        let emailList = event.positions
             .filter(position => position.email)
             .map(position => position.email);
 
-        emailList.push("glynn_29@hotmail.com");
+        setEvent(event);
+        //emailList.push("jpennington@kumc.edu");
+        //emailList.push("gll46960@ucmo.edu");
 
         setEventEmails(emailList);
         if(emailList.length > 0) {
@@ -75,15 +79,15 @@ const Email = (props) => {
 
     async function getEmailsByRole() {
         setLoading(true);
-        let rolesList = [];
         let emailsTemp = [];
-        rolesList = role.map(row => {
+        let rolesList = role.map(row => {
             return row.name
         });
         const result = await firestore.collection("users").where("role","in", rolesList).get();
         await result.forEach(row => {
             emailsTemp.push(row.data().email);
         });
+        //emailsTemp.push("gll46960@ucmo.edu");
         setLoading(false);
         console.log(emailsTemp);
         return emailsTemp;
@@ -141,31 +145,51 @@ const Email = (props) => {
         setModalOpen(false);
     };
 
-    function submitHandler() {
+    function sendMailHandler() {
         handleModalClose();
         const mailRef = functions.httpsCallable('sendEventMail');
-        const event = {
-            start: [2020, 5, 30, 6, 30],
-            end: [2020, 5, 30, 7, 30],
-            title: "mens health night",
-            description: "be here early",
-            location: "kumc"
-        };
+        //const mailRef = functions.httpsCallable('sendMail');
 
-        createEvent(event, (error, value) => {
-            if(error){
-                console.log(error);
-                return
-            }
+        if (emailType === "Event Email") {
+            //create ics file and attach to email
+            const start = new Date(event.date + "T" + event.start);
+            const end = new Date(event.date + "T" + event.end);
 
-            mailRef({name: "glynn", subject: "Event Reminder", text: message, emails: emails, icsAttachment: btoa(value)})
-                .then(result => console.log("Email Sent"))
+            const eventTemp = {
+                start: [start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), start.getMinutes()],
+                end: [end.getFullYear(), end.getMonth(), end.getDate(), end.getHours(), end.getMinutes()],
+                title: event.name,
+                description: event.details,
+                location: "340 Southwest Blvd, Kansas City, KS 66103"
+            };
+
+            createEvent(eventTemp, (error, value) => {
+                if (error) {
+                    console.log(error);
+                    return
+                }
+                console.table(value);
+                mailRef({
+                    name: "volunteer",
+                    subject: subject,
+                    text: message,
+                    emails: emails,
+                    icsAttachment: btoa(value)
+                })
+                .then(result => console.log("Email Sent", result))
                 .catch(error => console.log(error.message));
-
-        });
-
-
-
+            });
+        }else{
+            //no ics, just email
+            mailRef({
+                name: "volunteer",
+                subject: subject,
+                text: message,
+                emails: emails,
+            })
+            .then(result => console.log("Email Sent", result))
+            .catch(error => console.log(error.message));
+        }
     }
 
     return (
@@ -173,7 +197,7 @@ const Email = (props) => {
             <Typography variant="h3">Email Page</Typography>
             <Typography>Use this page to send email reminders</Typography>
             <CssBaseline />
-            <form className={classes.root} autoComplete="off" onSubmit={onSubmitHandler}>
+            <form onSubmit={onSubmitHandler}>
                 <Grid container spacing={2} direction={"column"} alignItems={"stretch"} >
                     <Grid item>
                         <FormControl variant="outlined" className={classes.formControl} >
@@ -252,7 +276,7 @@ const Email = (props) => {
                     </Grid>
                 </Grid>
                 {emailType === "Event Email" &&
-                    <ReminderForm getPositions={getPositions}/>
+                    <ReminderForm getEvent={getEvent}/>
                 }
                 <Typography color="error">{error}</Typography>
                 {loading ?
@@ -270,7 +294,7 @@ const Email = (props) => {
                 open={modalOpen}
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
-                form={<SendMail submit={submitHandler} cancel={handleModalClose} formData={formData}/>}
+                form={<SendMail submit={sendMailHandler} cancel={handleModalClose} formData={formData}/>}
                 title={"Emails"}
             />
         </Container>
