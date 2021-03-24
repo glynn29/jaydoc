@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
@@ -19,7 +19,7 @@ const EditEvent= props => {
     const [sponsor, setSponsor] = useState(props.formData.sponsor);
     const [details, setDetails] = useState(props.formData.details);
     const [modalOpen, setModalOpen] = useState(false);
-    const [positionList, setPositionList] = useState(props.formData.positions);
+    const [positionList, setPositionList] = useState([...props.formData.positions]);
 
     const submitFormHandler = (event) =>{
         event.preventDefault();
@@ -33,6 +33,14 @@ const EditEvent= props => {
             .catch(error => {console.log(error)});
         console.log("event Edited");
     };
+
+    useEffect(() => {
+        let positionListUpdate = [];
+        positionList.forEach(position => {
+            positionListUpdate.push({...position, minimum: "0"});
+        });
+        setPositionList(positionListUpdate);
+    }, []);
 
     const handleModalOpen = () => {
         setModalOpen(true);
