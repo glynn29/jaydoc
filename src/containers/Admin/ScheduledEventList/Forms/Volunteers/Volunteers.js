@@ -9,11 +9,10 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import formStyles from "../../../../../components/UI/Styles/formStyle";
 
-const Positions = props => {
+const Volunteers = props => {
     const classes = formStyles();
     const [volunteers, setVolunteers] = useState([]);
     const [positions, setPositions] = useState(props.positions);
-    const [signedUpUsers, setSignedUpUsers] = useState(props.signedUpUsers);
     const [positionIndex, setPositionIndex] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -42,10 +41,6 @@ const Positions = props => {
         let list = [...positions];
         list[props.index] = {position: props.position};
         setPositions(list);
-
-        let userList = [...signedUpUsers];
-        userList[props.index] = undefined;
-        setSignedUpUsers(userList);
     };
 
     const handleModalOpen = () => {
@@ -61,11 +56,6 @@ const Positions = props => {
         let list = [...positions];
         list[positionIndex] = {...list[positionIndex], volunteer: props.first + " " + props.last, email: props.email, language: props.language};
         setPositions(list);
-
-        const position = list[positionIndex].position;
-        let userList = [...signedUpUsers];
-        userList[positionIndex] = {...props, position};
-        setSignedUpUsers(userList);
         handleModalClose();
     };
 
@@ -76,7 +66,7 @@ const Positions = props => {
                     data={positions}
                     headCells={props.headCells}
                     set={!props.isPastDate ? setVolunteer : undefined}
-                    remove={removeVolunteer}
+                    remove={!props.isPastDate ? removeVolunteer : undefined}
                     noPagination
                 />
                 <Grid item xs={6}>
@@ -91,7 +81,7 @@ const Positions = props => {
                 </Grid>
                 <Grid item xs={6}>
                     <Button
-                        onClick={() => props.submit(positions, signedUpUsers)}
+                        onClick={() => props.submit(positions)}
                         fullWidth
                         variant="contained"
                         color="primary"
@@ -117,5 +107,5 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(Positions);
+export default connect(mapStateToProps)(Volunteers);
 
