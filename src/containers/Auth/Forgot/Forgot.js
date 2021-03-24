@@ -17,7 +17,7 @@ const Forgot = () => {
     const submitHandler = (event) =>{
         event.preventDefault();
         const actionCodeSettings = {
-            url: 'https://jaydoc-cb1af.web.app/login',
+            url: 'https://jaydoc-4412a.web.app/login',
             handleCodeInApp: false
         };
 
