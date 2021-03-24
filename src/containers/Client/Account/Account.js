@@ -4,51 +4,68 @@ import {connect} from "react-redux";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
-import useStyles from "../../../components/UI/Styles/formStyle";
+
 import * as actions from "../../../store/actions";
-import {getCurrentUser} from "../../../store/actions/auth";
+import * as classes from './Account.module.css';
+import ChangeRole from "./ChangeRole/ChangeRole";
 
 const Account = (props) => {
-    const classes = useStyles();
-    const {events} = props;
+    const {events, getCurrentUser} = props;
 
     useEffect(() => {
-       props.getCurrentUser();
+       getCurrentUser();
     },[getCurrentUser]);
 
     let futureEvents = [];
     let pastEvents = [];
 
     if(events){
-        events.map((event, index) => {
+        events.forEach((event, index) => {
             let currentDate = new Date();
             const date = new Date(event.date + "T17:00");
             const startTime = new Date(event.date + "T" + event.startTime);
             const endTime = new Date(event.date + "T" + event.endTime);
-            const eventRow = <p  key={index}> Event: {event.eventName} <br/> Position: {event.position}<br/> Date: {date.toDateString()}, from {startTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})} - {endTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})}</p>;
+            const eventRow = <div  key={index}> <Typography variant="h6">{event.eventName}</Typography> Signed up as {event.position}<br/> {date.toDateString()}, from {startTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})} - {endTime.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})}</div>;
             if(date >= currentDate){
-                futureEvents.push(<Paper key={index}>{eventRow}</Paper>);
+                futureEvents.push(<Grid item xs={12} key={index}><Paper className={classes.Item}>{eventRow}</Paper></Grid>);
             }else {
-                pastEvents.push(<Paper key={index}>{eventRow}</Paper>);
+                pastEvents.push(<Grid item xs={12} key={index}><Paper className={classes.Item}>{eventRow}</Paper></Grid>);
             }
         });
+        futureEvents.reverse();
     }
-
 
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <Typography variant="h3">Account Page</Typography>
-            <Typography variant="h4">Future Events:</Typography>
-            {futureEvents.length > 0 ? futureEvents : "No events"}
-            <Typography variant="h4">Past Events:</Typography>
-            {pastEvents.length > 0 ? pastEvents : "No events"}
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <Typography variant="h3">Account Page</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="h4" style={{textAlign: 'left'}}>Future Events:</Typography>
+                </Grid>
+                    {futureEvents.length > 0 ? futureEvents : <Grid item xs={12}>No events</Grid>}
+                <Grid item xs={12}>
+                    <Typography variant="h4" style={{textAlign: 'left'}}>Past Events:</Typography>
+                </Grid>
+                    {pastEvents.length > 0 ? pastEvents : <Grid item xs={12}>No events</Grid>}
+                <Grid item xs={12}>
+                    <Typography variant="h4" style={{textAlign: 'left'}}>Change Role: </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <ChangeRole roleList={props.roleList} userId={props.userId}/>
+                </Grid>
+            </Grid>
         </Container>);
 };
 
 const mapStateToProps = state => {
     return{
-        events: state.auth.events
+        events: state.auth.events,
+        roleList: state.lists.roleList,
+        userId: state.auth.userDocId
     };
 };
 
