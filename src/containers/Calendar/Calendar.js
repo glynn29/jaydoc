@@ -125,7 +125,7 @@ const CalendarBox = () => {
                 handleOpen={handleModalOpen}
                 handleClose={handleModalClose}
                 form={isAdmin ? <AdminSignUp formData={formData} cancel={handleModalClose} submit={editModal}/> : <SignUp formData={formData} onEdit={editModal} cancel={handleModalClose} getEvents={getDateRanges} date={date}/>}
-                title={isAdmin ? "Edit Positions" : "Sign Up"}
+                title={isAdmin ? "Edit Volunteers" : "Sign Up"}
             />
         </Container>
     );
