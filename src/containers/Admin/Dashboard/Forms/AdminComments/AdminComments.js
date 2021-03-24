@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
 import EnhancedTable from "../../../../../components/UI/Table/Table";
-import DeleteComment from "../DeleteComment/DeleteComment";
+import DeleteComment from "./DeleteComment/DeleteComment";
 import TransitionModal from "../../../../../components/UI/Modal/Modal";
 import {firestore} from "../../../../../firebase";
 
