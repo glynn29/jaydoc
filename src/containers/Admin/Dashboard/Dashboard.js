@@ -2,16 +2,17 @@ import React, {useEffect, useState} from "react";
 
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
-import {firestore} from "../../../firebase";
-import AdminContact from "./Forms/AdminContact/AdminContact";
-import AdminComments from "./Forms/AdminComments/AdminComments";
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import {firestore} from "../../../firebase";
+import AdminContact from "./Forms/AdminContact/AdminContact";
+import AdminComments from "./Forms/AdminComments/AdminComments";
 import formStyles from "../../../components/UI/Styles/formStyle";
+import EditPositions from "./Forms/EditPositions/EditPositions";
 
 const Dashboard = () => {
     const classes = formStyles();
@@ -23,7 +24,7 @@ const Dashboard = () => {
         'contact',
         'mandatory reporting',
     ];
-
+    //'edit positions'
     useEffect(() => {
         getContact().catch();
         getComment().catch();
@@ -53,6 +54,8 @@ const Dashboard = () => {
                 return <AdminContact contact={contact}/>;
             case 'mandatory reporting':
                 return <AdminComments comments={comment}/>;
+            case 'edit positions':
+                return <EditPositions/>;
             default:
                 return <div>Error</div>;
         }
