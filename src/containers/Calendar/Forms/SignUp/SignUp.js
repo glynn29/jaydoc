@@ -3,14 +3,14 @@ import {Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
 
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 import EnhancedTable from "../../../../components/UI/Table/Table";
 import AreYouSure from "../AreYouSure/AreYouSure";
 import TransitionModal from "../../../../components/UI/Modal/Modal";
 import * as actions from "../../../../store/actions";
 import {firestore} from "../../../../firebase";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import useStyles from "../../../../components/UI/Styles/formStyle";
 
 const headCells = [
@@ -35,6 +35,7 @@ const SignUp = (props) => {
     const [confirm, setConfirm] = useState(null);
     const [alreadyInEvent, setAlreadyInEvent] = useState(false);
 
+    //check if user is in the event, they can no longer sign up
     useEffect(()=> {
         tableData.forEach((row) => {
             if (row.volunteer === name){
@@ -43,12 +44,14 @@ const SignUp = (props) => {
         });
     },[name, positions, tableData]);
 
+    //check to see if both checks pass for signing up, if so set confirm to true for redirect
     useEffect(()=>{
         if(successIfStatement && successTransaction){
             setConfirm(true);
         }
     }, [successIfStatement, successTransaction]);
 
+    //redirect to confirm page
     if(confirm){
         return(
             <Redirect to={"/confirm"}/>
@@ -66,13 +69,6 @@ const SignUp = (props) => {
 
     //async function that runs a transaction so client and server stay in sync for user event sign ups
     async function eventSingUpEvent({index, position, date}) {
-
-
-        //check if user is signing ip for the right position if admin edits it
-
-
-
-
         const eventRef = firestore.collection('scheduledEvents').doc(props.formData.id);
         //create doc to update later
         const userRef = firestore.collection('users').doc(props.userDocId).collection('volunteerEvents').doc();
@@ -83,7 +79,7 @@ const SignUp = (props) => {
                 // current database positions array
                 const currentPos = doc.data().positions;
                 //if it has a volunteer then that spot is taken
-                if(currentPos[index].volunteer || currentPos[index].position !== position){//change havent tested this with positions
+                if(currentPos[index].volunteer || currentPos[index].position !== position){//check position to see if admin has edited event
                     alert("An error has occurred while signing up, please try again.");
                     props.getEvents();
                     props.cancel();
