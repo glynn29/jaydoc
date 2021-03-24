@@ -84,6 +84,9 @@ const ScheduledEventList = () => {
 
     //delete modal functions
     function deleteEvent({id}) {
+
+        //also delete event from users scheduledEvents
+
         firestore.collection('scheduledEvents').doc(id).delete()
             .then(()=>{
                 getScheduledEvents().catch(error => {console.log(error)});
