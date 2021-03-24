@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
@@ -47,7 +47,6 @@ const EditScheduledEvent = props => {
         setLoading(true);
         const eventsRef = await firestore.collection('events').doc(eventId).get();
         if (eventsRef.exists) {
-            console.log("positions",eventsRef.data());
             setDetails(eventsRef.data().details);
             eventsRef.data().positions.forEach((position) => {
                 for (let i = 0; i < position.count; i++){
@@ -62,11 +61,20 @@ const EditScheduledEvent = props => {
         console.table(positions);
     }
 
+    const selectChangeHandler = (event) =>{
+        setEventName(event.target.value);
+        eventList.filter(e => e.name === event.target.value).forEach(row => {
+            getPositions(row.id).catch(error => console.log(error));
+            setEventID(row.id)
+        });
+    };
+
     const submitFormHandler = (event) =>{
         //error, not a transaction so may overwrite if someone just signed up
          event.preventDefault();
         firestore.collection('scheduledEvents').doc(props.formData.id).get().then(function (res) {
 
+            //temp fix, checks to see if database and client are in sync, may be off by a few seconds
             let upToDate = true;
             for (let i = 0; i < props.formData.positions.length; i++) {
                 if (props.formData.positions[i].volunteer !== res.data().positions[i].volunteer) {
@@ -75,6 +83,7 @@ const EditScheduledEvent = props => {
                 }
             }
 
+            //if its up to date, delete events for users, then change info for scheduled event, then add updated event to newly signed up users.
             if (upToDate){
                 firestore.collectionGroup("volunteerEvents").where("scheduledEventId", "==", props.formData.id).get()
                     .then(function (result) {
@@ -125,15 +134,6 @@ const EditScheduledEvent = props => {
 
     };
 
-    const selectChangeHandler = (event) =>{
-        console.log(event.target.value);
-        setEventName(event.target.value);
-        eventList.filter(e => e.name === event.target.value).forEach(row => {
-            getPositions(row.id).catch(error => console.log(error));
-            setEventID(row.id)
-        });
-    };
-
     //volunteers modal functions
     const handleModalOpen = () => {
         setModalOpen(true);
@@ -150,8 +150,8 @@ const EditScheduledEvent = props => {
 
     //positions modal functions
     const convertList = () => {
-        //turn positions into list or {name: , count:}
-        //from {email, position, language, volunteer}
+        //turn positions into list of {position name: , count:}
+        //from when they are signed up {email, position, language, volunteer}
         let minimum = 0;
         let i = 0;
         let count = 0;
@@ -168,7 +168,7 @@ const EditScheduledEvent = props => {
                 if(tempPositions[j].position === position || tempPositions[j].position === position.name){
                     count++;
                     i++;
-                    if (tempPositions[j].volunteer){
+                    if (tempPositions[j].volunteer){ //check for volunteer to guarantee enough positions for users who are signed up
                         minimum++;
                         tempVolunteerList.push(tempPositions[j]);
                         console.log(i, j , minimum);
