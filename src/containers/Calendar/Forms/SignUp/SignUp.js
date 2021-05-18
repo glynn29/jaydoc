@@ -20,13 +20,14 @@ const headCells = [
 
 const SignUp = (props) => {
     const classes = useStyles();
-    const {positions, name, email, language} = props;
+    const {name, email, language, role} = props;
     const eventName = props.formData.name;
     const startTime = props.formData.start;
     const endTime = props.formData.end;
     const date = props.formData.date;
     const tableData = props.formData.positions;
     const details = props.formData.details;
+    const roleList = props.roleList;
 
     const [successIfStatement, setSuccessIfStatement] = useState(false);
     const [successTransaction, setSuccessTransaction] = useState(false);
@@ -34,6 +35,14 @@ const SignUp = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [confirm, setConfirm] = useState(null);
     const [alreadyInEvent, setAlreadyInEvent] = useState(false);
+    const [positions, setPositions] = useState(props.positions);
+
+    //grab positions dynamically
+    useEffect(() => {
+        const positionsIndex = roleList.findIndex(roleItem => roleItem.name === role);
+        const tempPositions = roleList[positionsIndex].positions;
+        setPositions(tempPositions);
+    }, [role, roleList]);
 
     //check if user is in the event, they can no longer sign up
     useEffect(()=> {
@@ -42,7 +51,7 @@ const SignUp = (props) => {
                 setAlreadyInEvent(true);
             }
         });
-    },[name, positions, tableData]);
+    },[name, tableData]);
 
     //check to see if both checks pass for signing up, if so set confirm to true for redirect
     useEffect(()=>{
@@ -170,7 +179,8 @@ const mapStateToProps = state => {
         name: state.auth.name,
         events: state.auth.events,
         userDocId: state.auth.userDocId,
-        language: state.auth.language
+        language: state.auth.language,
+        roleList: state.lists.roleList,
     };
 };
 

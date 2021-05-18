@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
         maxHeight: '80vh',
-        overflow: 'scroll',
+        overflow: 'auto',
     },
     deleteButton:{
         backgroundColor: "red",
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
         color: "white"
     },
     addButton: {
-        margin: theme.spacing(2, 4, 3),
+        margin: theme.spacing(1, 0, 1),
         minWidth: 200
     },
     cancelButton: {

@@ -60,7 +60,7 @@ const Volunteers = props => {
     };
 
     return (
-        <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
+        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
             <Grid container spacing={2}>
                 <EnhancedTable
                     data={positions}

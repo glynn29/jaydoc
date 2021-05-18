@@ -203,8 +203,11 @@ function EnhancedTable(props) {
                                             </StyledTableCell>}
                                             {/*go through all the normal cells in the head cells array*/}
                                             {props.headCells.map((cell, index)=>{
+                                                let data = row;
 
-                                                let data = row[cell.id];
+                                                if(cell.id)
+                                                    data = row[cell.id];
+
                                                 return(
                                                     <StyledTableCell component="th" key={index} scope="row" align="left">{data}</StyledTableCell>
                                                 );
@@ -219,7 +222,7 @@ function EnhancedTable(props) {
                                             }
                                             {props.edit &&
                                                 <StyledTableCell align="left">
-                                                    <Button onClick={() => {props.edit(row)}} variant="contained" className={classes.editButton}>Edit</Button>
+                                                    <Button onClick={() => {props.edit(row, index)}} variant="contained" className={classes.editButton}>Edit</Button>
                                                 </StyledTableCell>
                                             }
                                             {props.accept &&

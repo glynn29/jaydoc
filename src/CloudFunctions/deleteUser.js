@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import {functions} from "../firebase";
 
 export const DeleteUser = (uid) => {

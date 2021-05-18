@@ -69,7 +69,7 @@ const AdminSingUp = (props) => {
     };
 
     return(
-        <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+        <Container component="main" maxWidth="sm" style={{textAlign: 'center'}}>
             <Volunteers cancel={props.cancel} submit={submitFormHandler} positions={props.formData.positions} headCells={headCells} isPastDate={props.formData.isPastDate}/>
         </Container>
     );

@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 
 import * as classes from './Home.module.css';
 
-const Home = (props) => (
+const Home = () => (
     <div className={classes.Box}>
         <Typography variant="h2" className={classes.Line}><b>Welcome</b></Typography>
         <Typography variant="h4" className={classes.Line}><b>About Us</b></Typography>
@@ -28,34 +28,6 @@ const Home = (props) => (
         <br/>
         <Typography>Our main goal is to address the language, cultural, and financial barriers to health care access in Wyandotte County by providing primary care services and preventive education at no charge, integrated with on-site language interpretation and adolescent youth outreach. The clinic is open to everyone, but we hope to serve especially the indigent, uninsured, Hispanic, adolescent youth, and people without access to basic health care.</Typography>
         <br/>
-        {/*<Typography variant="h4" className={classes.Line}><b>Medical Services</b></Typography>*/}
-        {/*<br/>*/}
-        {/*<Typography>We provide immediate medical care for any illness among all ages including the following:</Typography>*/}
-        {/*    <ul>*/}
-        {/*        <li>Well-baby, child and adolescent examinations</li>*/}
-        {/*        <li>Adult and elderly preventive care</li>*/}
-        {/*        <li>Physical examinations for work, school, and sports</li>*/}
-        {/*        <li>Screenings such as blood pressure, cholesterol, diabetes, Pap smears, sexually transmitted diseases, and pregnancy.</li>*/}
-        {/*    </ul>*/}
-        {/*    <Typography>The JayDoc Free Clinic will provide service to the well, walking or wounded. Unfortunately, we will not be able to deliver babies or any perform any other overly complicated procedures. We ask that if you have an emergency, go immediately to a local emergency room, or call 911.</Typography>*/}
-        {/*<br/>*/}
-        {/*<Typography variant="h4" className={classes.Line}><b>Educational Services</b></Typography>*/}
-        {/*<br/>*/}
-        {/*<Typography>In addition to basic medical care, we also provide services including the following:</Typography>*/}
-        {/*    <ul>*/}
-        {/*        <li>Individual and family counseling</li>*/}
-        {/*        <li>Disease specific and dietary education</li>*/}
-        {/*        <li>Applications and aid for social services and support programs</li>*/}
-        {/*        <li>Assessments and referrals</li>*/}
-        {/*        <li>Outreach services and programs for schools and adolescents</li>*/}
-        {/*        <li>Health care for women</li>*/}
-        {/*        <li>Children's and teen health care</li>*/}
-        {/*        <li>Behavioral health care</li>*/}
-        {/*        <li>Eye exams and referrals</li>*/}
-        {/*        <li>Lab testing in the building</li>*/}
-        {/*        <li>Referrals for hospital care if required</li>*/}
-        {/*    </ul>*/}
-        {/*<br/>*/}
     </div>
 );
 

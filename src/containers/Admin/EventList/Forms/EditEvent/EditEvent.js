@@ -79,7 +79,6 @@ const EditEvent= props => {
                             value={sponsor}
                             onChange={event => setSponsor(event.target.value)}
                             variant="outlined"
-                            required
                             fullWidth
                             id="sponsor"
                             label="Sponsor"
@@ -96,7 +95,6 @@ const EditEvent= props => {
                                 multiline
                                 variant="outlined"
                                 fullWidth
-                                required
                                 rows={8}
                                 inputProps={{ className: classes.textarea }}
                             /></FormControl>

@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 import {firestore} from "../../../firebase";
-import pdf from '../../../assests/documents/Mandatory Reporting Protocol Jaydoc Free Clinic.pdf';
+import pdf from '../../../assets/documents/Mandatory Reporting Protocol Jaydoc Free Clinic.pdf';
 
 const Comment = () => {
     const classes = formStyles();

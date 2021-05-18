@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
+import {createEvent} from "ics";
 
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -22,7 +22,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import {firestore, functions} from "../../../firebase";
 import TransitionModal from "../../../components/UI/Modal/Modal";
 import SendMail from "./Forms/SendMail/SendMail";
-import {createEvent} from "ics";
+import Header from "../../../components/UI/Header/Header";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -192,11 +192,13 @@ const Email = (props) => {
         }
     }
 
+    // <Header title="Email Page"
+    //         info="Notes from developer: This page is for sending emails"
+    //         title2="Use this page to send email reminders"/>
     return (
         <Container component="main" maxWidth="md" style={{textAlign:"center"}}>
             <Typography variant="h3">Email Page</Typography>
             <Typography>Use this page to send email reminders</Typography>
-            <CssBaseline />
             <form onSubmit={onSubmitHandler}>
                 <Grid container spacing={2} direction={"column"} alignItems={"stretch"} >
                     <Grid item>

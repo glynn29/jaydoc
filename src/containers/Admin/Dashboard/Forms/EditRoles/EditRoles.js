@@ -2,31 +2,30 @@ import React, {useState, useEffect} from "react";
 import {connect} from "react-redux";
 
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
 
 import {firestore} from "../../../../../firebase";
 import * as actions from "../../../../../store/actions";
+import Typography from "@material-ui/core/Typography";
 import EnhancedTable from "../../../../../components/UI/Table/Table";
 import TransitionModal from "../../../../../components/UI/Modal/Modal";
 import Delete from "./Delete/Delete";
 import Add from "./Add/Add";
 import Edit from "./Edit/Edit";
-import Header from "../../../../../components/UI/Header/Header";
 
 const headCells = [
-    {label: 'Name'}
+    {id: 'name', label: 'Name'},
 ];
 
-const EditPositions = ({positionList, fetchPositionList}) => {
-    const [positions, setPositions] = useState([...positionList]);
+const EditRoles = ({roleList, positionList, fetchRoleList}) => {
+    const [roles, setRoles] = useState([...roleList]);
     const [editOpen, setEditOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [formData, setFormData] = useState({});
 
     useEffect(() => {
-        setPositions(positionList);
-    }, [positionList]);
+        setRoles(roleList);
+    }, [roleList, positionList]);
 
     //add modal functions
     const handleAddOpen = () => {
@@ -37,14 +36,14 @@ const EditPositions = ({positionList, fetchPositionList}) => {
         setAddOpen(false);
     };
 
-    function addPosition() {
-        fetchPositionList();
+    function addRole() {
+        fetchRoleList();
         handleAddClose();
     }
 
     //edit modal functions
-    const handleEditOpen = (position, index) => {
-        setFormData({position, index});
+    const handleEditOpen = (editedRole, index) => {
+        setFormData({...editedRole, index});
         setEditOpen(true);
     };
 
@@ -52,15 +51,14 @@ const EditPositions = ({positionList, fetchPositionList}) => {
         setEditOpen(false);
     };
 
-    function editPosition() {
-        fetchPositionList();
+    function editRole() {
+        fetchRoleList();
         handleEditClose();
     }
 
     //delete modal functions
     const handleDeleteOpen = (props) => {
         setFormData(props);
-        console.log(props);
         setDeleteOpen(true);
     };
 
@@ -68,23 +66,20 @@ const EditPositions = ({positionList, fetchPositionList}) => {
         setDeleteOpen(false);
     };
 
-    const deletePosition = (props) => {
-        console.log(props, positions);
-        let tempList = positions.filter(position => position !== props);
-        firestore.collection('positions').doc('positions').update({
-            positions: tempList
+    const deleteRole = (props) => {
+        let tempList = roles.filter(role => role.name !== props.name);
+        firestore.collection('roles').doc('roles').update({
+            roles: tempList
         }).catch(error => console.log(error));
-        fetchPositionList();
+        fetchRoleList();
         handleDeleteClose();
     };
-    // <Header title="Edit Positions"
-    //         info="Be careful bruh"
-    //         title2="Use this page manage Positions"/>
+
     return(
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <Typography variant="h4">Edit Positions</Typography>
+            <Typography variant="h4">Edit Roles</Typography>
             <EnhancedTable
-                data={positions}
+                data={roles}
                 headCells={headCells}
                 delete={handleDeleteOpen}
                 add={handleAddOpen}
@@ -94,21 +89,21 @@ const EditPositions = ({positionList, fetchPositionList}) => {
                 open={editOpen}
                 handleOpen={handleEditOpen}
                 handleClose={handleEditClose}
-                form={<Edit formData={formData} onEdit={editPosition} handleClose={handleEditClose} positionList={positions} />}
-                title={"Edit Position"}
+                form={<Edit formData={formData} onEdit={editRole} handleClose={handleEditClose} positionList roleList={roles}/>}
+                title={"Edit Role"}
             />
             <TransitionModal
                 open={addOpen}
                 handleOpen={handleAddOpen}
                 handleClose={handleAddClose}
-                form={<Add onAdd={addPosition} handleClose={handleAddClose} positionList={positions} />}
-                title={"Add Position"}
+                form={<Add onAdd={addRole} handleClose={handleAddClose} positionList roleList={roles}/>}
+                title={"Add Role"}
             />
             <TransitionModal
                 open={deleteOpen}
                 handleOpen={handleDeleteOpen}
                 handleClose={handleDeleteClose}
-                form={<Delete formData={formData} submit={deletePosition} cancel={handleDeleteClose} />}
+                form={<Delete formData={formData} submit={deleteRole} cancel={handleDeleteClose} />}
                 title={"Are You Sure?"}
             />
         </Container>
@@ -117,14 +112,16 @@ const EditPositions = ({positionList, fetchPositionList}) => {
 
 const mapStateToProps = state => {
     return{
+        roleList: state.lists.roleList,
         positionList: state.lists.positionList,
     };
 };
 
 const mapDispatchToProps = dispatch =>{
     return{
-        fetchPositionList: () => dispatch(actions.fetchPositionList())
+        onConfirm: (data) => dispatch(actions.updateConfirmation(data)),
+        fetchRoleList: () => dispatch(actions.fetchRoleList()),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditPositions);
+export default connect(mapStateToProps, mapDispatchToProps)(EditRoles);
