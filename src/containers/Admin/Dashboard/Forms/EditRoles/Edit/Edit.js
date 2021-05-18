@@ -1,3 +1,5 @@
+import Tooltip from "@material-ui/core/Tooltip";
+import InfoIcon from "@material-ui/icons/InfoOutlined";
 import React, {useState} from "react";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -45,6 +47,10 @@ const Edit = props => {
         <Container component="main" maxWidth="sm" className={classes.Container}>
             <CssBaseline />
             <form autoComplete="off" onSubmit={submitFormHandler}>
+                <Tooltip title={"Editing role names will cause issues as of now, will implement in future"} aria-label="add">
+                    <InfoIcon color="disabled" style={{'float': 'left'}}/>
+                </Tooltip>
+                <br/>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <FormControl className={classes.formControl}>
@@ -57,6 +63,7 @@ const Edit = props => {
                                 id="name"
                                 label="Role Name"
                                 autoFocus
+                                disabled
                             />
                         </FormControl>
                     </Grid>

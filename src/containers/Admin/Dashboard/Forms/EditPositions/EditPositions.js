@@ -60,7 +60,6 @@ const EditPositions = ({positionList, fetchPositionList}) => {
     //delete modal functions
     const handleDeleteOpen = (props) => {
         setFormData(props);
-        console.log(props);
         setDeleteOpen(true);
     };
 
@@ -69,7 +68,6 @@ const EditPositions = ({positionList, fetchPositionList}) => {
     };
 
     const deletePosition = (props) => {
-        console.log(props, positions);
         let tempList = positions.filter(position => position !== props);
         firestore.collection('positions').doc('positions').update({
             positions: tempList

@@ -89,14 +89,14 @@ const EditRoles = ({roleList, positionList, fetchRoleList}) => {
                 open={editOpen}
                 handleOpen={handleEditOpen}
                 handleClose={handleEditClose}
-                form={<Edit formData={formData} onEdit={editRole} handleClose={handleEditClose} positionList roleList={roles}/>}
+                form={<Edit formData={formData} onEdit={editRole} handleClose={handleEditClose} positionList={positionList} roleList={roles}/>}
                 title={"Edit Role"}
             />
             <TransitionModal
                 open={addOpen}
                 handleOpen={handleAddOpen}
                 handleClose={handleAddClose}
-                form={<Add onAdd={addRole} handleClose={handleAddClose} positionList roleList={roles}/>}
+                form={<Add onAdd={addRole} handleClose={handleAddClose} positionList={positionList} roleList={roles}/>}
                 title={"Add Role"}
             />
             <TransitionModal
