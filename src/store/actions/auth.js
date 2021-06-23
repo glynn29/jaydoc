@@ -99,7 +99,7 @@ export const getUser = () => {
         firestore.collection('users').where('id', '==', uid).get()
             .then((res) => {
                 res.forEach(user => {
-                    firestore.collection('users').doc(user.id).collection("volunteerEvents").orderBy("date","desc").get()
+                    firestore.collection('users').doc(user.id).collection("volunteerEvents").orderBy("date","desc").limit(10).get()
                         .then((res)=> {
                             let eventList = [];
                            res.forEach(event => {
