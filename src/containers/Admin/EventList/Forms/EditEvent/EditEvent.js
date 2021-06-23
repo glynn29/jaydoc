@@ -36,8 +36,14 @@ const EditEvent= props => {
 
     useEffect(() => {
         let positionListUpdate = [];
-        positionList.forEach(position => {
-            positionListUpdate.push({...position, minimum: "0"});
+        props.positionList.forEach(position => {
+            const index = positionList.findIndex(el => el.name === position);
+            if (index >= 0) {
+                const realPosition = positionList[index];
+                positionListUpdate.push({...realPosition, minimum: "0"});
+            }
+            else
+                positionListUpdate.push({name: position, count: "0", minimum: "0"});
         });
         setPositionList(positionListUpdate);
     }, []);

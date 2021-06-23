@@ -7,7 +7,6 @@ import FormControl from "@material-ui/core/FormControl";
 import formStyles from "../../../../components/UI/Styles/formStyle";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import {firestore} from "../../../../firebase";
 
@@ -60,9 +59,9 @@ const ChangeRole = (props) => {
     };
 
     return (
-        <Container>
+        <div>
             <form onSubmit={submitHandler}>
-                <Grid container spacing={1}>
+                <Grid container spacing={1} style={{alignItems: 'center'}}>
                     <Grid item xs={12} sm={6}>
                         <FormControl variant="outlined" className={classes.formControl} required>
                             <InputLabel>Role</InputLabel>
@@ -111,7 +110,7 @@ const ChangeRole = (props) => {
                     </Grid>}
                 </Grid>
             </form>
-        </Container>
+        </div>
     )
 };
 

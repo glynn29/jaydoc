@@ -5,7 +5,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
+import Divider from '@material-ui/core/Divider';
 
 import * as actions from "../../../store/actions";
 import * as classes from './Account.module.css';
@@ -39,20 +39,24 @@ const Account = (props) => {
 
     return (
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
+            <br /> <br />
             <Grid container spacing={1}>
                 <Grid item xs={12}>
-                    <Typography variant="h3">Account Page</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant="h4" style={{textAlign: 'left'}}>Future Events:</Typography>
+                    <Typography variant="h4" style={{textAlign: 'left'}}>Future Events</Typography>
+                    <Divider style={{width: "100%"}}/>
+                    <br />
                 </Grid>
                     {futureEvents.length > 0 ? futureEvents : <Grid item xs={12}>No events</Grid>}
                 <Grid item xs={12}>
-                    <Typography variant="h4" style={{textAlign: 'left'}}>Past Events:</Typography>
+                    <Typography variant="h4" style={{textAlign: 'left'}}>Past Events</Typography>
+                    <Divider style={{width: "100%"}}/>
+                    <br />
                 </Grid>
                     {pastEvents.length > 0 ? pastEvents : <Grid item xs={12}>No events</Grid>}
                 <Grid item xs={12}>
-                    <Typography variant="h4" style={{textAlign: 'left'}}>Change Role: </Typography>
+                    <Typography variant="h4" style={{textAlign: 'left'}}>Change Role </Typography>
+                    <Divider style={{width: "100%"}}/>
+                    <br />
                 </Grid>
                 <Grid item xs={12}>
                     <ChangeRole roleList={props.roleList} userId={props.userId}/>

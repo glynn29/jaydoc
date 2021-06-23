@@ -75,12 +75,12 @@ const EditPositions = ({positionList, fetchPositionList}) => {
         fetchPositionList();
         handleDeleteClose();
     };
-    // <Header title="Edit Positions"
-    //         info="Be careful bruh"
-    //         title2="Use this page manage Positions"/>
+
     return(
         <Container component="main" maxWidth="md" style={{textAlign: 'center'}}>
-            <Typography variant="h4">Edit Positions</Typography>
+            <Header title="Edit Positions"
+                    info="Editing a position's name will effect editing an event template. It will not be able to associate the count with the new name."
+                    title2="Use this page manage Positions"/>
             <EnhancedTable
                 data={positions}
                 headCells={headCells}

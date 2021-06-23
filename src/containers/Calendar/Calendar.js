@@ -72,52 +72,52 @@ const CalendarBox = () => {
 
     return (
         <Container component="main" maxWidth="lg" style={{textAlign: 'center'}}>
-            <Typography variant="h3">Calendar Page</Typography>
-                <Calendar
-                    onActiveStartDateChange={({activeStartDate}) => getDateRanges(activeStartDate)}
-                    className={classes.Box}
-                    onChange={e => setDate(e)}
-                    value={date}
-                    defaultValue={new Date()}
-                    tileClassName={classes.Tile}
-                    calendarType={"US"}
-                    showNeighboringMonth={false}
-                    nextLabel={"Next Month >"}
-                    next2Label={"Next Year >"}
-                    prevLabel={"< Previous Month"}
-                    prev2Label={"< Previous Year"}
-                    tileContent={
-                        ({ date, view }) => {
-                            const table = tableData.map((row)=>{
-                                const currentDate = new Date();
-                                const rowDate = new Date(row.date + "T19:00");
-                                const day = rowDate.getDate();
-                                const month = rowDate.getMonth();
-                                const year = rowDate.getFullYear();
-                                const isPastDate = currentDate > rowDate;
-                                const itemClass = isPastDate ? classes.PastCalenderItem : classes.CalenderItem;
+            <br /> <br />
+            <Calendar
+                onActiveStartDateChange={({activeStartDate}) => getDateRanges(activeStartDate)}
+                className={classes.Box}
+                onChange={e => setDate(e)}
+                value={date}
+                defaultValue={new Date()}
+                tileClassName={classes.Tile}
+                calendarType={"US"}
+                showNeighboringMonth={false}
+                nextLabel={"Next Month >"}
+                next2Label={"Next Year >"}
+                prevLabel={"< Previous Month"}
+                prev2Label={"< Previous Year"}
+                tileContent={
+                    ({ date, view }) => {
+                        const table = tableData.map((row)=>{
+                            const currentDate = new Date();
+                            const rowDate = new Date(row.date + "T19:00");
+                            const day = rowDate.getDate();
+                            const month = rowDate.getMonth();
+                            const year = rowDate.getFullYear();
+                            const isPastDate = currentDate > rowDate;
+                            const itemClass = isPastDate ? classes.PastCalenderItem : classes.CalenderItem;
 
-                                return(
-                                    view === 'month' &&
-                                    date.getDate() === day &&
-                                    date.getMonth() === month &&
-                                    date.getFullYear() === year
-                                        ?
-                                    <p key={row.id}
-                                       onClick={()=> handleModalOpen({...row, isPastDate})}
-                                       className={itemClass}
-                                    >
-                                        {row.name}
-                                    </p>
-                                        : null
-                                );
-                            });
                             return(
-                                <div className={classes.CalenderItemBlock}>{table}</div>
+                                view === 'month' &&
+                                date.getDate() === day &&
+                                date.getMonth() === month &&
+                                date.getFullYear() === year
+                                    ?
+                                <p key={row.id}
+                                   onClick={()=> handleModalOpen({...row, isPastDate})}
+                                   className={itemClass}
+                                >
+                                    {row.name}
+                                </p>
+                                    : null
                             );
-                        }
+                        });
+                        return(
+                            <div className={classes.CalenderItemBlock}>{table}</div>
+                        );
                     }
-                />
+                }
+            />
             <div>{loading && <Spinner/>}</div>
 
             <TransitionModal

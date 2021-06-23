@@ -51,11 +51,13 @@ const Positions = props => {
                         </Grid>
                     );
                 })}
-                    <Grid item sm={6}>
-                        <Button onClick={props.cancel} fullWidth className={classes.cancelButton} variant="outlined">Cancel</Button>
-                    </Grid>
-                    <Grid item sm={6}>
-                        <Button type="submit" fullWidth color="primary" variant="contained">{props.button}</Button>
+                    <Grid container spacing={2}>
+                        <Grid item sm={6}>
+                            <Button onClick={props.cancel} fullWidth className={classes.cancelButton} variant="outlined">Cancel</Button>
+                        </Grid>
+                        <Grid item sm={6}>
+                            <Button type="submit" fullWidth color="primary" variant="contained">{props.button}</Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </form>
