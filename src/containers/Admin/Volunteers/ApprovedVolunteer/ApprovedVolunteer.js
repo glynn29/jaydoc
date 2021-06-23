@@ -2,13 +2,13 @@ import React, {useState, useEffect} from "react";
 
 import Container from "@material-ui/core/Container";
 
-import EnhancedTable from "../../../components/UI/Table/Table";
-import EditVolunteerForm from "./Forms/EditVolunteer/EditVolunteer";
-import AddVolunteer from "./Forms/AddVolunteer/AddVolunteer";
-import TransitionModal from "../../../components/UI/Modal/Modal";
-import {firestore} from "../../../firebase";
-import {DeleteUser} from "../../../CloudFunctions/deleteUser"
-import DeleteVolunteer from "./Forms/DeleteVolunteer/DeleteVolunteer";
+import EnhancedTable from "../../../../components/UI/Table/Table";
+import EditVolunteerForm from "../Forms/EditVolunteer/EditVolunteer";
+import AddVolunteer from "../Forms/AddVolunteer/AddVolunteer";
+import TransitionModal from "../../../../components/UI/Modal/Modal";
+import {firestore} from "../../../../firebase";
+import {DeleteUser} from "../../../../CloudFunctions/deleteUser"
+import DeleteVolunteer from "../Forms/DeleteVolunteer/DeleteVolunteer";
 
 const ApprovedVolunteer = (props) => {
     const {headCells} = props;
@@ -84,7 +84,7 @@ const ApprovedVolunteer = (props) => {
                 data={tableData}
                 headCells={headCells}
                 delete={handleDeleteOpen}
-                add={handleAddOpen}
+                // add={handleAddOpen}
                 edit={handleEditOpen}
             />
             <TransitionModal

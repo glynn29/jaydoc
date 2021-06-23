@@ -3,8 +3,8 @@ import React, {useEffect, useState} from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import ApprovedVolunteer from "../ApprovedVolunteer/ApprovedVolunteer";
-import RegisteredVolunteer from "../RegisteredVolunteer/RegisteredVolunteer";
+import ApprovedVolunteer from "./ApprovedVolunteer/ApprovedVolunteer";
+import RegisteredVolunteer from "./RegisteredVolunteer/RegisteredVolunteer";
 import {firestore} from "../../../firebase";
 
 const headCells = [

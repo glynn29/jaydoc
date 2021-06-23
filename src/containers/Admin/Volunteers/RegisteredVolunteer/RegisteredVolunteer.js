@@ -2,11 +2,11 @@ import React, {useEffect, useState} from "react";
 
 import Container from "@material-ui/core/Container";
 
-import EnhancedTable from "../../../components/UI/Table/Table";
-import {firestore} from "../../../firebase";
-import {DeleteUser} from "../../../CloudFunctions/deleteUser";
-import DeleteVolunteer from "../ApprovedVolunteer/Forms/DeleteVolunteer/DeleteVolunteer";
-import TransitionModal from "../../../components/UI/Modal/Modal";
+import EnhancedTable from "../../../../components/UI/Table/Table";
+import {firestore} from "../../../../firebase";
+import {DeleteUser} from "../../../../CloudFunctions/deleteUser";
+import DeleteVolunteer from "../Forms/DeleteVolunteer/DeleteVolunteer";
+import TransitionModal from "../../../../components/UI/Modal/Modal";
 
 const RegisteredVolunteer = (props) => {
     const {headCells} = props;

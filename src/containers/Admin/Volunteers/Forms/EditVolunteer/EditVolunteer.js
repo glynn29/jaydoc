@@ -28,9 +28,10 @@ const EditVolunteer = props => {
     const submitFormHandler = (event) =>{
         event.preventDefault();
         firestore.collection('users').doc(props.formData.userDocId).set({
-            first: first,
-            last: last,
+            first,
+            last,
             approved: `${approved}`,
+            role,
             language,
         }, {merge: true})
             .then(()=>{props.onEdit();})
