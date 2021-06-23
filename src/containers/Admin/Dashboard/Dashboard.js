@@ -23,7 +23,7 @@ const Dashboard = () => {
 
     const list = [
         'contact',
-        'mandatory reporting',
+        'anonymous reporting',
         'edit roles',
         'edit positions'];
 
@@ -58,7 +58,7 @@ const Dashboard = () => {
         switch (page) {
             case 'contact':
                 return <AdminContact contact={contact}/>;
-            case 'mandatory reporting':
+            case 'anonymous reporting':
                 return <AdminComments comments={comment}/>;
             case 'edit roles':
                 return <EditRoles/>;
